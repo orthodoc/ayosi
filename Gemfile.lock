@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/thoughtbot/shoulda-matchers.git
+  revision: 8a0bf45d0f85d5b6583f611d1e720ea9276b4b80
+  specs:
+    shoulda-matchers (2.4.0)
+      activesupport (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -84,6 +91,8 @@ GEM
     factory_girl_rails (4.3.0)
       factory_girl (~> 4.3.0)
       railties (>= 3.0.0)
+    faker (1.2.0)
+      i18n (~> 0.5)
     ffi (1.9.3)
     figaro (0.7.0)
       bundler (~> 1.0)
@@ -193,8 +202,6 @@ GEM
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
-    shoulda-matchers (2.4.0)
-      activesupport (>= 3.0.0)
     slop (3.4.7)
     sprockets (2.10.1)
       hike (~> 1.2)
@@ -244,7 +251,8 @@ DEPENDENCIES
   database_cleaner (= 1.0.1)
   devise
   email_spec
-  factory_girl_rails
+  factory_girl_rails (~> 4.0)
+  faker
   figaro
   foundation-rails
   guard-bundler
@@ -265,7 +273,7 @@ DEPENDENCIES
   rolify
   rspec-rails
   sass-rails (~> 4.0.0)
-  shoulda-matchers
+  shoulda-matchers!
   therubyracer
   thin
   turbolinks

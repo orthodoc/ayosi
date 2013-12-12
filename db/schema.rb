@@ -11,7 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131208130720) do
+ActiveRecord::Schema.define(version: 20131212063518) do
+
+  create_table "clients", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "patient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "clients", ["patient_id"], name: "index_clients_on_patient_id", using: :btree
+  add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
+
+  create_table "designations", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "hospital_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "designations", ["hospital_id"], name: "index_designations_on_hospital_id", using: :btree
+  add_index "designations", ["user_id"], name: "index_designations_on_user_id", using: :btree
 
   create_table "hospitals", force: true do |t|
     t.string   "name"
@@ -25,12 +46,10 @@ ActiveRecord::Schema.define(version: 20131208130720) do
     t.date     "birth_date"
     t.integer  "age"
     t.string   "gender"
-    t.integer  "hospital_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "uhid"
   end
-
-  add_index "patients", ["hospital_id"], name: "index_patients_on_hospital_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -42,6 +61,22 @@ ActiveRecord::Schema.define(version: 20131208130720) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "surgeries", force: true do |t|
+    t.string   "name"
+    t.date     "date"
+    t.integer  "hospital_id"
+    t.integer  "patient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "category"
+    t.boolean  "side"
+    t.string   "region"
+    t.string   "surgeon"
+  end
+
+  add_index "surgeries", ["hospital_id"], name: "index_surgeries_on_hospital_id", using: :btree
+  add_index "surgeries", ["patient_id"], name: "index_surgeries_on_patient_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

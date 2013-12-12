@@ -30,8 +30,9 @@ group :development do
   gem 'pry'
 end
 group :development, :test do
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '~>4.0'
   gem 'rspec-rails'
+  gem 'faker'
 end
 group :test do
   gem 'capybara'
@@ -39,5 +40,5 @@ group :test do
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
   gem 'launchy'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers'
 end

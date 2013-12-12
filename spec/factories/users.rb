@@ -2,15 +2,18 @@
 
 FactoryGirl.define do
   factory :user do |user|
-    user.sequence(:name) {|n| "Test User #{n}"}
-    user.sequence(:email) {|n| "test_user#{n}@example.com"}
+    user.name { Faker::Name.name }
+    user.email { Faker::Internet.email }
     user.sequence(:password) {|n| "test_pwd#{n}"}
     user.sequence(:password_confirmation) {|n| "test_pwd#{n}"}
 
-    factory :user_with_hospitals do
-      after(:create) do |user|
-        FactoryGirl.crate(:hospital, user: user)
-      end
-    end
+   # has_many association is not working with factory girl. So recreate with methods
+   # while testing
+   #
+   # factory :user_with_client do
+   #   after(:create) do
+   #     create(:client, user: user)
+   #   end
+   # end
   end
 end
