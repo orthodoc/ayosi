@@ -6,6 +6,10 @@ FactoryGirl.define do
     surgery.sequence(:date) {|n| ("#{n+100}").to_i.days.ago }
     surgery.patient
     surgery.hospital
+    surgery.category {["Primary", "Revision"].sample}
+    surgery.side {[true,false].sample}
+    surgery.region {["Hip","Knee","Shoulder","Elbow","Ankle"].sample}
+    surgery.surgeon { Faker::Name.name }
 
     before(:create) do
       surgery.patient = FactoryGirl.create(:patient) unless surgery.patient.present?

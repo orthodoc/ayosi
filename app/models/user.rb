@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_many :clients
   has_many :patients, through: :clients
 
+  # Validation for the rest are provided by devise. Validation that follows here are
+  # for the extra fields that have been added to the user model eg: name
   validates_presence_of :name
   validates_presence_of :encrypted_password
 

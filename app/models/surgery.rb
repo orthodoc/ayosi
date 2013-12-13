@@ -10,5 +10,9 @@ class Surgery < ActiveRecord::Base
   validates_presence_of :date
   validates_presence_of :hospital
   validates_presence_of :patient
+  validates_presence_of :category
+  validates_presence_of :side
+  validates_presence_of :region
+  validates_presence_of :surgeon
 
 end
