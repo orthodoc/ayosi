@@ -1,5 +1,16 @@
 <%= form_for @patient do |f| %>
   <p>
-    
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :age %>
+    <%= f.text_field :age %>
+  </p>
+  <p>
+    <b>Gender</b><br />
+    <%= f.radio_button :gender, 'Male' %> Male
+    <%= f.radio_button :gender, 'Female' %> Female
+    <%= f.radio_button :gender, 'Others' %> Others<br />
   </p>
 <% end  %>

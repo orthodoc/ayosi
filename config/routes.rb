@@ -1,5 +1,5 @@
 Ayosi::Application.routes.draw do
-  resources :patients, only: [:new]
+  resources :patients
   root to: 'patients#new'
   devise_for :users
 end

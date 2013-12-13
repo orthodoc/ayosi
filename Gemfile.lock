@@ -80,6 +80,9 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    em-websocket (0.5.0)
+      eventmachine (>= 0.12.9)
+      http_parser.rb (~> 0.5.3)
     email_spec (1.5.0)
       launchy (~> 2.1)
       mail (~> 2.2)
@@ -115,12 +118,17 @@ GEM
     guard-cucumber (1.4.0)
       cucumber (>= 1.2.0)
       guard (>= 1.1.0)
+    guard-livereload (2.1.0)
+      em-websocket (~> 0.5)
+      guard (~> 2.0)
+      multi_json (~> 1.8)
     guard-rails (0.4.7)
       guard (>= 0.2.2)
     guard-rspec (4.2.0)
       guard (>= 2.1.1)
       rspec (>= 2.14, < 4.0)
     hike (1.2.3)
+    http_parser.rb (0.5.3)
     i18n (0.6.9)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -257,6 +265,7 @@ DEPENDENCIES
   foundation-rails
   guard-bundler
   guard-cucumber
+  guard-livereload
   guard-rails
   guard-rspec
   jbuilder (~> 1.2)
