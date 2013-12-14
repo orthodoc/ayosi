@@ -5,11 +5,13 @@ FactoryGirl.define do
     hospital.name { Faker::Lorem.words(2).join(" ").titleize + " Hospital"}
     hospital.city { Faker::Address.city }
 
-   factory :hospital_with_surgery do
-     after(:create) do
-       create(:surgery, hospital: hospital)
-     end
-   end
+   # has_many association is not working with factory girl. So recreate with methods
+   # while testing
+   #factory :hospital_with_surgery do
+   #  after(:create) do
+   #    create(:surgery, hospital: hospital)
+   #  end
+   #end
 
   end
 end
