@@ -2,12 +2,15 @@ require 'spec_helper'
 
 describe PatientsController do
 
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+    @hospital = FactoryGirl.create(:hospital)
+    @designation = FactoryGirl.create(:designation, user: @user, hospital: @hospital)
+  end
+
   context "for a signed in user" do
 
     before(:each) do
-      @user = FactoryGirl.create(:user)
-      @hospital = FactoryGirl.create(:hospital)
-      @designation = FactoryGirl.create(:designation, user: @user, hospital: @hospital)
       sign_in @user
       get :new
     end
@@ -16,6 +19,17 @@ describe PatientsController do
     it { should respond_with(:success) }
     it { should render_template(:new) }
     it { should_not set_the_flash }
+
+  end
+
+  context "for a visitor" do
+
+    before(:each) do
+      get :new
+    end
+
+    it { should redirect_to(new_user_session_path) }
+    it { should set_the_flash[:alert].to("You must sign in first!") }
 
   end
 end

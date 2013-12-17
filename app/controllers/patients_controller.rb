@@ -5,6 +5,7 @@ class PatientsController < ApplicationController
       @hospital = @user.designations.first.hospital
       @patient = Patient.new
     else
+      flash[:alert] = "You must sign in first!"
       redirect_to new_user_session_path
     end
   end
