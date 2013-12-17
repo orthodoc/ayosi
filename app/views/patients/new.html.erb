@@ -1,2 +1,14 @@
-<h2>Step 1</h2>
-<%= render 'form' %>
+<div class="row">
+  <hgroup class="small-12 medium-6 columns">
+    <h2 class="left">Step 1</h2>
+    <sgroup class="right">
+      <span><%= @hospital.name %></span><br />
+      <span><%= @hospital.city %></span>
+    </sgroup>
+  </hgroup>
+</div>
+<div class="row">
+  <div class="small-12 medium-6">
+    <%= render 'form' %>
+  </div>
+</div>

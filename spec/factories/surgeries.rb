@@ -7,8 +7,8 @@ FactoryGirl.define do
     surgery.patient
     surgery.hospital
     surgery.category {["Primary", "Revision"].sample}
-    surgery.side {[true,false].sample}
-    surgery.region {["Hip","Knee","Shoulder","Elbow","Ankle"].sample}
+    surgery.side {["Right", "Left"].sample}
+    surgery.region {["Hip","Knee","Shoulder"].sample}
     surgery.surgeon { Faker::Name.name }
 
     before(:create) do

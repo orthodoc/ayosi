@@ -16,3 +16,7 @@ puts 'DEFAULT USERS'
 user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
 puts 'user: ' << user.name
 user.add_role :admin
+hospital = FactoryGirl.create(:hospital)
+puts 'Hospital: ' << hospital.name
+designation = FactoryGirl.create(:designation, user: user, hospital: hospital)
+puts 'Designation: ' << designation.name

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131212063518) do
+ActiveRecord::Schema.define(version: 20131215135436) do
 
   create_table "clients", force: true do |t|
     t.integer  "user_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20131212063518) do
   end
 
   add_index "clients", ["patient_id"], name: "index_clients_on_patient_id", using: :btree
+  add_index "clients", ["user_id", "patient_id"], name: "index_clients_on_user_id_and_patient_id", unique: true, using: :btree
   add_index "clients", ["user_id"], name: "index_clients_on_user_id", using: :btree
 
   create_table "designations", force: true do |t|
@@ -32,6 +33,7 @@ ActiveRecord::Schema.define(version: 20131212063518) do
   end
 
   add_index "designations", ["hospital_id"], name: "index_designations_on_hospital_id", using: :btree
+  add_index "designations", ["name", "user_id", "hospital_id"], name: "index_designations_on_name_and_user_id_and_hospital_id", unique: true, using: :btree
   add_index "designations", ["user_id"], name: "index_designations_on_user_id", using: :btree
 
   create_table "hospitals", force: true do |t|
@@ -70,12 +72,13 @@ ActiveRecord::Schema.define(version: 20131212063518) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "category"
-    t.boolean  "side"
+    t.string   "side"
     t.string   "region"
     t.string   "surgeon"
   end
 
   add_index "surgeries", ["hospital_id"], name: "index_surgeries_on_hospital_id", using: :btree
+  add_index "surgeries", ["name", "date", "hospital_id", "patient_id", "category", "side", "region", "surgeon"], name: "unique_surgery_attributes_index", unique: true, using: :btree
   add_index "surgeries", ["patient_id"], name: "index_surgeries_on_patient_id", using: :btree
 
   create_table "users", force: true do |t|

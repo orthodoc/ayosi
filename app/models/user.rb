@@ -8,11 +8,11 @@ class User < ActiveRecord::Base
 
   # Designation is the join table for users and hospitals
   has_many :designations
-  has_many :hospitals, through: :designations
+  has_many :hospitals, -> {distinct}, through: :designations
 
   # Client is the join table for users and patients
   has_many :clients
-  has_many :patients, through: :clients
+  has_many :patients, -> {distinct}, through: :clients
 
   # Validation for the rest are provided by devise. Validation that follows here are
   # for the extra fields that have been added to the user model eg: name

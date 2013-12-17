@@ -2,11 +2,11 @@ class Patient < ActiveRecord::Base
 
   # Surgery is the join table for patients and hospitals
   has_many :surgeries
-  has_many :hospitals, through: :surgeries
+  has_many :hospitals, -> {distinct}, through: :surgeries
 
   # Client is the join table for patients and users
   has_many :clients
-  has_many :users, through: :clients
+  has_many :users, -> {distinct}, through: :clients
 
   validates_presence_of :name
   validates_presence_of :age

@@ -11,10 +11,12 @@ gem 'cancan'
 gem 'devise'
 gem 'figaro'
 gem 'foundation-rails'
+gem 'foundation-icons-sass-rails'
 gem 'pg'
 gem 'rolify'
 gem 'therubyracer', :platform=>:ruby
 gem 'thin'
+gem 'simple_form'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
