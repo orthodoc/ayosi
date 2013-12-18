@@ -1,6 +1,7 @@
 <%= simple_form_for @patient do |f| %>
-  <%= f.input :name, placeholder: Faker::Name.name %>
-  <%= f.input :age , placeholder: %w[30 35 40 45 50 55 60 65].sample %>
+  <%= f.input :name, hint: "Enter the patient's name", placeholder: Faker::Name.name %>
+  <%= f.input :age , placeholder: %w[30 35 40 45 50 55 60 65].sample, collection: (12..110) %>
+  <%= f.input :birth_date, label: "Date of Birth" %>
   <%= f.input :gender, as: :radio_buttons, collection: ["Male", "Female", "Others"], boolean_style: :inline %>
   <%= f.input :uhid, label: "UHID", placeholder: %w[266900 266153 113203 267443 267623].sample %>
   <a href="/"><i class="fi-home"></i></a>
