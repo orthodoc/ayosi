@@ -20,3 +20,5 @@ hospital = FactoryGirl.create(:hospital)
 puts 'Hospital: ' << hospital.name
 designation = FactoryGirl.create(:designation, user: user, hospital: hospital)
 puts 'Designation: ' << designation.name
+FactoryGirl.create_list(:hospital, 5)
+FactoryGirl.create_list(:designation, 5)

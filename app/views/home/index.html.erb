@@ -1,0 +1,8 @@
+<h3>Home</h3>
+Welcome 
+<% if signed_in? %>
+  <%= link_to  @user.name, user_path(@user) %>!<br />
+  <%= @patients.count %> patients registered
+<% else %>
+  Guest!
+<% end %>

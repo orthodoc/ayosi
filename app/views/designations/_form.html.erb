@@ -1,0 +1,6 @@
+<%= simple_form_for @designation do |f| %>
+  <%= f.input :name, collection: Designation.all.select(:name).uniq, value_method: :name %>
+  <%= f.association :hospital, collection: Hospital.all %>
+  <%= f.input :user_id, as: "hidden", input_html: {value: @user.id} %>
+  <%= f.button :submit, 'Submit' %>
+<% end %>

@@ -4,8 +4,8 @@ FactoryGirl.define do
   factory :user do |user|
     user.name { Faker::Name.name }
     user.email { Faker::Internet.email }
-    user.sequence(:password) {|n| "test_pwd#{n}"}
-    user.sequence(:password_confirmation) {|n| "test_pwd#{n}"}
+    user.password "test_pwd"
+    user.password_confirmation "test_pwd"
 
    # has_many association is not working with factory girl. So recreate with methods
    # while testing

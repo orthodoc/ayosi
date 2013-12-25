@@ -10,5 +10,7 @@ describe Designation do
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:hospital) }
   it { should validate_uniqueness_of(:name).scoped_to([:user_id, :hospital_id])}
+  it { should accept_nested_attributes_for(:hospital) }
+  it { should accept_nested_attributes_for(:user) }
 
 end

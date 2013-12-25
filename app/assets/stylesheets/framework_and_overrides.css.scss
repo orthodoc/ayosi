@@ -46,3 +46,13 @@ section {
   @extend .row;
   margin-top: 20px;
   }
+
+// Mini button
+.button-mini {
+  @include button;
+  @include radius;
+  padding: 0.25rem;
+  font-size: 0.75rem;
+  background-color: green;
+  margin: 0;
+}
