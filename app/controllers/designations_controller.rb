@@ -1,5 +1,5 @@
 class DesignationsController < ApplicationController
-  before_filter :find_user, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :find_user
   def new
     if signed_in?
       @designation = Designation.new
@@ -10,7 +10,7 @@ class DesignationsController < ApplicationController
   end
 
   def create
-    @designation = Designation.new(params[:designation].permit(:name, :hospital_id, :user_id))
+    @designation = Designation.new(params[:designation].permit(:name, :hospital_id, :user_id, :aasm_state))
     if @designation.save
       flash[:notice] = "Thank you for the submission"
       redirect_to @user
@@ -31,7 +31,7 @@ class DesignationsController < ApplicationController
 
   def update
     @designation = Designation.find(params[:id])
-    if @designation.update_attributes(params[:designation].permit(:name, :hospital_id, :user_id))
+    if @designation.update_attributes(params[:designation].permit(:name, :hospital_id, :user_id, :aasm_state))
       flash[:notice] = "Designation has been updated"
       redirect_to user_path(@user)
     else
@@ -45,7 +45,17 @@ class DesignationsController < ApplicationController
     @designation.destroy
     flash[:alert] = "Designation has been deleted!"
     redirect_to user_path(@user)
+  end
 
+  def requesting
+    if signed_in?
+      @designation = Designation.find(params[:id])
+      if @designation.inactive?
+        @designation.request!
+      end
+      flash[:notice] = "Request submitted!"
+      redirect_to user_path(@user)
+    end
   end
 
   private
@@ -53,4 +63,5 @@ class DesignationsController < ApplicationController
   def find_user
     @user = current_user
   end
+
 end

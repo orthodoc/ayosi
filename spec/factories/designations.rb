@@ -5,6 +5,7 @@ FactoryGirl.define do
     designation.name { Faker::Name.title.split(" ")[2] }
     designation.user
     designation.hospital
+    designation.aasm_state "inactive"
 
     before(:create) do
       designation.user = FactoryGirl.create(:user) unless designation.user.present?

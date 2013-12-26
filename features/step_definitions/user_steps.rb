@@ -17,7 +17,7 @@ def sign_up
   delete_user
   visit '/users/sign_up'
   fill_in "user_name", with: @visitor[:name]
-  fill_in "user_email", with: @visitor[:password]
+  fill_in "user_email", with: @visitor[:email]
   fill_in "user_password", with: @visitor[:password]
   fill_in "user_password_confirmation", with: @visitor[:password_confirmation]
   click_button "Sign up"
@@ -158,10 +158,16 @@ When(/^I click on the delete button$/) do
   @designation.destroy
 end
 
+When(/^I request activation$/) do
+  create_user_at_hospital_with_designation
+  visit user_path(@user)
+  click_link "Request"
+end
+
 ## Then 
 
 Then(/^I should see a successful sign up message$/) do
-  page.has_content? "Welcome! You have signed up successfully."
+  page.should have_content "Welcome! You have signed up successfully."
 end
 
 Then(/^I should see an invalid email message$/) do
@@ -169,48 +175,55 @@ Then(/^I should see an invalid email message$/) do
 end
 
 Then(/^I should see a missing password message$/) do
-  page.has_content? "Password can't be blank"
+  page.should have_content "Passwordcan't be blank"
+  # The absent space b/w Password and can't is necessary for the step to pass
+  # Simple Form displays the error inline to the input box
 end
 
 Then(/^I should see a missing password confirmation message$/) do
-  page.has_content? "Password doesn't match confirmation"
+  page.should have_content "Password confirmationdoesn't match Password"
+  # The absent space b/w confirmation and doesn't is necessary for the step to pass
+  # Simple Form displays the error inline to the input box
 end
 
 Then(/^I should see a mismatched password message$/) do
-  page.has_content? "Password doesn't match confirmation"
+  page.should have_content "Password confirmationdoesn't match Password"
+  # The absent space b/w confirmation and doesn't is necessary for the step to pass
+  # Simple Form displays the error inline to the input box
 end
 
 Then(/^I see an invalid login message$/) do
-  page.has_content? "Invalid email or password."
+  page.should have_content "Invalid email or password."
 end
 
 Then(/^I should be signed out$/) do
-  page.has_content? "Sign up"
-  page.has_content? "Login"
-  page.has_no_content? "Logout"
+  page.should have_content "Sign up"
+  page.should have_content "Login"
+  page.should_not have_content "Logout"
 end
 
 Then(/^I see a successful sign in message$/) do
-  page.has_content? "Signed in successfully"
+  page.should have_content "Signed in successfully"
 end
 
 Then(/^I should be signed in$/) do
-  page.has_content? "Logout"
-  page.has_no_content? "Sign up"
-  page.has_no_content? "Login"
+  page.should have_content "Logout"
+  page.should_not have_content "Sign up"
+  page.should_not have_content "Login"
 end
 
 Then(/^I should see a signed out message$/) do
-  page.has_content? "Signed out successfully."
+  page.should have_content "Signed out successfully."
 end
 
 Then(/^I should see my name$/) do
-  page.has_content? @user.name
+  page.should have_content(@user.name)
 end
 
 Then(/^I should see my new designation$/) do
   create_user_at_hospital_with_designation
-  page.has_content?(@designation.name)
+  visit user_path(@user)
+  page.should have_content(@designation.name)
 end
 
 Then(/^I should be on my page$/) do
@@ -218,9 +231,25 @@ Then(/^I should be on my page$/) do
 end
 
 Then(/^I should see my edited designation$/) do
-  page.has_content?(@new_designation.name)
+  page.should have_content(@new_designation.name)
 end
 
 Then(/^I should not see the designation$/) do
-  page.has_no_content?(@designation.name)
+  page.should_not have_content(@designation.name)
+end
+
+Then(/^it should be in an inactive state$/) do
+  visit user_path(@user)
+  @designation.inactive?
+  page.should have_content("Inactive")
+end
+
+Then(/^I should see a request button$/) do
+  visit user_path(@user)
+  @designation.inactive?
+  page.should have_content("Request")
+end
+
+Then(/^I should see a pending state$/) do
+    page.should have_content("Pending")
 end
