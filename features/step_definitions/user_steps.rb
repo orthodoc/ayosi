@@ -37,10 +37,6 @@ def sign_in
   click_button "Sign in"
 end
 
-def create_designation
-  @designation = FactoryGirl.create(:designation)
-end
-
 ## Given Steps ##
 Given(/^I am not logged in$/) do
   visit 'users/sign_out'
@@ -154,14 +150,14 @@ end
 When(/^I click on the delete button$/) do
   create_user_at_hospital_with_designation
   visit user_path(@user)
-  click_link "Delete"
+  click_button "Delete"
   @designation.destroy
 end
 
 When(/^I request activation$/) do
   create_user_at_hospital_with_designation
   visit user_path(@user)
-  click_link "Request"
+  click_button "Request"
 end
 
 ## Then 
@@ -173,22 +169,24 @@ end
 Then(/^I should see an invalid email message$/) do
   page.should have_content "Emailis invalid"
 end
+  # The absent space b/w **Email and is** is necessary for the step to pass
+  # Simple Form displays the error inline to the input box
 
 Then(/^I should see a missing password message$/) do
   page.should have_content "Passwordcan't be blank"
-  # The absent space b/w Password and can't is necessary for the step to pass
+  # The absent space b/w **Password and can't** is necessary for the step to pass
   # Simple Form displays the error inline to the input box
 end
 
 Then(/^I should see a missing password confirmation message$/) do
   page.should have_content "Password confirmationdoesn't match Password"
-  # The absent space b/w confirmation and doesn't is necessary for the step to pass
+  # The absent space b/w **confirmation and doesn't** is necessary for the step to pass
   # Simple Form displays the error inline to the input box
 end
 
 Then(/^I should see a mismatched password message$/) do
   page.should have_content "Password confirmationdoesn't match Password"
-  # The absent space b/w confirmation and doesn't is necessary for the step to pass
+  # The absent space b/w **confirmation and doesn't** is necessary for the step to pass
   # Simple Form displays the error inline to the input box
 end
 
@@ -247,9 +245,9 @@ end
 Then(/^I should see a request button$/) do
   visit user_path(@user)
   @designation.inactive?
-  page.should have_content("Request")
+  page.should have_button("Request")
 end
 
 Then(/^I should see a pending state$/) do
-    page.should have_content("Pending")
+  page.should have_content("Pending")
 end

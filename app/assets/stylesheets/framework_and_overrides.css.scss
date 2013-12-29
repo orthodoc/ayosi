@@ -49,10 +49,24 @@ section {
 
 // Mini button
 .button-mini {
-  @include button;
+  @extend button;
   @include radius;
   padding: 0.25rem;
   font-size: 0.75rem;
   background-color: green;
   margin: 0;
+}
+
+// Make the background neutral for buttons in forms
+form, form.button_to {
+  margin: 0.10rem;
+  padding: 0.15rem;
+}
+table#designation-roles > tbody {
+  tr:nth-child(even) > td > form.button_to {
+    background-color: #f9f9f9;
+  }
+  tr:nth-child(odd) > td > form.button_to {
+    background-color: #fff;
+  }
 }

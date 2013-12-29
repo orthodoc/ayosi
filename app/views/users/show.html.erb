@@ -1,7 +1,7 @@
 <h3><%= @user.name %></h3>
 <div class="small-12 medium-6">
 <h4>List of  Designated Roles</h4>
-<table cellspacing="0">
+<table id="designation-roles" cellspacing="0">
   <thead>
     <tr>
       <th>Designation</th>
@@ -17,8 +17,8 @@
         <td><%= link_to designation.name, edit_designation_path(designation) %></td>
         <td><%= link_to designation.hospital.name, hospital_path(designation.hospital.id) %></td>
         <td><%= designation.aasm_state.capitalize %></td>
-        <td><%= link_to "Request", requesting_designation_path(designation), method: :post, class: "button-mini" %></td>
-        <td><%= link_to "Delete", designation, method: :delete, data: { confirm: "Are you sure you want to delete this designation?" }, class: "button-mini" %></td>
+        <td><%= button_to "Request", requesting_designation_path(designation), class: "button-mini" %></td>
+        <td><%= button_to "Delete", designation, method: :delete, data: { confirm: "Are you sure you want to delete this designation?" }, class: "button-mini" %></td>
       </tr>
     <% end %>
   </tbody>

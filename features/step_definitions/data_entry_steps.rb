@@ -12,6 +12,10 @@ def create_user_at_hospital_with_designation
   @hospital = @user.designations.find_by_name(@designation.name).hospital
 end
 
+def create_designation
+  @designation = FactoryGirl.create(:designation)
+end
+
 def build_patient
   @patient = FactoryGirl.build(:patient)
 end
