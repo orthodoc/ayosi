@@ -70,3 +70,13 @@ table#designation-roles > tbody {
     background-color: #fff;
   }
 }
+
+// Decrease the size of span element in headers
+h3 > span {
+  font-size: rem-calc(18);
+}
+
+// Improve spacing for radio buttons
+input[type="radio"], select {
+  margin: 0.25rem 0.35rem;
+}

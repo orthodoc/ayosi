@@ -7,4 +7,10 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
+  helper_method :display_name
+
+  def display_name
+    name.titleize
+  end
+
 end

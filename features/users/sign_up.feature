@@ -9,6 +9,7 @@ Feature: Sign up
     Scenario: User signs up with valid data
       When I sign up with valid user data
       Then I should see a successful sign up message
+      And I should be on the home page
 
     Scenario: User signs up with invalid email
       When I sign up with an invalid email

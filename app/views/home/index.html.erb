@@ -1,8 +1,31 @@
-<h3>Home</h3>
-Welcome 
-<% if signed_in? %>
-  <%= link_to  @user.name, user_path(@user) %>!<br />
-  <%= @patients.count %> patients registered
-<% else %>
-  Guest!
-<% end %>
+<div class="row">
+  <div class="small-12 medium-6">
+    <h3>
+    <% if signed_in? %>
+      <%= link_to  @user.name, user_path(@user) %>
+      <span>
+        <% if @user.roles.first.nil? %>
+          (<%= @user.category.titleize %>)
+        <% else %>
+          (<%= @user.roles.first.name.titleize %>)
+        <% end %>
+      </span>
+    <% else %>
+      Welcome Visitor!
+    <% end %>
+    </h3>
+    <p>
+      <% if signed_in? %>
+        <% if @user.category == "hospital_staff" && @user.roles.count == 0 %>
+          Before you proceed, let us know what you do at the hospital
+          <%= simple_form_for @user, url: user_path(@user), html: { method: :put}  do |f| %>
+            <%= f.input :role_ids, label: "Role", collection: Role.hospital_staff, as: :radio_buttons %>
+            <%= f.submit "Submit", class: "button small radius" %>
+          <% end %>
+        <% elsif @user.category == "patient" %>
+        <% end %>
+      <% end %>
+    </p>
+  </div>
+</div>
+

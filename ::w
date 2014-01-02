@@ -17,7 +17,7 @@ def find_user
 end
 
 def find_patient
-  @user ||=User.find_by_email(@patient_visitor[:email])
+  @user ||=User.find_by(email: (@patient_visitor[:email]))
 end
 
 def find_hospital_staff
@@ -50,28 +50,6 @@ def sign_up
   find_user
 end
 
-def sign_up_as_patient
-  delete_patient
-  visit '/users/sign_up'
-  fill_in "user_name", with: @patient_visitor[:name]
-  fill_in "user_email", with: @patient_visitor[:email]
-  fill_in "user_password", with: @patient_visitor[:password]
-  fill_in "user_password_confirmation", with: @patient_visitor[:password_confirmation]
-  click_button "Sign up"
-  find_patient
-end
-
-def sign_up_as_hospital_staff
-  delete_hospital_staff
-  visit '/users/sign_up'
-  fill_in "user_name", with: @hospital_staff_visitor[:name]
-  fill_in "user_email", with: @hospital_staff_visitor[:email]
-  fill_in "user_password", with: @hospital_staff_visitor[:password]
-  fill_in "user_password_confirmation", with: @hospital_staff_visitor[:password_confirmation]
-  click_button "Sign up"
-  find_hospital_staff
-end
-
 def create_user
   create_visitor
   delete_user
@@ -97,33 +75,6 @@ def sign_in
   click_button "Sign in"
 end
 
-def sign_in_as_hospital_staff
-  visit '/users/sign_in'
-  fill_in "user_email", with: @hospital_staff_visitor[:email]
-  fill_in "user_password", with: @hospital_staff_visitor[:password]
-  click_button "Sign in"
-end
-
-def sign_in_as_patient
-  visit '/users/sign_in'
-  fill_in "user_email", with: @patient_visitor[:email]
-  fill_in "user_password", with: @patient_visitor[:password]
-  click_button "Sign in"
-end
-
-def create_roles
-  roles = %w[admin group_admin visitor guest patient doctor nurse physio secretary office_manager data_operator media_manager]
-  roles.each do |r|
-    Role.create(name: r)
-  end
-  hosp_staff = %w[doctor nurse physio secretary office_manager data_operator media_manager]
-  hosp_roles = Array.new
-  hosp_staff.each do |hs|
-    role = Role.find_by(name: hs)
-    hosp_roles << role
-  end
-end
-
 ## Given Steps ##
 Given(/^I am not logged in$/) do
   visit 'users/sign_out'
@@ -141,27 +92,6 @@ end
 Given(/^I am logged in$/) do
   create_user
   sign_in
-end
-
-Given(/^I am logged in as hospital staff$/) do
-  create_hospital_staff
-  sign_in_as_hospital_staff
-end
-
-Given(/^I am logged in as patient$/) do
-  create_patient
-  sign_in_as_patient
-end
-
-Given(/^I am assigned as a doctor$/) do
-  create_hospital_staff
-  create_roles
-  sign_in_as_hospital_staff
-  if @user.roles.count == 0
-    role = Role.find_by(name: "doctor")
-    choose("user_role_ids_#{role.id}")
-    click_button "Submit"
-  end
 end
 
 ## When Steps ##
@@ -268,6 +198,10 @@ When(/^I request activation$/) do
   click_button "Request"
 end
 
+When(/^I sign up as a patient$/) do
+
+end
+
 ## Then 
 
 Then(/^I should see a successful sign up message$/) do
@@ -362,32 +296,4 @@ end
 
 Then(/^I should be on the home page$/) do
   visit root_path
-end
-
-Then(/^I should see the word guest$/) do
-  page.should have_content @user.category.titleize
-end
-
-Then(/^I should see the word hospital staff$/) do
-  page.should have_content @user.category.titleize
-end
-
-Then(/^I should see the word patient$/) do
-  page.should have_content @user.category.titleize
-end
-
-Then(/^I should not see the words visitor, guest or patient$/) do
-  %w[visitor guest patient].each do |word|
-    page.should_not have_content(word)
-  end
-end
-
-Then(/^I should not see the words visitor, guest or hospital staff$/) do
-  ["visitor", "guest", "hospital staff"].each do |word|
-    page.should_not have_content(word)
-  end
-end
-
-Then(/^I should see the name doctor$/) do
-  page.should have_content(@user.roles.first.name.titleize)
 end

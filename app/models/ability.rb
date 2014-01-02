@@ -4,6 +4,8 @@ class Ability
   def initialize(user)
     if user.has_role? :admin
       can :manage, :all
+    elsif user.has_role? :patient
+      can :manage, Patient
     else
       can :read, Designation
     end

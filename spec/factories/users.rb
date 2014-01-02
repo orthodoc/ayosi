@@ -6,6 +6,7 @@ FactoryGirl.define do
     user.email { Faker::Internet.email }
     user.password "test_pwd"
     user.password_confirmation "test_pwd"
+    user.category {["patient", "hospital", "guest"].sample}
 
    # has_many association is not working with factory girl. So recreate with methods
    # while testing

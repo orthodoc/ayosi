@@ -1,4 +1,13 @@
-<h3><%= @user.name %></h3>
+<h3>
+  <%= @user.name %>
+  <span>
+    <% if @user.roles.first.nil? %>
+      (<%= @user.category.titleize %>)
+    <% else %>
+      (<%= @user.roles.first.name.titleize %>)
+    <% end %>
+  </span>
+</h3>
 <div class="small-12 medium-6">
 <h4>List of  Designated Roles</h4>
 <table id="designation-roles" cellspacing="0">
