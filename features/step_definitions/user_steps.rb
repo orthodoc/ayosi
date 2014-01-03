@@ -240,7 +240,7 @@ When(/^I create a new designation at a hospital$/) do
   create_designation
   create_hospital
   click_link "Apply for a designation"
-  select @designation.name, from: "designation_name"
+  fill_in "designation_name", with: @designation.name
   select @hospital.name, from: "designation_hospital_id"
   click_button "Submit"
 end

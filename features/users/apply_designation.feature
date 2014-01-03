@@ -24,12 +24,12 @@ Feature: Apply for designation
     Given I am logged in as hospital staff
     And I am assigned as a doctor
     Then I should see the name doctor
- #   And I create a new designation at a hospital
- #   Then I should be on my page
- #   And I should see my new designation
- #   And it should be in an inactive state
- #   And I should see a request button
- #
+    And I create a new designation at a hospital
+    Then I should be on my page
+    And I should see my new designation
+    And it should be in an inactive state
+    And I should see a request button
+ 
  # Scenario: Edit a designation
  #   When I edit my designation
  #   Then I should be on my page

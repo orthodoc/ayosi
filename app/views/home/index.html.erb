@@ -1,25 +1,25 @@
 <div class="row">
   <div class="small-12 medium-6">
     <h3>
-    <% if signed_in? %>
-      <%= link_to  @user.name, user_path(@user) %>
-      <span>
-        <% if @user.roles.first.nil? %>
-          (<%= @user.category.titleize %>)
-        <% else %>
-          (<%= @user.roles.first.name.titleize %>)
-        <% end %>
-      </span>
-    <% else %>
-      Welcome Visitor!
-    <% end %>
+      <% if signed_in? %>
+        <%= link_to  @user.name, user_path(@user) %>
+        <span>
+          <% if @user.roles.first.nil? %>
+            (<%= @user.category.titleize %>)
+          <% else %>
+            (<%= @user.roles.first.name.titleize %>)
+          <% end %>
+        </span>
+      <% else %>
+        Welcome Visitor!
+      <% end %>
     </h3>
     <p>
       <% if signed_in? %>
         <% if @user.category == "hospital_staff" && @user.roles.count == 0 %>
           Before you proceed, let us know what you do at the hospital
           <%= simple_form_for @user, url: user_path(@user), html: { method: :put}  do |f| %>
-            <%= f.input :role_ids, label: "Role", collection: Role.hospital_staff, as: :radio_buttons %>
+            <%= f.input :role_ids, label: "Role", collection: Role.hospital_staff, as: :radio_buttons, label_method: lambda { |r| r.name.titleize unless r.nil? } %>
             <%= f.submit "Submit", class: "button small radius" %>
           <% end %>
         <% elsif @user.category == "patient" %>
