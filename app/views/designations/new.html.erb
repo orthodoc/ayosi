@@ -4,7 +4,7 @@
       <% if signed_in? %>
         <%= link_to  @user.name, user_path(@user) %>
         <span>
-          <% if @user.roles.first.nil? %>
+          <% if @user.roles.count == 0 %>
             (<%= @user.category.titleize %>)
           <% else %>
             (<%= @user.roles.first.name.titleize %>)

@@ -124,6 +124,10 @@ def create_roles
   end
 end
 
+def build_hospital
+  @hospital = FactoryGirl.build(:hospital)
+end
+
 ## Given Steps ##
 Given(/^I am not logged in$/) do
   visit 'users/sign_out'
@@ -268,6 +272,14 @@ When(/^I request activation$/) do
   click_button "Request"
 end
 
+When(/^I select the hospital$/) do
+  create_patient_as_visitor
+  create_hospital
+  click_link "Fill in hospital name"
+  select @hospital.name, from: "designation_hospital_id"
+  click_button "Submit"
+end
+
 ## Then 
 
 Then(/^I should see a successful sign up message$/) do
@@ -329,7 +341,9 @@ end
 Then(/^I should see my new designation$/) do
   create_user_at_hospital_with_designation
   visit user_path(@user)
-  page.should have_content(@designation.name)
+  if @user.category == "hospital_staff"
+    page.should have_content(@designation.name)
+  end
 end
 
 Then(/^I should be on my page$/) do
@@ -347,13 +361,17 @@ end
 Then(/^it should be in an inactive state$/) do
   visit user_path(@user)
   @designation.inactive?
-  page.should have_content("Inactive")
+  if @user.category == "hospital_staff"
+    page.should have_content("Inactive")
+  end
 end
 
 Then(/^I should see a request button$/) do
   visit user_path(@user)
   @designation.inactive?
-  page.should have_button("Request")
+  if @user.category == "hospital_staff"
+    page.should have_button("Request")
+  end
 end
 
 Then(/^I should see a pending state$/) do

@@ -43,3 +43,7 @@ Feature: Apply for designation
  #   When I request activation
  #   Then I should see a pending state
 
+   Scenario: Select hospital as a patient
+    Given I am logged in as patient
+    When I select the hospital
+    Then I should see the name of the hospital

@@ -6,6 +6,7 @@ class Designation < ActiveRecord::Base
   # | Registrar   | Doctor |
   # | Nurse       | Nurse  |
   # | Physio      | Physio |
+  # | Patient     | Patient|
   # ------------------------
   #
   include AASM

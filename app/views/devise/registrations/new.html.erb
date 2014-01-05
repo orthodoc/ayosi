@@ -6,7 +6,7 @@
       <%= f.input :email, required: true %>
       <%= f.input :password, required: true %>
       <%= f.input :password_confirmation, required: true %>
-      <%= f.input :category, as: :radio_buttons, collection: [["I am a patient", "patient"], ["I work at a hospital", "hospital_staff"]], boolean_style: :inline %>
+      <%= f.input :category, as: :radio_buttons, collection: [["I am a patient", "patient"], ["I work at a hospital", "hospital_staff"]] %>
       <%= f.button :submit, "Sign up", class: "button small radius" %>
     <% end %>
     <%= render "devise/shared/links" %>

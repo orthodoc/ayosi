@@ -28,7 +28,6 @@ end
 ## When Steps ##
 ## Then Steps ##
 Then(/^I should see the name of the hospital$/) do
-  create_user_at_hospital_with_designation
   page.should have_content(@hospital.name)
 end
 

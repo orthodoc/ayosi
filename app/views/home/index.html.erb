@@ -4,7 +4,7 @@
       <% if signed_in? %>
         <%= link_to  @user.name, user_path(@user) %>
         <span>
-          <% if @user.roles.first.nil? %>
+          <% if @user.roles.count == 0 %>
             (<%= @user.category.titleize %>)
           <% else %>
             (<%= @user.roles.first.name.titleize %>)
@@ -22,7 +22,10 @@
             <%= f.input :role_ids, label: "Role", collection: Role.hospital_staff, as: :radio_buttons, label_method: lambda { |r| r.name.titleize unless r.nil? } %>
             <%= f.submit "Submit", class: "button small radius" %>
           <% end %>
-        <% elsif @user.category == "patient" %>
+        <% elsif @user.category == "guest" %>
+          A patient? <%= link_to "Edit your account", edit_user_registration_path(@user) %>
+        <% else %>
+          <%= link_to "Fill in hospital name", new_designation_path %>
         <% end %>
       <% end %>
     </p>

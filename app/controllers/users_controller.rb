@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def update
     if signed_in?
       @user = current_user
-      if @user.update_attributes(params[:user].permit(:role_ids))
+      if @user.update_attributes(params[:user].permit(:role_ids, :designations_attributes))
         redirect_to user_path(@user), notice: "User updated."
       else
         redirect_to user_path(@user), alert: "Unable to update user"

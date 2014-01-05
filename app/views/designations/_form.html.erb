@@ -1,6 +1,10 @@
 <%= simple_form_for @designation do |f| %>
-  <%= f.input :name %>
+  <% if @user.category == "hospital_staff" %>
+    <%= f.input :name %>
+  <% elsif @user.category == "patient" %>
+    <%= f.input :name, as: "hidden", input_html: { value: "patient" } %>
+  <% end %>
   <%= f.association :hospital, collection: Hospital.all %>
   <%= f.input :user_id, as: "hidden", input_html: {value: @user.id} %>
-  <%= f.button :submit, 'Submit' %>
+  <%= f.submit "Submit", class: "button small radius" %>
 <% end %>
