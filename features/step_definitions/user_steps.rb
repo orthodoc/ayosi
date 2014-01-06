@@ -128,6 +128,13 @@ def build_hospital
   @hospital = FactoryGirl.build(:hospital)
 end
 
+def create_patient_at_hospital
+  create_patient
+  sign_in_as_patient
+  create_hospital
+  @designation = FactoryGirl.create(:designation, user: @user, hospital: @hospital)
+end
+
 ## Given Steps ##
 Given(/^I am not logged in$/) do
   visit 'users/sign_out'
@@ -253,10 +260,12 @@ When(/^I edit my designation$/) do
   create_user_at_hospital_with_designation
   visit user_path(@user)
   @new_designation = FactoryGirl.create(:designation)
-  click_link @designation.name
-  select @new_designation.name, from: "designation_name"
-  select @hospital.name, from: "designation_hospital_id"
-  click_button "Submit"
+  if @user.category == "hospital_staff"
+    click_link @designation.name
+    select @new_designation.name, from: "designation_name"
+    select @hospital.name, from: "designation_hospital_id"
+    click_button "Submit"
+  end
 end
 
 When(/^I click on the delete button$/) do
@@ -278,6 +287,17 @@ When(/^I select the hospital$/) do
   click_link "Fill in hospital name"
   select @hospital.name, from: "designation_hospital_id"
   click_button "Submit"
+end
+
+When(/^I edit the hospital$/) do
+  create_patient_at_hospital
+  visit user_path(@user)
+  @new_hospital = FactoryGirl.create(:hospital)
+  if @user.category == "patient"
+    click_button "Edit"
+    select @new_hospital.name, from: "designation_hospital_id"
+    click_button "Submit"
+  end
 end
 
 ## Then 
@@ -351,7 +371,9 @@ Then(/^I should be on my page$/) do
 end
 
 Then(/^I should see my edited designation$/) do
-  page.should have_content(@new_designation.name)
+  if @user.category == "hospital_staff"
+    page.should have_content(@new_designation.name)
+  end
 end
 
 Then(/^I should not see the designation$/) do
@@ -408,4 +430,8 @@ end
 
 Then(/^I should see the name doctor$/) do
   page.should have_content(@user.roles.first.name.titleize)
+end
+
+Then(/^I should see the edited hospital$/) do
+  page.should have_content(@new_hospital.name)
 end
