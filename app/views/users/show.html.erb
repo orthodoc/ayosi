@@ -59,7 +59,7 @@
           <% @designations.each do |designation| %>
             <tr>
               <td><%= link_to designation.hospital.name, hospital_path(designation.hospital.id) %></td>
-              <td><%= button_to "Edit", edit_designation_path(designation), method: :get, class: "button-mini" %></td>
+              <td><%= button_to "Edit", edit_designation_path(designation), method: :get %></td>
               <td><%= button_to "Delete", designation, method: :delete, data: { confirm: "Are you sure you want to delete this hospital?"}, class: "button-mini" %></td>
             </tr>
           <% end %>

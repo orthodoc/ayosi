@@ -16,11 +16,26 @@
     </h3>
     <p>
       <% if signed_in? %>
-        <% if @user.category == "hospital_staff" && @user.roles.count == 0 %>
-          Before you proceed, let us know what you do at the hospital
-          <%= simple_form_for @user, url: user_path(@user), html: { method: :put}  do |f| %>
-            <%= f.input :role_ids, label: "Role", collection: Role.hospital_staff, as: :radio_buttons, label_method: lambda { |r| r.name.titleize unless r.nil? } %>
-            <%= f.submit "Submit", class: "button small radius" %>
+        <% if @user.category == "hospital_staff"%>
+          <% if @user.roles.count == 0 %>
+            Before you proceed, let us know what you do at the hospital
+            <%= simple_form_for @user, url: user_path(@user), html: { method: :put}  do |f| %>
+              <%= f.input :role_ids, label: "Role", collection: Role.hospital_staff, as: :radio_buttons, label_method: lambda { |r| r.name.titleize unless r.nil? } %>
+              <%= f.submit "Submit", class: "button small radius" %>
+            <% end %>
+          <% elsif @user.roles.first.name == "doctor" %>
+            <p>You need to complete the following:</p>
+            <ul class="tasks">
+              <% if @user.hospitals.empty? %>
+                <li><%= link_to "Task 1 - Fill in the hospital details", new_designation_path %>
+              <% else %>
+                <li class="strike"><%= link_to "Task 1 - Fill in the hospital details", edit_designation_path(@user.designations.first.id) %><i class="fi-check green"></i>
+              <% end %>
+              <li><%= link_to "Task 2 - Set up your team", "#" %></li>
+              <li><%= link_to "Task 3 - Set up team members", "#" %></li>
+            </ul>
+          <% else @user.roles.first.name || "doctor" %>
+            <p>Something for those who are not doctors</p>
           <% end %>
         <% elsif @user.category == "guest" %>
           A patient? <%= link_to "Edit your account", edit_user_registration_path(@user) %>
