@@ -26,6 +26,26 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
   end
 
+  def edit
+    if signed_in?
+      @team = Team.find(params[:id])
+    else
+      flash[:alert] = "You have to sign in to update the team"
+      redirect_to new_user_session_path
+    end
+  end
+
+  def update
+    @team = Team.find(params[:id])
+    if @team.update_attributes(params[:team].permit(:name, :hospital_id))
+      flash[:notice] = "Team has been updated"
+      redirect_to team_path(@team)
+    else
+      flash[:alert] = "Team has not been updated"
+      render action: "edit"
+    end
+  end
+
   private
 
   def find_user

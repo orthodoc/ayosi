@@ -259,7 +259,7 @@ end
 When(/^I edit my designation$/) do
   create_user_at_hospital_with_designation
   visit user_path(@user)
-  @new_designation = FactoryGirl.create(:designation)
+  @new_designation = FactoryGirl.build(:designation)
   if @user.category == "hospital_staff"
     click_link @designation.name
     fill_in "designation_name", with: @new_designation.name

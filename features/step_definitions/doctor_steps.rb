@@ -23,7 +23,14 @@ def build_team
   @team = FactoryGirl.build(:team)
 end
 
+def create_team
+  @team = FactoryGirl.create(:team)
+end
 ## Given ##
+
+Given(/^I have created a team$/) do
+  create_team
+end
 
 ## When ##
 
@@ -37,6 +44,18 @@ When(/^I create a team$/) do
   click_button "Submit"
 end
 
+When(/^I edit the team$/) do
+  create_doctor_at_hospital_with_designation
+  sign_in_as_doctor
+  create_team
+  visit team_path(@team)
+  click_link @team.name
+  @new_team = FactoryGirl.build(:team)
+  fill_in "team_name", with: @new_team.name
+  select @user.hospitals.first.name, from: "team_hospital_id"
+  click_button "Submit"
+end
+
 ## Then ##
 
 Then(/^I should see the name of the team$/) do
@@ -45,4 +64,8 @@ end
 
 Then(/^I should see the link to add team members$/) do
   page.should have_content("Add team members")
+end
+
+Then(/^I should see the name of the new team$/) do
+  page.should have_content(@new_team.name)
 end

@@ -31,8 +31,11 @@
               <% else %>
                 <li class="strike"><%= link_to "Task 1 - Fill in the hospital details", edit_designation_path(@user.designations.first.id) %><i class="fi-check green"></i>
               <% end %>
-              <li><%= link_to "Task 2 - Set up your team", new_team_path %></li>
-              <li><%= link_to "Task 3 - Set up team members", "#" %></li>
+              <% if @user.teams.empty? %>
+                <li><%= link_to "Task 2 - Set up your team", new_team_path %></li>
+              <% else %>
+                  <li class="strike"><%= link_to "Task 2 - Set up your team", edit_team_path(@user.teams.first.id) %><i class="fi-check green"></i></li>
+              <% end %>
             </ul>
           <% else @user.roles.first.name || "doctor" %>
             <p>Something for those who are not doctors</p>

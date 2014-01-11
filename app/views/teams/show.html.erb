@@ -1,7 +1,7 @@
 <div class="row">
   <div class="small-12 medium-6 columns">
     <h3>
-      <%= @team.name %>
+      <%= link_to @team.name, edit_team_path(@team) %>
       <span>(<%= @team.hospital.name %>)</span>
     </h3>
     <h4>Members:</h4>
