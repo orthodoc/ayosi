@@ -15,5 +15,6 @@ describe User do
 
   it { should accept_nested_attributes_for(:designations) }
   it { should accept_nested_attributes_for(:clients) }
+  it { should accept_nested_attributes_for(:memberships) }
 
 end

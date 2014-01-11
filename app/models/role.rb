@@ -14,18 +14,8 @@ class Role < ActiveRecord::Base
     return roles
   end
 
-  def self.admins
-    admin_roles = %w[admin group_admin]
-    roles = Array.new
-    admin_roles.each do |ar|
-      role = Role.find_by!(name: ar)
-      roles << role
-    end
-    return roles
-  end
-
-  def self.group_admin
-    role = Role.find_by!(name: "group_admin")
+  def self.admin
+    role = Role.find_by!(name: "admin")
     return role
   end
   

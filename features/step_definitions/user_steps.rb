@@ -262,7 +262,7 @@ When(/^I edit my designation$/) do
   @new_designation = FactoryGirl.create(:designation)
   if @user.category == "hospital_staff"
     click_link @designation.name
-    select @new_designation.name, from: "designation_name"
+    fill_in "designation_name", with: @new_designation.name
     select @hospital.name, from: "designation_hospital_id"
     click_button "Submit"
   end

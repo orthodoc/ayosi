@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="small-12 medium-6 columns">
+    <h3>
+      <%= @team.name %>
+      <span>(<%= @team.hospital.name %>)</span>
+    </h3>
+    <h4>Members:</h4>
+    <p>
+      <% @team.members.each do |member| %>
+        <ol>
+          <li><%= link_to member.name, user_path(member.id) %></li>
+        </ol>
+      <% end %>
+    </p>
+    <p>
+      <%= link_to "Add team members", "#" %>
+    </p>
+  </div>
+</div>

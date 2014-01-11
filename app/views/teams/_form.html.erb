@@ -1,0 +1,5 @@
+<%= simple_form_for @team do |f| %>
+  <%= f.input :name %>
+  <%= f.association :hospital, collection: @user.hospitals %>
+  <%= f.submit "Submit", class: "button small radius" %>
+<% end %>

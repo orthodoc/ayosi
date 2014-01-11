@@ -7,6 +7,8 @@ class Hospital < ActiveRecord::Base
   has_many :surgeries
   has_many :patients, -> {distinct}, through: :surgeries
 
+  has_many :teams
+
   # Many of the hospitals that are branches have the same name as the main branch,
   # so the name scoped to city would be unique. This doesn't solve for two branches
   # in the same city, but we are not solving all problems! This can overcome by

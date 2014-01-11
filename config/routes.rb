@@ -9,4 +9,5 @@ Ayosi::Application.routes.draw do
     end
   end
   resources :hospitals
+  resources :teams
 end
