@@ -3,7 +3,12 @@ class TeamsController < ApplicationController
 
   def new
     if signed_in?
-      @team = Team.new
+      if is_doctor?
+        @team = Team.new
+      else
+        flash[:alert] = "Only doctors can form a team"
+        redirect_to user_path(@user)
+      end
     else
       flash[:alert] = "You must sign in first!"
       redirect_to new_user_session_path

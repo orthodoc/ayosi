@@ -8,9 +8,14 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :display_name
+  helper_method :is_doctor?
 
   def display_name
     name.titleize
+  end
+
+  def is_doctor?
+    current_user.has_role? :doctor
   end
 
 end
