@@ -18,8 +18,8 @@ development:
   encoding: unicode
   database: ayosi_development
   pool:     5
-  username: ENV["DB_USERNAME"]
-  password: ENV["DB_PASSWORD"]
+  username: bdb
+  password: bd241075
   template: template0
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -46,8 +46,8 @@ test: &test
   encoding: unicode
   database: ayosi_test
   pool:     5
-  username: ENV["DB_USERNAME"]
-  password: ENV["DB_PASSWORD"]
+  username: bdb
+  password: bd241075
   template: template0
 
 production:
@@ -56,8 +56,8 @@ production:
   encoding: unicode
   database: ayosi_production
   pool:     5
-  username: ENV["DB_USERNAME"]
-  password: ENV["DB_PASSWORD"]
+  username: bdb
+  password: bd241075
   template: template0
 
 cucumber:
