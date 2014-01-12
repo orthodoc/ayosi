@@ -14,9 +14,9 @@ before_script:
   - bundle exec rake db:create db:migrate
   - bundle exec rake db:test:prepare
 
-env: 
-  - RAILS_ENV=test
-  - DB=postgresql
+env:
+  global:
+    - RAILS_ENV=test
 
 script:
   - export RAILS_ENV=test
