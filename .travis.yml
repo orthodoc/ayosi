@@ -1,15 +1,23 @@
 language: ruby
+bundler_args: --without development
 
 rvm: 
   - 1.9.3
   - 2.0.0
 
+before_install:
+  - 'echo "gem: --no-ri --no-rdoc" > ~/.gemrc'
+  - gem install bundler
+
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - bundle exec rake db:create db:migrate
+  - bundle exec rake db:test:prepare
+
 env: 
-  - DB=postgresql
-  - DB=sqlite
+  - RAILS_ENV=test
   - DB=postgresql
 
-before_install: cp config/database.travis.yml config/database.yml
 script:
   - export RAILS_ENV=test
   - bundle exec rake db:create db:migrate
