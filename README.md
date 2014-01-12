@@ -1,4 +1,5 @@
-Ayosi
+Ayosi [![Build
+Status](https://travis-ci.org/orthodoc/ayosi.png?branch=master)](https://travis-ci.org/orthodoc/ayosi)
 ========================
 
 This project aims to build a web application that will aid ortho surgeons to update
