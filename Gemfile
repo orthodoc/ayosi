@@ -13,7 +13,7 @@ gem 'figaro'
 gem 'foundation-rails'
 gem 'foundation-icons-sass-rails'
 gem 'pg'
-gem 'rolify'
+gem 'rolify', github: 'EppO/rolify'
 gem 'therubyracer', :platform=>:ruby
 gem 'thin'
 gem 'simple_form'
