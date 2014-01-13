@@ -1,15 +1,23 @@
 language: ruby
-cache: bundler
-bundler_args: --without development
-rvm: 
-  - 1.9.3
-  - 2.0.0
+bundler_args: --without development --path=~/.bundle
+rvm:
+- 1.9.3
+- 2.0.0
 before_install:
-  - 'echo "gem: --no-ri --no-rdoc" > ~/.gemrc'
-  - gem install bundler
+- 'echo "gem: --no-ri --no-rdoc" > ~/.gemrc'
+- gem install bundler bundle_cache
+- bundle_cache_install
 before_script:
-  - cp config/database.travis.yml config/database.yml
-  - bundle exec rake db:create db:migrate
-  - bundle exec rake db:test:prepare
+- cp config/database.travis.yml config/database.yml
+- bundle exec rake db:create db:migrate
+- bundle exec rake db:test:prepare
+after_script:
+- bundle_cache
 env:
+  matrix:
   - RAILS_ENV=test
+  global:
+    - BUNDLE_ARCHIVE="ayosi_bundle"
+    - AWS_S3_BUCKET="travisbundlercache"
+    - AWS_S3_REGION="ap-southeast-1"
+    - secure: caM6sGUAEHwQCfX5mQ1t5EqSRxdHNVFlMSFOxjUuCXAVwIh3EFN45p8qmJIfIivzG2BBmtz6fy4oZ6V+zKdWzB8H1x0QIP9/KMTU8WBt4uAZzzgRwFy7faeXgEg7OI0E6ACXS2i8VKhhxs+pR/eu3RlDME4lX8Xd5YOCAkJ7TC0=
