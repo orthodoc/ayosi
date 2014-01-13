@@ -1,7 +1,7 @@
 class PatientsController < ApplicationController
   def new
     if signed_in?
-      @user = User.find_by_id(current_user.id)
+      @user = current_user
       @hospital = @user.hospitals.first
       @patient = Patient.new
     else

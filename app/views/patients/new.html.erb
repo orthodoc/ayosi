@@ -2,8 +2,12 @@
   <hgroup class="small-12 medium-6 columns">
     <h2 class="left">Step 1</h2>
     <sgroup class="right">
-      <span><%= @hospital.name %></span><br />
-      <span><%= @hospital.city %></span>
+      <% unless @hospital.nil? %>
+        <span><%= @hospital.name %></span><br />
+        <span><%= @hospital.city %></span>
+      <% else %>
+        <%= link_to "Add hospital", new_designation_path %>
+      <% end %>
     </sgroup>
   </hgroup>
 </div>

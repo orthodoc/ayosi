@@ -57,6 +57,7 @@ When(/^I edit the team$/) do
 end
 
 When(/^I skip team creation$/) do
+  visit root_path
   click_link "Skip!"
 end
 
