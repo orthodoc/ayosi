@@ -56,6 +56,10 @@ When(/^I edit the team$/) do
   click_button "Submit"
 end
 
+When(/^I skip team creation$/) do
+  click_link "Skip!"
+end
+
 ## Then ##
 
 Then(/^I should see the name of the team$/) do
@@ -68,4 +72,8 @@ end
 
 Then(/^I should see the name of the new team$/) do
   page.should have_content(@new_team.name)
+end
+
+Then(/^I should be on the new patient page$/) do
+  visit new_patient_path
 end
