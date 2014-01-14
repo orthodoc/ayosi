@@ -61,6 +61,15 @@ When(/^I skip team creation$/) do
   click_link "Skip!"
 end
 
+When(/^I am on the team page$/) do
+  create_team
+  visit team_path(@team)
+end
+
+When(/^I invite team members$/) do
+
+end
+
 ## Then ##
 
 Then(/^I should see the name of the team$/) do
