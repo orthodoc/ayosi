@@ -21,22 +21,24 @@ gem 'aasm'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
-  gem 'guard-bundler'
-  gem 'guard-cucumber'
-  gem 'guard-rails'
-  gem 'guard-rspec'
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
   gem 'pry'
-  gem 'guard-livereload'
 end
 group :development, :test do
   gem 'factory_girl_rails', '~>4.0'
   gem 'rspec-rails'
   gem 'faker'
+  gem 'guard-rspec'
+  gem 'spork-rails'
+  gem 'guard-spork'
+  gem 'guard-cucumber'
+  gem 'guard-bundler'
+  gem 'guard-rails'
+  gem 'guard-livereload'
 end
 group :test do
   gem 'capybara'
