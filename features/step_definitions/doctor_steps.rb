@@ -66,9 +66,6 @@ When(/^I am on the team page$/) do
   visit team_path(@team)
 end
 
-When(/^I invite team members$/) do
-
-end
 
 ## Then ##
 
