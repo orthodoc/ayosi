@@ -18,4 +18,8 @@ class ApplicationController < ActionController::Base
     current_user.has_role? :doctor
   end
 
+  def team_owner
+    @team.user.name.titleize
+  end
+
 end

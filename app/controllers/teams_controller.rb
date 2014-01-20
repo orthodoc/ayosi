@@ -16,7 +16,7 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @team = Team.new(params[:team].permit(:name, :hospital_id))
+    @team = Team.new(params[:team].permit(:name, :hospital_id, :user_id))
     if @team.save
       Membership.create!(team: @team, user: @user)
       flash[:notice] = "Thank you for the submission"
