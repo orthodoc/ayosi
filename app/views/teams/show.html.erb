@@ -6,13 +6,22 @@
     </h3>
     <h4>Members:</h4>
     <p>
-      <% @team.members.each do |member| %>
-        <ol>
-          <li><%= link_to member.name, user_path(member.id) %></li>
-        </ol>
-      <% end %>
+      <ol>
+        <% @team.members.each do |member| %>
+          <li>
+            <%= link_to member.name, user_path(member.id) %>
+            <% if member.name == @team.user.name %>
+              (Leader)
+            <% end %>
+          </li>
+        <% end %>
+      </ol>
     </p>
     <p>
+    <%= form_tag users_path, method: :get do %>
+      <%= text_field_tag :query, params[:query] %>
+      <%= submit_tag "Search", name: nil, class: "button small radius" %>
+    <% end %>
       <%= link_to "Add team members", "#" %>
     </p>
   </div>
