@@ -16,7 +16,7 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @team = Team.new(params[:team].permit(:name, :hospital_id, :user_id))
+    @team = Team.new(team_params)
     if @team.save
       Membership.create!(team: @team, user: @user)
       flash[:notice] = "Thank you for the submission"
@@ -42,7 +42,7 @@ class TeamsController < ApplicationController
 
   def update
     @team = Team.find(params[:id])
-    if @team.update_attributes(params[:team].permit(:name, :hospital_id))
+    if @team.update_attributes(team_params)
       flash[:notice] = "Team has been updated"
       redirect_to team_path(@team)
     else
@@ -52,6 +52,10 @@ class TeamsController < ApplicationController
   end
 
   private
+
+  def team_params
+    params.require(:team).permit(:name, :hospital_id, :user_tokens)
+  end
 
   def find_user
     @user = current_user
