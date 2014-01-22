@@ -21,4 +21,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    if signed_in?
+      @users = User.order(:name)
+      respond_to do |format|
+        format.html
+        format.json { render json: @users }
+      end
+    end
+  end
+
 end
