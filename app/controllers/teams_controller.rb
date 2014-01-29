@@ -17,7 +17,7 @@ class TeamsController < ApplicationController
 
   def create
     @team = Team.new(team_params)
-    if @team.save
+    if @team.save!
       Membership.create!(team: @team, user: @user)
       flash[:notice] = "Thank you for the submission"
       redirect_to @team
@@ -54,7 +54,7 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:name, :hospital_id, :user_tokens)
+    params.require(:team).permit(:name, :hospital_id, :user_id, member_ids: [])
   end
 
   def find_user

@@ -8,15 +8,20 @@ class Role < ActiveRecord::Base
     hospital_roles  = %w[doctor nurse physio office_manager data_operator media_manager secretary]
     roles = Array.new
     hospital_roles.each do |hr|
-      role = Role.find_by(name: hr)
-      roles << role
+      roles << Role.find_by(name: hr)
     end
     return roles
   end
 
   def self.admin
-    role = Role.find_by!(name: "admin")
-    return role
+    Role.find_by!(name: "admin")
   end
   
+  def self.guest
+    Role.find_by!(name: "guest")
+  end
+
+  def self.patient
+    Role.find_by!(name: "patient")
+  end
 end

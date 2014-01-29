@@ -27,4 +27,12 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :clients
   accepts_nested_attributes_for :memberships
 
+  def self.hospital_staff
+    where(category: "hospital_staff")
+  end
+
+  def self.doctors
+    Role.find_by(name: "doctor").users
+  end
+
 end

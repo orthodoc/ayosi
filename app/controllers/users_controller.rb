@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  respond_to :html, :json
 
   def show
     if signed_in?
@@ -24,10 +25,7 @@ class UsersController < ApplicationController
   def index
     if signed_in?
       @users = User.order(:name)
-      respond_to do |format|
-        format.html
-        format.json { render json: @users }
-      end
+      respond_with @users
     end
   end
 
