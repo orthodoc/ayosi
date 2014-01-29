@@ -1,4 +1,5 @@
 Ayosi::Application.routes.draw do
+  get "hospitals/index"
   root to: 'home#index'
   devise_for :users, controllers: { registrations: "registrations"}
   resources :patients

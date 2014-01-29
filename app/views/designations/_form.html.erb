@@ -4,7 +4,7 @@
   <% elsif @user.category == "patient" %>
     <%= f.input :name, as: "hidden", input_html: { value: "patient" } %>
   <% end %>
-  <%= f.association :hospital, collection: Hospital.all %>
+  <%= f.association :hospital, collection: Hospital.order(:name) %>
   <%= f.input :user_id, as: "hidden", input_html: {value: @user.id} %>
   <%= f.submit "Submit", class: "button small radius" %>
 <% end %>

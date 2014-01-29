@@ -10,10 +10,7 @@ class Team < ActiveRecord::Base
   validates_presence_of :user
   accepts_nested_attributes_for :members
 
-  attr_reader :user_tokens
-
-  def user_tokens=(ids)
-    self.user_ids = ids.split(",")
+  def owner
+    self.user
   end
-
 end
