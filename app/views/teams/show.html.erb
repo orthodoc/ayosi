@@ -4,7 +4,7 @@
       <%= link_to @team.name, edit_team_path(@team) %>
       <span>(<%= @team.hospital.name %>)</span>
     </h3>
-    <h4>Members:</h4>
+    <h4>Registered Members:</h4>
     <p>
       <ol>
         <% @team.members.order(:name).each do |member| %>
@@ -20,6 +20,13 @@
           </li>
         <% end %>
       </ol>
+    </p>
+    <h4>Invite Others</h4>
+    <p>
+      <% form_tag(new_user_invitation_path, method: 'get') do %>
+        <%= email_field_tag "email" %>
+        <%= submit_tag "Submit" %>
+      <% end %>
     </p>
   </div>
 </div>
