@@ -19,6 +19,7 @@ gem 'thin'
 gem 'simple_form'
 gem 'aasm'
 gem 'select2-rails'
+gem 'devise_invitable'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
@@ -40,6 +41,7 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-livereload'
+  gem 'coveralls', require: false
 end
 group :test do
   gem 'capybara'

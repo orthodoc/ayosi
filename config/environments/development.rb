@@ -36,4 +36,7 @@ Ayosi::Application.configure do
   # Send email in development mode.
   config.action_mailer.perform_deliveries = true
 
+  # Default url option
+  config.action_mailer.default_url_options = { host: 'localhost:3000'}
+
 end
