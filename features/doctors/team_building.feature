@@ -8,4 +8,4 @@ Feature: Team building by the surgeon
     And I am assigned as a doctor
     When I create a team
     Then I should see the name of the team
-    And I should see the link to add team members
+    And I should see the team members

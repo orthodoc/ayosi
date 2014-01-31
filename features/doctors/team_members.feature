@@ -8,6 +8,6 @@ Feature: Sending invitations to team members
     And I am assigned as a doctor
     When I create a team
     And I am on the team page
-    And I invite team members
-    Then I should see the name of the member
-    And I should the status as invited
+    Then I should see the invite by email link
+    When I click on the invite by email link
+    Then I should be on the send invitation page

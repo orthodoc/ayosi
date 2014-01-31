@@ -21,12 +21,6 @@
         <% end %>
       </ol>
     </p>
-    <h4>Invite Others</h4>
-    <p>
-      <% form_tag(new_user_invitation_path, method: 'get') do %>
-        <%= email_field_tag "email" %>
-        <%= submit_tag "Submit" %>
-      <% end %>
-    </p>
+    <%= link_to "Invite by email", new_user_invitation_path %>
   </div>
 </div>
