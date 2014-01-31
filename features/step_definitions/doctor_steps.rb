@@ -66,6 +66,10 @@ When(/^I am on the team page$/) do
   visit team_path(@team)
 end
 
+When(/^I click on the invite by email link$/) do
+  click_link "Invite by email"
+end
+
 
 ## Then ##
 
@@ -73,14 +77,24 @@ Then(/^I should see the name of the team$/) do
   page.should have_content(@team.name)
 end
 
-Then(/^I should see the link to add team members$/) do
-  page.should have_content("Add team members")
-end
-
 Then(/^I should see the name of the new team$/) do
   page.should have_content(@new_team.name)
 end
 
+Then(/^I should see the team members$/) do
+  @team.members.each do |member|
+    page.should have_content(member.name)
+  end
+end
+
 Then(/^I should be on the new patient page$/) do
   visit new_patient_path
+end
+
+Then(/^I should see the invite by email link$/) do
+  page.should have_link("Invite by email")
+end
+
+Then(/^I should be on the send invitation page$/) do
+  visit new_user_invitation_path
 end

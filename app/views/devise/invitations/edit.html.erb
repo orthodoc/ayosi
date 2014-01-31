@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="small-12 medium-6 columns">
+    <h2>Set your account</h2>
+    <%= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put } ) do |f| %>
+      <%= f.hidden_field :invitation_token %>
+      <%= f.input :name, required: true, autofocus: true, placeholder: Faker::Name.name %>
+      <%= f.input :password, required: true %>
+      <%= f.input :password_confirmation, required: true %>
+      <%= f.input :category, as: :radio_buttons, collection: [["I am a patient", "patient"], ["I work at a hospital", "hospital_staff"]] %>
+      <%= f.button :submit, "Set account!", class: "button small radius" %>
+    <% end %>
+  </div>
+</div>
