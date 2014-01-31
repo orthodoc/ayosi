@@ -1,5 +1,5 @@
 Ayosi 
-========================
+======================
 
 [![Build Status](https://travis-ci.org/orthodoc/ayosi.png?branch=master)](https://travis-ci.org/orthodoc/ayosi)
 [![Code Climate](https://codeclimate.com/github/orthodoc/ayosi.png)](https://codeclimate.com/github/orthodoc/ayosi)
