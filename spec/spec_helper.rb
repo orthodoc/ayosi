@@ -1,11 +1,19 @@
 require 'rubygems'
 require 'spork'
+require 'json'
 require 'coveralls'
 Coveralls.wear!
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
 Spork.prefork do
+  # To run simplecov
+  # https://github.com/colszowka/simplecov/issues/42#issuecomment-4440284
+  unless ENV['DRB']
+    require 'simplecov'
+    SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+    SimpleCov.start 'rails'
+  end
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
@@ -84,6 +92,13 @@ Spork.prefork do
 end
 
 Spork.each_run do
+  # For simplecov
+  # https://github.com/colszowka/simplecov/issues/42#issuecomment-4440284
+  if ENV['DRB']
+    require 'simplecov'
+    SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+    SimpleCov.start 'rails'
+  end
   # This code will be run each time you run your specs.
   FactoryGirl.reload
   # Watch out that with FactoryGirl is when specifying a class for a factory, using
