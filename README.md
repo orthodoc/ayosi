@@ -20,8 +20,9 @@ For Developers
 Fork the project and contribute!!
 
 Follow these guides:
-[Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide)
-[Rails Style Guide](https://github.com/bbatsov/rails-style-guide)
+1. [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide)
+2. [Rails Style Guide](https://github.com/bbatsov/rails-style-guide)
+3. [Rails Best Practices](http://rails-bestpractices.com/posts/archive)
 
 License
 =====================
@@ -31,7 +32,7 @@ available in the LICENSE.txt file.
 
 (c) Biswajit Dutta Baruah 2014.
 
-This application was generated with the [rails_apps_composer gem]
+This application was generated with the [Rails apps composer gem]
 (https://github.com/RailsApps/rails_apps_composer) provided by the [RailsApps Project]
 (http://railsapps.github.io)
 
