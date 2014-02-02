@@ -5,6 +5,7 @@ Ayosi
 [![Code Climate](https://codeclimate.com/github/orthodoc/ayosi.png)](https://codeclimate.com/github/orthodoc/ayosi)
 [![Coverage Status](https://coveralls.io/repos/orthodoc/ayosi/badge.png)](https://coveralls.io/r/orthodoc/ayosi)
 [![Dependency Status](https://gemnasium.com/orthodoc/ayosi.png)](https://gemnasium.com/orthodoc/ayosi)
+[![License](http://img.shields.io/license/GPlv3.png?color=green)](http://opensource.org/licenses/GPL-3.0)
 
 This project aims to build a web application that will aid ortho surgeons to update
 data on implants used in joint replacment surgeries. This is done in several
