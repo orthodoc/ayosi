@@ -5,8 +5,8 @@ def create_doctor_at_hospital
   create_hospital_staff
   ## find_by_name method in rolify is deprecated, so add_role method throws up a
   #warning. Made it verbose to avoid the warning!!
-  role = Role.find_by(name: "doctor")
-  @user.roles << role
+  doctor = Role.find_by(name: "doctor")
+  @user.roles << doctor unless doctor.nil?
 end
 
 def create_doctor_at_hospital_with_designation
@@ -26,10 +26,28 @@ end
 def create_team
   @team = FactoryGirl.create(:team)
 end
+
+def create_team_with_members
+  create_doctor_at_hospital_with_designation
+  @team = FactoryGirl.create(:team, user: @user)
+  @team = FactoryGirl.create(:team)
+  @nurse = FactoryGirl.create(:user)
+  nurse = Role.find_by(name: "nurse")
+  @nurse.roles << nurse unless nurse.nil?
+  @team.members << @nurse
+end
 ## Given ##
 
 Given(/^I have created a team$/) do
   create_team
+end
+
+Given(/^I create a team with team members$/) do
+  create_team_with_members
+end
+
+Given(/^I visit the team page$/) do
+  visit team_path(@team)
 end
 
 ## When ##
@@ -97,4 +115,17 @@ end
 
 Then(/^I should be on the send invitation page$/) do
   visit new_user_invitation_path
+end
+
+Then(/^I should see the designations of each team member$/) do
+  save_and_open_page
+  @team.members.each do |member|
+    page.should have_content(member.designations.first.name)
+  end
+end
+
+Then(/^I should see the state of each designation as pending$/) do
+  @team.members.each do |member|
+    page.should have_content(member.designations.first.aasm_state)
+  end
 end
