@@ -3,8 +3,8 @@
     <h2 class="left">Step 1</h2>
     <sgroup class="right">
       <% unless @hospital.nil? %>
-        <span><%= @hospital.name %></span><br />
-        <span><%= @hospital.city %></span>
+        <span><%= link_to @hospital.name, edit_designation_path(@user.default_designation.id) %></span><br />
+        <span><%= link_to @hospital.city, edit_designation_path(@user.default_designation.id) %></span>
       <% else %>
         <%= link_to "Add hospital", new_designation_path %>
       <% end %>

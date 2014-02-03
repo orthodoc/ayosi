@@ -33,7 +33,7 @@ end
 group :development, :test do
   gem 'factory_girl_rails', '~>4.0'
   gem 'rspec-rails'
-  gem 'faker'
+  gem 'ffaker'
   gem 'guard-rspec'
   gem 'spork-rails'
   gem 'guard-spork'

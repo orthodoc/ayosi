@@ -2,7 +2,7 @@ class PatientsController < ApplicationController
   def new
     if signed_in?
       @user = current_user
-      @hospital = @user.hospitals.first
+      @hospital = @user.default_hospital
       @patient = Patient.new
     else
       flash[:alert] = "You must sign in first!"

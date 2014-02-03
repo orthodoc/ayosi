@@ -10,7 +10,7 @@ class DesignationsController < ApplicationController
   end
 
   def create
-    @designation = Designation.new(params[:designation].permit(:name, :hospital_id, :user_id, :aasm_state))
+    @designation = Designation.new(params[:designation].permit(:name, :hospital_id, :user_id, :is_default, :aasm_state))
     if @designation.save
       flash[:notice] = "Thank you for the submission"
       redirect_to @user
@@ -31,7 +31,7 @@ class DesignationsController < ApplicationController
 
   def update
     @designation = Designation.find(params[:id])
-    if @designation.update_attributes(params[:designation].permit(:name, :hospital_id, :user_id, :aasm_state))
+    if @designation.update_attributes(params[:designation].permit(:name, :hospital_id, :user_id, :is_default, :aasm_state))
       flash[:notice] = "Designation has been updated"
       redirect_to user_path(@user)
     else
