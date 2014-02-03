@@ -27,12 +27,30 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :clients
   accepts_nested_attributes_for :memberships
 
+
+  private
+
   def self.hospital_staff
     where(category: "hospital_staff")
   end
 
   def self.doctors
     Role.find_by(name: "doctor").users
+  end
+  
+  # These methods will be called upon to associate the hospital automatically with the
+  # patient's hospital
+  def default_designation
+    designations.find_by(is_default: true)
+  end
+
+  def default_hospital
+    default_designation.hospital unless default_designation.nil?
+  end
+
+  # This method is necessary for displaying the hospital in the views
+  def display_hospital
+    default_hospital.name + " - " + default_hospital.city
   end
 
 end
