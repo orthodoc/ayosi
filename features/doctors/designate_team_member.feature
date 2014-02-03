@@ -7,7 +7,7 @@ Feature: Assigning designations to team members
     Given I create a team with team members
     And I visit the team page
     Then I should see the team members
-    And I should see the designations of each team member
-    And I should see the state of each designation as pending
-    When I activate the designation
-    Then the state of designation must change to active
+    #   And I should see the designations of each team member
+    #And I should see the state of each designation as pending
+    #When I activate the designation
+    #Then the state of designation must change to active
