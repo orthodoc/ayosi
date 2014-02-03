@@ -28,8 +28,6 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :memberships
 
 
-  private
-
   def self.hospital_staff
     where(category: "hospital_staff")
   end
