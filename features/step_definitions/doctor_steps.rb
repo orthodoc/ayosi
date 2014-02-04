@@ -30,7 +30,6 @@ end
 def create_team_with_members
   create_doctor_at_hospital_with_designation
   @team = FactoryGirl.create(:team, user: @user)
-  @team = FactoryGirl.create(:team)
   @nurse = FactoryGirl.create(:user)
   nurse = Role.find_by(name: "nurse")
   @nurse.roles << nurse unless nurse.nil?
@@ -118,14 +117,13 @@ Then(/^I should be on the send invitation page$/) do
 end
 
 Then(/^I should see the designations of each team member$/) do
-  save_and_open_page
   @team.members.each do |member|
-    page.should have_content(member.designations.first.name)
+    page.should have_content(member.default_designation) unless member.nil?
   end
 end
 
 Then(/^I should see the state of each designation as pending$/) do
   @team.members.each do |member|
-    page.should have_content(member.designations.first.aasm_state)
+    page.should have_content(member.default_designation.aasm_state) unless member.nil?
   end
 end
