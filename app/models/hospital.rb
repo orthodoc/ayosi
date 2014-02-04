@@ -1,9 +1,9 @@
 class Hospital < ActiveRecord::Base
-  # Designation is the join table for users and hospitals
+  # Designation defines the join table for users and hospitals
   has_many :designations
   has_many :users, -> {distinct}, through: :designations
 
-  # Surgery is the join table for patients and hospitals
+  # Surgery defines the join table for patients and hospitals
   has_many :surgeries
   has_many :patients, -> {distinct}, through: :surgeries
 
@@ -19,5 +19,12 @@ class Hospital < ActiveRecord::Base
 
   accepts_nested_attributes_for :designations
   accepts_nested_attributes_for :surgeries
+
+  # Class method to return all users associated with a hospital
+  # This is not the same as hospital.users, which is an instance method and
+  # derives the list of users through the designation association
+  def self.users
+    self.all.includes(:users).collect(&:users).flatten.uniq
+  end
 
 end
