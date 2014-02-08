@@ -118,12 +118,12 @@ end
 
 Then(/^I should see the designations of each team member$/) do
   @team.members.each do |member|
-    page.should have_content(member.default_designation) unless member.nil?
+    page.should have_content(member.default_designation.name) unless member.default_designation.nil?
   end
 end
 
 Then(/^I should see the state of each designation as pending$/) do
   @team.members.each do |member|
-    page.should have_content(member.default_designation.aasm_state) unless member.nil?
+    page.should have_content(member.default_designation.aasm_state) unless member.default_designation.nil?
   end
 end
