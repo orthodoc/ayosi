@@ -12,10 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require select2
 // Note: Foundation 5 won't work with turbolinks
 //= require foundation
 //= require stacktable
-//= require select2
+//= require js-routes
 //= require_tree .
 $(function() {
   $(document).foundation();

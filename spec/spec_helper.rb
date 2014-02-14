@@ -14,6 +14,12 @@ Spork.prefork do
     SimpleCov.formatter = Coveralls::SimpleCov::Formatter
     SimpleCov.start 'rails'
   end
+
+  # Spork trap_method to delay route loading by devise
+  # https://github.com/sporkrb/spork/wiki/Spork.trap_method-Jujitsu
+  Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
+  # https://github.com/railsware/js-routes
+  Spork.trap_method(JsRoutes, :generate!)
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
