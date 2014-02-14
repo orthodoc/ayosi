@@ -12,7 +12,7 @@ describe Team do
   it { should belong_to(:user) }
 
   it { should validate_presence_of(:name) }
-  it { should validate_uniqueness_of(:name) }
+  it { should validate_uniqueness_of(:name).scoped_to(:hospital_id) }
   it { should validate_presence_of(:hospital) }
   it { should validate_presence_of(:user) }
 

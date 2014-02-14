@@ -20,6 +20,7 @@ gem 'simple_form'
 gem 'aasm'
 gem 'select2-rails'
 gem 'devise_invitable', '1.3.2'
+gem 'js-routes'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]

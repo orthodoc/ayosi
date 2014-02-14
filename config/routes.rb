@@ -8,6 +8,8 @@ Ayosi::Application.routes.draw do
       post :requesting
     end
   end
-  resources :hospitals
+  resources :hospitals do
+    resources :users, only: :index
+  end
   resources :teams
 end

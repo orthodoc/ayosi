@@ -17,13 +17,13 @@ class TeamsController < ApplicationController
 
   def create
     @team = Team.new(team_params)
-    if @team.save!
-      Membership.create!(team: @team, user: @user)
+    if @team.save
+      @team.members << @user
       flash[:notice] = "Thank you for the submission"
       redirect_to @team
     else
       flash[:alert] = "Team was not created"
-      render action: "new"
+      render action: :new
     end
   end
 
@@ -43,6 +43,7 @@ class TeamsController < ApplicationController
   def update
     @team = Team.find(params[:id])
     if @team.update_attributes(team_params)
+      @team.members << @user
       flash[:notice] = "Team has been updated"
       redirect_to team_path(@team)
     else
@@ -54,7 +55,7 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:name, :hospital_id, :user_id, member_ids: [])
+    params.require(:team).permit(:name, :hospital_id, :user_id, :member_list )
   end
 
   def find_user
