@@ -29,10 +29,12 @@ end
 
 def create_team_with_members
   create_doctor_at_hospital_with_designation
-  @team = FactoryGirl.create(:team, user: @user)
+  @hospital = FactoryGirl.create(:hospital)
+  @team = FactoryGirl.create(:team, user: @user, hospital: @hospital)
   @nurse = FactoryGirl.create(:user)
   nurse = Role.find_by(name: "nurse")
   @nurse.roles << nurse unless nurse.nil?
+  FactoryGirl.create(:designation, user: @nurse, hospital: @hospital)
   @team.members << @nurse
 end
 ## Given ##
@@ -87,6 +89,12 @@ When(/^I click on the invite by email link$/) do
   click_link "Invite by email"
 end
 
+When(/^I activate the designation$/) do
+  create_team_with_members
+  visit team_path(@team)
+  click_button "Activate"
+end
+
 
 ## Then ##
 
@@ -118,11 +126,20 @@ end
 
 Then(/^I should see the designations of each team member$/) do
   @team.members.each do |member|
-    page.should have_content(member.default_designation.name) unless member.default_designation.nil?
+    page.should have_content(member.default_designation.name.titleize)
   end
 end
 
 Then(/^I should see the state of each designation as pending$/) do
   @team.members.each do |member|
+    page.should have_content(member.default_designation.aasm_state.capitalize)
   end
+end
+
+Then(/^the state of designation must change to active$/) do
+  create_team_with_members
+  sign_in_as_doctor
+  visit team_path(@team)
+  click_button "Activate"
+  page.should have_content("Active")
 end

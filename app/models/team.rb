@@ -37,8 +37,10 @@ class Team < ActiveRecord::Base
   # member_list is a virtual attribute. Getter method below.
   def member_list
     @member_list
+    #@member_list = self.member_ids.join(",")
   end
-  
+
+  private
   # Since member_list is a virtual attribute, the assign_members method assigns
   # the members to the team. Ordinarily this is done magically when the collection
   # is member_ids on a members association.
