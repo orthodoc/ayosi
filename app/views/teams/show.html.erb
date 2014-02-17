@@ -7,18 +7,37 @@
     <h4>Registered Members:</h4>
     <p>
       <ol>
-        <% @team.members.order(:name).each do |member| %>
-          <li>
-            <% if current_user == member %>
-              <%= link_to member.name, user_path(member.id) %>
-            <% else %>
-              <%= member.name %>
+        <table cellspacing="0">
+          <thead>
+            <tr>
+              <th class="large-only">Name</th>
+              <th class="large-only">Designation</th>
+              <th class="large-only">Status</th>
+              <th class="large-only"></th>
+              <th class="large-only"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @team.members.order(:name).each do |member| %>
+              <tr>
+                <td>
+                  <% if current_user == member %>
+                    <%= link_to member.name, user_path(member) %>
+                  <% else %>
+                    <%= member.name %>
+                  <% end %>
+                  <% if member == @team.owner %>
+                     (Owner)
+                  <% end %>
+                </td>
+                <td><%= member.designation(@team).name.titleize %></td>
+                <td><%= member.designation(@team).aasm_state.capitalize %></td>
+                <td><%= button_to "Activate", activating_designation_path(member.designation(@team)), class: "button-mini" %></td>
+                <td><%= button_to "Delete", member.membership(@team), method: :delete, data: { confirm: "Are you sure you wnat to remove this member?" }, class: "button-mini" %></td>
+              </tr>
             <% end %>
-            <% if member == @team.owner %>
-              (Owner)
-            <% end %>
-          </li>
-        <% end %>
+          </tbody>
+        </table>
       </ol>
     </p>
     <%= link_to "Invite by email", new_user_invitation_path %>

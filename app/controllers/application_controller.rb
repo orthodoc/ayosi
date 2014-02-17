@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :display_name
   helper_method :is_doctor?
+  helper_method :team_owner
+  helper_method :team_owner?
 
   def display_name
     name.titleize
@@ -20,6 +22,10 @@ class ApplicationController < ActionController::Base
 
   def team_owner
     @team.user.name.titleize
+  end
+
+  def team_owner?
+    Team.where(user: current_user).count > 0
   end
 
 end

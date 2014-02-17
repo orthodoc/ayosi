@@ -1,3 +1,6 @@
+> **"If you cannot measure it, you cannot improve it."**
+> Lord Kelvin
+
 Ayosi 
 ======================
 
@@ -21,15 +24,19 @@ For Developers
 Fork the project and contribute!!
 
 Follow these guides:
+
 1. [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide)
 2. [Rails Style Guide](https://github.com/bbatsov/rails-style-guide)
 3. [Rails Best Practices](http://rails-bestpractices.com/posts/archive)
+
+The project relies on a postgresql database for persisting data. You'll have to set
+up one your machine. Fill the database.yml file with your credentials to get started.
 
 License
 =====================
 
 The code in this repository is covered by the GPL v3 license. The content is
-available in the LICENSE.txt file.
+available in LICENSE.txt.
 
 (c) Biswajit Dutta Baruah 2014.
 

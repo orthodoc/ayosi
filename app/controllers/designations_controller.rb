@@ -58,6 +58,17 @@ class DesignationsController < ApplicationController
     end
   end
 
+  def activating
+    if signed_in?
+      @designation = Designation.find(params[:id])
+      if @designation.inactive? || @designation.pending?
+        @designation.activate!
+      end
+      flash[:notice] = "Membership activated!"
+      redirect_to :back
+    end
+  end
+
   private
 
   def find_user
