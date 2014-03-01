@@ -93,6 +93,9 @@ Spork.prefork do
 
     # For shoulda matchers
     require 'shoulda/matchers/integrations/rspec'
+
+    # For draper
+    require 'draper/test/rspec_integration'
   end
 
 end

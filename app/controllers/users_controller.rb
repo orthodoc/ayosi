@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     if signed_in?
-      @user = current_user
+      @user = current_user.decorate
       @designations = @user.designations
       @teams = @user.teams
     else

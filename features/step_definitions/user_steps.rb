@@ -98,6 +98,7 @@ def sign_in
 end
 
 def sign_in_as_hospital_staff
+  create_roles
   visit '/users/sign_in'
   fill_in "user_email", with: @hospital_staff_visitor[:email]
   fill_in "user_password", with: @hospital_staff_visitor[:password]
@@ -133,6 +134,10 @@ def create_patient_at_hospital
   sign_in_as_patient
   create_hospital
   @designation = FactoryGirl.create(:designation, user: @user, hospital: @hospital)
+end
+
+def build_designation
+  @designation = FactoryGirl.build(:designation)
 end
 
 ## Given Steps ##
@@ -244,11 +249,13 @@ end
 When(/^I click on my name$/) do
   create_user
   sign_in
-  click_link @user.name
+  within("main") do
+    click_link @user.name
+  end
 end
 
 When(/^I create a new designation at a hospital$/) do
-  create_designation
+  build_designation
   create_hospital
   click_link "Apply for a designation"
   fill_in "designation_name", with: @designation.name
@@ -271,14 +278,7 @@ end
 When(/^I click on the delete button$/) do
   create_user_at_hospital_with_designation
   visit user_path(@user)
-  click_button "Delete"
-  @designation.destroy
-end
-
-When(/^I request activation$/) do
-  create_user_at_hospital_with_designation
-  visit user_path(@user)
-  click_button "Request"
+  find("i.fa-trash-o").click
 end
 
 When(/^I select the hospital$/) do
@@ -378,26 +378,6 @@ end
 
 Then(/^I should not see the designation$/) do
   page.should_not have_content(@designation.name)
-end
-
-Then(/^it should be in an inactive state$/) do
-  visit user_path(@user)
-  @designation.inactive?
-  if @user.category == "hospital_staff"
-    page.should have_content("Inactive")
-  end
-end
-
-Then(/^I should see a request button$/) do
-  visit user_path(@user)
-  @designation.inactive?
-  if @user.category == "hospital_staff"
-    page.should have_button("Request")
-  end
-end
-
-Then(/^I should see a pending state$/) do
-  page.should have_content("Pending")
 end
 
 Then(/^I should be on the home page$/) do

@@ -41,3 +41,7 @@ jQuery ->
         item.name
       formatResult: (item) ->
         item.name
+
+  $("#team-members-table")
+    .stacktable
+      myClass: "stacktable small-only"

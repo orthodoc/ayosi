@@ -4,42 +4,40 @@
       <%= link_to @team.name, edit_team_path(@team) %>
       <span>(<%= @team.hospital.name %>)</span>
     </h3>
-    <h4>Registered Members:</h4>
-    <p>
-      <ol>
-        <table cellspacing="0">
-          <thead>
-            <tr>
-              <th class="large-only">Name</th>
-              <th class="large-only">Designation</th>
-              <th class="large-only">Status</th>
-              <th class="large-only"></th>
-              <th class="large-only"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @team.members.order(:name).each do |member| %>
-              <tr>
-                <td>
-                  <% if current_user == member %>
-                    <%= link_to member.name, user_path(member) %>
-                  <% else %>
-                    <%= member.name %>
-                  <% end %>
-                  <% if member == @team.owner %>
-                     (Owner)
-                  <% end %>
-                </td>
-                <td><%= member.designation(@team).name.titleize %></td>
-                <td><%= member.designation(@team).aasm_state.capitalize %></td>
-                <td><%= button_to "Activate", activating_designation_path(member.designation(@team)), class: "button-mini" %></td>
-                <td><%= button_to "Delete", member.membership(@team), method: :delete, data: { confirm: "Are you sure you wnat to remove this member?" }, class: "button-mini" %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </ol>
-    </p>
+    <p><%= @team.current_user_display %></p>
+    <h5>Other Members:</h5>
+    <table id="team-members-table" class="large-only" cellspacing="0">
+      <thead>
+        <tr>
+          <!--There are 5 headers in total. The small-only class headers will appear in mobiles and tablets  -->
+          <th class="small-only">Member Names</th>
+          <th class="small-only">Designation</th>
+          <th class="small-only">Status</th>
+          <th class="small-only"></th>
+          <th class="small-only"></th>
+          <!--The large-only class headers are only for desktops  -->
+          <th class="large-only">Name</th>
+          <th class="large-only">Designation</th>
+          <th class="large-only">Status</th>
+          <th class="large-only"></th>
+          <th class="large-only"></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @team.members_except_current_user.each do |member| %>
+          <tr>
+            <td>
+              <%= member.name_link %>
+              <%= member.owner_title(@team) %>
+            </td>
+            <td><%= member.designation_name(@team) %></td>
+            <td><%= member.membership_status(@team) %></td>
+            <td><%= member.action_button(@team)  %></td>
+            <td><%= member.delete_membership(@team) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
     <%= link_to "Invite by email", new_user_invitation_path %>
   </div>
 </div>

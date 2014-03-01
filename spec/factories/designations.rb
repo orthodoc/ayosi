@@ -5,7 +5,6 @@ FactoryGirl.define do
     designation.name { Faker::Company.position }
     designation.user
     designation.hospital
-    designation.aasm_state "inactive"
     designation.is_default false
 
     before(:create) do

@@ -46,6 +46,9 @@ class Team < ActiveRecord::Base
   # is member_ids on a members association.
   def assign_members
     unless @member_list.nil?
+      @member_list = @member_list.reject{|id| id == 0 }
+    end
+    unless @member_list.nil?
       @member_list.each do |member_id|
         @user = User.find(member_id)
         self.members << @user

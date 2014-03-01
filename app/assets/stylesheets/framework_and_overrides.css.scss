@@ -53,8 +53,9 @@ section {
   @include radius;
   padding: 0.25rem;
   font-size: 0.75rem;
-  background-color: green;
+  background-color: #f23c5d;
   margin: 0;
+  text-shadow: 0 0 1px rgba(0,0,0,0.5);
 }
 
 // Make the background neutral for buttons in forms
@@ -743,4 +744,8 @@ disabled look for disabled choices in the results dropdown
   .select2-search input {
 	  background-position: 100% -21px !important;
   }
+}
+
+.light-red {
+  color: #f23c5d;
 }

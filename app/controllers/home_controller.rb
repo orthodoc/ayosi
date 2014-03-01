@@ -1,15 +1,8 @@
 class HomeController < ApplicationController
   def index
     if signed_in?
-      @user = current_user
+      @user = current_user.decorate
     end
   end
-
-  def show
-    if signed_in?
-      @user = current_user
-    end
-  end
-
 
 end
