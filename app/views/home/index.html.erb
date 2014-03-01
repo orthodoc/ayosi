@@ -2,14 +2,8 @@
   <div class="small-12 medium-6">
     <h3>
       <% if signed_in? %>
-        <%= link_to  @user.name, user_path(@user) %>
-        <span>
-          <% if @user.roles.count == 0 %>
-            (<%= @user.category.titleize %>)
-          <% else %>
-            (<%= @user.roles.first.name.titleize %>)
-          <% end %>
-        </span>
+        <%= @user.name_link %>
+        <span><%= @user.role_name %></span>
       <% else %>
         Welcome Visitor!
       <% end %>
@@ -29,7 +23,7 @@
               <% if @user.hospitals.empty? %>
                 <li><%= link_to "Task 1 - Fill in the hospital details", new_designation_path %></li>
               <% else %>
-                <li class="strike"><%= link_to "Task 1 - Fill in the hospital details", edit_designation_path(@user.designations.first.id) %><i class="fi-check green"></i></li>
+                <li class="strike"><%= link_to "Task 1 - Fill in the hospital details", edit_designation_path(@user.designations.first.id) %><i class="fi-checkbox green"></i></li>
               <% end %>
               <% if @user.teams.empty? %>
                 <li>
@@ -37,7 +31,7 @@
                   <span>(Not interested? <%= link_to "Skip!", new_patient_path %>)</span>
                 </li>
               <% else %>
-                  <li class="strike"><%= link_to "Task 2 - Set up your team", edit_team_path(@user.teams.first.id) %><i class="fi-check green"></i></li>
+                  <li class="strike"><%= link_to "Task 2 - Set up your team", edit_team_path(@user.teams.first.id) %><i class="fi-checkbox green"></i></li>
               <% end %>
             </ul>
           <% else @user.roles.first.name || "doctor" %>

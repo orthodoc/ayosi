@@ -1,22 +1,70 @@
 ## Utility steps ##
 
+def create_the_hospital
+  @the_hospital ||= { name: "Morits Hospital", city: "Rigor Exposure hospital" }
+end
+
+def find_the_hospital
+  @hospital ||= Hospital.find_by(name: @the_hospital[:name])
+end
+
+def delete_the_hospital
+  find_the_hospital
+  @hospital.destroy unless @hospital.nil?
+end
+
+def create_hospital
+  create_the_hospital
+  delete_the_hospital
+  @hospital = FactoryGirl.create(:hospital, name: @the_hospital[:name], city: @the_hospital[:city])
+end
+
 def create_doctor_at_hospital
   create_hospital
   create_hospital_staff
   ## find_by_name method in rolify is deprecated, so add_role method throws up a
   #warning. Made it verbose to avoid the warning!!
   doctor = Role.find_by(name: "doctor")
+  @user = User.find_by(name: @hospital_staff_visitor[:name])
   @user.roles << doctor unless doctor.nil?
 end
 
-def create_doctor_at_hospital_with_designation
-  create_doctor_at_hospital
-  @designation = FactoryGirl.create(:designation, user: @user, hospital: @hospital)
+def create_the_designation_name
+  create_hospital_staff_as_visitor
+  create_the_hospital
+  @the_designation ||= { name: "Consultant", user: @hospital_staff_visitor[:name], hospital: @the_hospital[:name] }
 end
 
-def sign_in_as_doctor
-  create_doctor_at_hospital_with_designation
-  sign_in_as_hospital_staff
+def find_the_designation
+  @designation = Designation.find_by(name: @the_designation[:name])
+end
+
+def delete_the_designation
+  find_the_designation
+  @designation.destroy unless @designation.nil?
+end
+
+def create_designation
+  @user = User.find_by(name: @hospital_staff_visitor[:name])
+  @hospital = Hospital.find_by(name: @the_hospital[:name])
+  create_the_designation_name
+  delete_the_designation
+  @designation = FactoryGirl.create(:designation, name: @the_designation[:name], user: @user, hospital: @hospital)
+end
+
+def create_the_team
+  create_hospital_staff_as_visitor
+  create_hospital
+  @the_team ||= { name: "JRGC", user: @hospital_staff_visitor[:name], hospital: @the_hospital[:name] }
+end
+
+def find_the_team
+  @team = Team.find_by(name: @the_team[:name])
+end
+
+def delete_the_team
+  find_the_team
+  @team.destroy unless @team.nil?
 end
 
 def build_team
@@ -24,27 +72,42 @@ def build_team
 end
 
 def create_team
-  @team = FactoryGirl.create(:team)
+  sign_in_as_doctor
+  build_team
+  visit new_team_path
+  fill_in "team_name", with: @team[:name]
+  select @user.hospitals.first.name, from: "team_hospital_id"
+  click_button "Submit"
+  @team.save
 end
 
 def create_team_with_members
-  create_doctor_at_hospital_with_designation
-  @hospital = FactoryGirl.create(:hospital)
-  @team = FactoryGirl.create(:team, user: @user, hospital: @hospital)
+  create_team
   @nurse = FactoryGirl.create(:user)
-  nurse = Role.find_by(name: "nurse")
-  @nurse.roles << nurse unless nurse.nil?
-  FactoryGirl.create(:designation, user: @nurse, hospital: @hospital)
-  @team.members << @nurse
+  @secretary = FactoryGirl.create(:user)
+  @team.members << [@nurse, @secretary]
+  @team.save
 end
+
+def create_doctor_at_hospital_with_designation
+  create_doctor_at_hospital
+  create_designation
+end
+
+def sign_in_as_doctor
+  create_doctor_at_hospital_with_designation
+  sign_in_as_hospital_staff
+end
+
 ## Given ##
 
 Given(/^I have created a team$/) do
-  create_team
 end
 
 Given(/^I create a team with team members$/) do
-  create_team_with_members
+end
+
+Given(/^I visit the team page as a doctor$/) do
 end
 
 Given(/^I visit the team page$/) do
@@ -54,13 +117,7 @@ end
 ## When ##
 
 When(/^I create a team$/) do
-  create_doctor_at_hospital_with_designation
-  sign_in_as_doctor
-  build_team
-  click_link "Set up your team"
-  fill_in "team_name", with: @team.name
-  select @hospital.name, from: "team_hospital_id"
-  click_button "Submit"
+  create_team
 end
 
 When(/^I edit the team$/) do
@@ -81,20 +138,12 @@ When(/^I skip team creation$/) do
 end
 
 When(/^I am on the team page$/) do
-  create_team
   visit team_path(@team)
 end
 
 When(/^I click on the invite by email link$/) do
   click_link "Invite by email"
 end
-
-When(/^I activate the designation$/) do
-  create_team_with_members
-  visit team_path(@team)
-  click_button "Activate"
-end
-
 
 ## Then ##
 
@@ -107,7 +156,11 @@ Then(/^I should see the name of the new team$/) do
 end
 
 Then(/^I should see the team members$/) do
-  @team.members.each do |member|
+  @members = @team.members.reject{ |m| m == @team.owner }
+  sign_in
+  create_team_with_members
+  visit team_path(@team)
+  @members.each do |member|
     page.should have_content(member.name)
   end
 end
@@ -130,16 +183,21 @@ Then(/^I should see the designations of each team member$/) do
   end
 end
 
-Then(/^I should see the state of each designation as pending$/) do
-  @team.members.each do |member|
-    page.should have_content(member.default_designation.aasm_state.capitalize)
-  end
+Then(/^I should see my designation$/) do
+  create_team_with_members
+  visit team_path(@team)
+  page.should have_content(@team.owner.designation(@team).name.titleize) unless @team.owner.designation(@team).nil?
 end
 
-Then(/^the state of designation must change to active$/) do
-  create_team_with_members
-  sign_in_as_doctor
+Then(/^I should be on the new team page$/) do
+  create_team
   visit team_path(@team)
-  click_button "Activate"
-  page.should have_content("Active")
+end
+
+Then(/^I should see my my name$/) do
+  page.should have_content(@user.name.titleize)
+end
+
+Then(/^I should be a member of the team$/) do
+  @team.members.include?(@team.owner)
 end

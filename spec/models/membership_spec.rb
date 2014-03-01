@@ -9,4 +9,7 @@ describe Membership do
 
   it { should validate_presence_of(:user) }
   it { should validate_presence_of(:team) }
+
+  it { should accept_nested_attributes_for(:user) }
+  it { should accept_nested_attributes_for(:team) }
 end

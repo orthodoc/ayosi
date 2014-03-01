@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140202063539) do
+ActiveRecord::Schema.define(version: 20140228153924) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "clients", force: true do |t|
     t.integer  "user_id"
@@ -30,7 +33,6 @@ ActiveRecord::Schema.define(version: 20140202063539) do
     t.integer  "hospital_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "aasm_state"
     t.boolean  "is_default",  default: false
   end
 
@@ -50,6 +52,7 @@ ActiveRecord::Schema.define(version: 20140202063539) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "aasm_state"
   end
 
   add_index "memberships", ["team_id"], name: "index_memberships_on_team_id", using: :btree

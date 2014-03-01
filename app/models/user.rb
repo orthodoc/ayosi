@@ -46,19 +46,4 @@ class User < ActiveRecord::Base
     default_designation.hospital unless default_designation.nil?
   end
 
-  # This method is necessary for displaying the hospital in the views
-  def display_hospital
-    default_hospital.name + " - " + default_hospital.city
-  end
-
-  # Method to get the member's designation details
-  def designation(team)
-    designations.find_by(hospital: team.hospital)
-  end
-
-  # Method to get the member's team membership
-  def membership(team)
-    memberships.find_by(team: team)
-  end
-
 end

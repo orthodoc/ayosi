@@ -8,7 +8,7 @@ Feature: Apply for designation
     Then I should see my name
     And I should see the word guest
     When I click on my name
-    And I should see my name
+    Then I should be on my page
 
   Scenario: Logged in as hospital staff
     Given I am logged in as hospital staff
@@ -22,8 +22,6 @@ Feature: Apply for designation
     And I create a new designation at a hospital
     Then I should be on my page
     And I should see my new designation
-    And it should be in an inactive state
-    And I should see a request button
 
   Scenario: Edit a designation as hospital staff
     Given I am logged in as hospital staff
@@ -34,10 +32,6 @@ Feature: Apply for designation
   Scenario: Delete a designation
     When I click on the delete button
     Then I should not see the designation
- #
- # Scenario: Request activation
- #   When I request activation
- #   Then I should see a pending state
 
   Scenario: Logged in as patient
     Given I am logged in as patient

@@ -1,6 +1,9 @@
 > **"If you cannot measure it, you cannot improve it."**
 > Lord Kelvin
 
+> **"The idea is to to be approximately right than be exactly wrong."**
+> Ed Tufte
+
 Ayosi 
 ======================
 
