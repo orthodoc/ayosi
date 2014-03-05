@@ -11,9 +11,9 @@ class MembershipsController < ApplicationController
   def requesting
     if @membership.inactive?
       @membership.request!
+      flash[:notice] = "Request submitted!"
+      redirect_to user_path(@user)
     end
-    flash[:notice] = "Request submitted!"
-    redirect_to user_path(@user)
   end
 
   def activating
@@ -44,7 +44,7 @@ class MembershipsController < ApplicationController
     if @membership.active? || @membership.pending? || @membership.rejected?
       @membership.ban!
     end
-    flash[:notice] = "Member was banned!"
+    flash[:notice] = "Member has been banned!"
     redirect_to :back
   end
   
@@ -63,6 +63,11 @@ class MembershipsController < ApplicationController
   end
 
   def find_membership
-    @membership = Membership.find(params[:id])
+    if signed_in?
+      @membership = MembershipDecorator.find(params[:id])
+    else
+      flash[:alert] = "You have to sign in first!"
+      redirect_to new_user_session_path
+    end
   end
 end

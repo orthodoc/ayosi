@@ -31,6 +31,7 @@ Follow these guides:
 1. [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide)
 2. [Rails Style Guide](https://github.com/bbatsov/rails-style-guide)
 3. [Rails Best Practices](http://rails-bestpractices.com/posts/archive)
+4. [Better Specs](http://betterspecs.org)
 
 The project relies on a postgresql database for persisting data. You'll have to set
 up one your machine. Fill the database.yml file with your credentials to get started.
@@ -46,8 +47,3 @@ available in LICENSE.txt.
 This application was generated with the [Rails apps composer gem]
 (https://github.com/RailsApps/rails_apps_composer) provided by the [RailsApps Project]
 (http://railsapps.github.io)
-
-------------------------
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/orthodoc/ayosi/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

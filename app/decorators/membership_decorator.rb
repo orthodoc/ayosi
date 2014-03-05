@@ -1,8 +1,8 @@
 class MembershipDecorator < ApplicationDecorator
   delegate_all
 
-  def delete_link(user)
-    if user.memberships.include?(model)
+  def delete_link(team)
+    if team.owner == h.current_user
       trash_link
     end
   end

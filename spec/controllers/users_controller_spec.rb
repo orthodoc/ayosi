@@ -16,6 +16,8 @@ describe UsersController do
       get :show, id: @user.id
     end
 
+    it { assigns(:user).should eq(UserDecorator.decorate(@user)) }
+    it { assigns(:designations).should eq(DesignationDecorator.decorate(@designations)) }
     it { should respond_with(:success) }
     it { should render_template(:show) }
     it { should_not set_the_flash }

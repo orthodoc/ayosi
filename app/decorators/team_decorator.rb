@@ -4,7 +4,7 @@ class TeamDecorator < ApplicationDecorator
   decorates_association :members
 
   def delete_link(user)
-    if user.teams.include?(model)
+    if user == model.owner
       trash_link
     end
   end
@@ -13,12 +13,12 @@ class TeamDecorator < ApplicationDecorator
     h.link_to h.current_user.name, h.user_path(h.current_user)
   end
 
-  def current_user_designation
-    h.current_user.designations.find_by(hospital: model.hospital)
+  def current_user_membership
+    h.current_user.memberships.find_by(team: model)
   end
 
-  def current_user_designation_status
-    current_user_designation.aasm_state.titleize
+  def current_user_membership_status
+    current_user_membership.aasm_state.titleize
   end
 
   def disabled_button
@@ -30,23 +30,23 @@ class TeamDecorator < ApplicationDecorator
 
   def request_button
     h.button_to "Request",
-      h.requesting_designation_path(current_user_designation),
+      h.requesting_membership_path(current_user_membership),
       class: "button-mini"
   end
 
   def resign_button
     h.button_to "Resign",
-      h.resigning_designation_path(current_user_designation),
+      h.resigning_membership_path(current_user_membership),
       class: "button-mini"
   end
 
-  def current_user_designation_button
+  def current_user_membership_button
     unless h.current_user == model.owner
-      if current_user_designation_status == "Inactive"
+      if current_user_membership_status == "Inactive"
         request_button
-      elsif current_user_designation_status == "Pending"
+      elsif current_user_membership_status == "Pending"
         disabled_button
-      else current_user_designation_status == "Active"
+      else current_user_membership_status == "Active"
         resign_button
       end
     end
@@ -59,10 +59,12 @@ class TeamDecorator < ApplicationDecorator
       else
         h.content_tag(:span, current_user_name
                       .concat(": Your membership is ")
-                      .concat(current_user_designation_status)
-                      .concat(current_user_designation_button)
+                      .concat(current_user_membership_status)
+                      .concat(current_user_membership_button)
                      )
       end
+    else
+      h.content_tag(:span, current_user_name.concat(": You do not work in this hospital"))
     end
   end
 

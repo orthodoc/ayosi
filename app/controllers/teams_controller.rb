@@ -25,7 +25,7 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     if @team.save
       @team.members << @user
-      @team.memberships.find_by(user: @user).activate!
+      @team.owner.memberships.find_by(team: @team).activate!
       flash[:notice] = "Thank you for the submission"
       redirect_to @team
     else
@@ -66,7 +66,7 @@ class TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:name, :hospital_id, :user_id, :member_list )
+    params.require(:team).permit(:id, :name, :hospital_id, :user_id, :member_list )
   end
 
   def find_user

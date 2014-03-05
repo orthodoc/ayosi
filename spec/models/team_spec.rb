@@ -17,4 +17,9 @@ describe Team do
   it { should validate_presence_of(:user) }
 
   it { should accept_nested_attributes_for(:members) }
+
+  it { expect(subject.owner).to eq(subject.user) }
+
+  it { expect(subject.member_list).to eq(@member_list) }
+
 end
