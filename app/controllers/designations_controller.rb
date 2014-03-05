@@ -1,6 +1,6 @@
 class DesignationsController < ApplicationController
   before_filter :find_user
-  before_filter :find_designation, only: [:update, :destroy, :requesting, :activating, :rejecting, :deactivating, :banning, :resigning]
+  before_filter :find_designation, only: [:update, :edit, :destroy, :requesting, :activating, :rejecting, :deactivating, :banning, :resigning]
 
   def new
     if signed_in?
@@ -12,7 +12,7 @@ class DesignationsController < ApplicationController
   end
 
   def create
-    @designation = Designation.new(params[:designation].permit(:name, :hospital_id, :user_id, :is_default, :aasm_state))
+    @designation = Designation.new(designation_params)
     if @designation.save
       flash[:notice] = "Thank you for the submission"
       redirect_to @user
@@ -23,16 +23,11 @@ class DesignationsController < ApplicationController
   end
 
   def edit
-    if signed_in?
-      @designation = Designation.find(params[:id])
-    else
-      flash[:alert] = "You have to sign in to update the designation"
-      redirect_to new_user_session_path
-    end
+    @designation
   end
 
   def update
-    if @designation.update_attributes(params[:designation].permit(:name, :hospital_id, :user_id, :is_default, :aasm_state))
+    if @designation.update_attributes(designation_params)
       flash[:notice] = "Designation has been updated"
       redirect_to user_path(@user)
     else
@@ -47,55 +42,11 @@ class DesignationsController < ApplicationController
     redirect_to user_path(@user)
   end
 
-  def requesting
-    if @designation.inactive?
-      @designation.request!
-    end
-    flash[:notice] = "Request submitted!"
-    redirect_to user_path(@user)
-  end
-
-  def activating
-    if @designation.inactive? || @designation.pending?
-      @designation.activate!
-    end
-    flash[:notice] = "Membership activated!"
-    redirect_to :back
-  end
-
-  def rejecting
-    if @designation.pending?
-      @designation.reject!
-    end
-    flash[:notice] = "Membership was rejected!"
-    redirect_to :back
-  end
-
-  def deactivating
-    if @designation.active?
-      @designation.deactivate!
-    end
-    flash[:notice] = "Membership was deactivated!"
-    redirect_to :back
-  end
-
-  def banning
-    if @designation.active? || @designation.pending? || @designation.rejected?
-      @designation.ban!
-    end
-    flash[:notice] = "Member was banned!"
-    redirect_to :back
-  end
-
-  def resigning
-    if @designation.active?
-      @designation.resign!
-    end
-    flash[:notice] = "You have resigned from membership!"
-    redirect_to :back
-  end
-
   private
+
+  def designation_params
+    params.require(:designation).permit(:id, :name, :user_id, :hospital_id, :is_default)
+  end
 
   def find_user
     @user = current_user

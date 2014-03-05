@@ -46,4 +46,5 @@ class User < ActiveRecord::Base
     default_designation.hospital unless default_designation.nil?
   end
 
+
 end

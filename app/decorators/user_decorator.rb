@@ -122,12 +122,6 @@ class UserDecorator < ApplicationDecorator
     end
   end
 
-
-  def delete_membership(team)
-    membership(team).delete_link(h.current_user)
-  end
-
-
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #
