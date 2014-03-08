@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :role do |role|
-    role.name { Faker::Name.title.split(" ")[2] }
+    role.name { Faker::Company.position.split(" ")[-1] }
   end
 end

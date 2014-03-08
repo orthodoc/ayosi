@@ -9,7 +9,7 @@ describe UsersController do
     @designations = @user.designations
   end
 
-  context "for a signed in user" do
+  context "where a signed in user gets the show page" do
 
     before(:each) do
       sign_in @user
@@ -23,7 +23,7 @@ describe UsersController do
     it { should_not set_the_flash }
   end
 
-  context "for a visitor" do
+  context "where a visitor gets the show page" do
     before(:each) do
       sign_out @user
       get :show, id: @user.id
@@ -34,5 +34,10 @@ describe UsersController do
     it { should set_the_flash[:alert].to("You must sign in first!") }
 
   end
+
+  context "when updating user" do
+
+  end
+
 
 end

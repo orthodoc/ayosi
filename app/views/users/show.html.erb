@@ -1,9 +1,6 @@
 <div class="row">
   <div class="small-12 medium-6">
-    <h3>
-      <%= @user.name %>
-      <span>(<%= @user.role_name %>)</span>
-    </h3>
+    <h3><%= @user.welcome_title %></h3>
     <% if @user.category == "hospital_staff" %>
       <p>
         <h5>List of designated roles</h5>

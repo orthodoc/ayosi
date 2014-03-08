@@ -11,8 +11,12 @@ Spork.prefork do
   # https://github.com/colszowka/simplecov/issues/42#issuecomment-4440284
   unless ENV['DRB']
     require 'simplecov'
-    SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-    SimpleCov.start 'rails'
+    SimpleCov.start 'rails' do
+      formatter SimpleCov::Formatter::MultiFormatter[
+        SimpleCov::Formatter::HTMLFormatter,
+        Coveralls::SimpleCov::Formatter
+      ]
+    end
   end
 
   # Spork trap_method to delay route loading by devise
@@ -105,8 +109,12 @@ Spork.each_run do
   # https://github.com/colszowka/simplecov/issues/42#issuecomment-4440284
   if ENV['DRB']
     require 'simplecov'
-    SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-    SimpleCov.start 'rails'
+    SimpleCov.start 'rails' do
+      formatter SimpleCov::Formatter::MultiFormatter[
+        SimpleCov::Formatter::HTMLFormatter,
+        Coveralls::SimpleCov::Formatter
+      ]
+    end
   end
   # This code will be run each time you run your specs.
   FactoryGirl.reload
