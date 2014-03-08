@@ -23,11 +23,12 @@ class UserDecorator < ApplicationDecorator
   end
 
   def welcome_title
-    if h.signed_in?
-      name_link 
-      content_tag(:span, " (".concat(role_name).concat(")"))
+    if h.current_user == model
+      name_link.concat(
+        h.content_tag(:span, " (".concat(role_name).concat(")"))
+      )
     else
-      "Welcome Vistor!"
+      "Welcome Visitor!"
     end
   end
 
@@ -46,7 +47,7 @@ class UserDecorator < ApplicationDecorator
   end
 
   def membership(team)
-    team.memberships.find_by(user: model)
+    model.memberships.find_by(team_id: team.id)
   end
 
   def membership_status(team)
@@ -78,7 +79,7 @@ class UserDecorator < ApplicationDecorator
   end
 
   def disabled_button
-    h.button_to "Deactivate",
+    h.button_to "Disabled",
       "",
       method: :get,
       class: "button-mini disabled"
@@ -99,7 +100,7 @@ class UserDecorator < ApplicationDecorator
   def action_button(team)
     if h.current_user == team.owner
       if model == h.current_user
-        disabled_button(team)
+        disabled_button
       else
         if membership_status(team) == "Inactive"
           activate_button(team)
@@ -114,7 +115,7 @@ class UserDecorator < ApplicationDecorator
         if membership_status(team) == "Inactive"
           request_button(team)
         elsif membership_status(team) == "Pending"
-          disabled_button(team)
+          disabled_button
         else membership_status(team) == "Active"
           resign_button(team)
         end

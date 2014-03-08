@@ -15,14 +15,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
-    if signed_in?
-      @hospital = Hospital.find(params[:hospital_id])
-      @users = @hospital.users.order(:name)
-      respond_with @users
-    end
-  end
-
   private
 
   def find_user

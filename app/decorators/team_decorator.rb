@@ -2,6 +2,7 @@ class TeamDecorator < ApplicationDecorator
   delegate_all
   decorates_finders
   decorates_association :members
+  decorates_association :memberships
 
   def delete_link(user)
     if user == model.owner
