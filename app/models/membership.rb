@@ -8,6 +8,7 @@ class Membership < ActiveRecord::Base
   # So the validation exists only for the update action
   # http://stackoverflow.com/questions/14140994/failing-validations-in-join-model-when-using-has-many-through
   validates :team, presence: true, on: "update"
+  validates_uniqueness_of :user_id, scope: :team_id
 
   accepts_nested_attributes_for :user
   accepts_nested_attributes_for :team

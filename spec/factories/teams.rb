@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :team do |team|
-    team.name { Faker::Lorem.word.titleize + " Group" }
+    team.sequence(:name) { |n| Faker::Lorem.word.titleize + " Group" + " #{n}" }
     team.hospital
     team.user
 
