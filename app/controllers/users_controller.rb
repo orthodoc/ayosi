@@ -15,6 +15,16 @@ class UsersController < ApplicationController
     end
   end
 
+  # This method is useful to get the list of users related to the hospital when
+  # forming a team
+  def index
+    if signed_in?
+      @hospital = Hospital.find(params[:hospital_id])
+      @users = @hospital.users.where(category: "hospital_staff").order(:name)
+      respond_with @users
+    end
+  end
+
   private
 
   def find_user
