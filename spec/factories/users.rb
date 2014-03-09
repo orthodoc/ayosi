@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :user do |user|
-    user.name { Faker::Name.name }
-    user.email { Faker::Internet.email }
+    user.sequence(:name) { |n| Faker::Name.name + " #{n}" }
+    user.sequence(:email) { |n| "#{n}" + Faker::Internet.email }
     user.password "test_pwd"
     user.password_confirmation "test_pwd"
     user.category {["patient", "hospital_staff", "guest"].sample}

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :patient do |patient|
-    patient.name { Faker::Name.name }
+    patient.sequence(:name) { |n| Faker::Name.name.concat(" #{n}") }
     patient.sequence(:age) {|n| ("#{n+30}").to_i}
     patient.sequence(:birth_date) {|n| ("#{n+30}").to_i.years.ago }
     patient.gender {["Male", "Female", "Others"].sample}
