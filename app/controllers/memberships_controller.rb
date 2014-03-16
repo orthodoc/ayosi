@@ -9,7 +9,7 @@ class MembershipsController < ApplicationController
   end
 
   def requesting
-    if @membership.inactive?
+    if @membership.inactive? || @membership.rejected?
       @membership.request!
       flash[:notice] = "Request submitted!"
       redirect_to user_path(@user)

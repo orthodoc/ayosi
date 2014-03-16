@@ -27,7 +27,7 @@
         </tr>
       </thead>
       <tbody>
-      <% @team.members_except_current_user.each do |member| %>
+      <% @team.display_members.each do |member| %>
           <tr>
             <td>
               <%= member.name_link %>
@@ -45,6 +45,6 @@
         <% end %>
       </tbody>
     </table>
-    <%= link_to "Invite by email", new_user_invitation_path %>
+    <%= @team.invite_by_email_link %>
   </div>
 </div>

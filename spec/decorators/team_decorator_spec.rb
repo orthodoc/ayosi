@@ -108,6 +108,20 @@ describe TeamDecorator do
         it { expect(team.current_user_membership_button).to eq(team.resign_button) }
       end
 
+      context "for rejected member" do
+        before(:each) do
+          membership.update_attributes(aasm_state: "rejected")
+        end
+        it { expect(team.current_user_membership_button).to eq(team.request_button) }
+      end
+
+      context "for banned member" do
+        before(:each) do
+          membership.update_attributes(aasm_state: "banned")
+        end
+        it { expect(team.current_user_membership_button).to eq(team.disabled_button) }
+      end
+
       it { expect(team.current_user_display).to have_selector("span") }
       it { expect(team.current_user_display).to include(visitor.name) }
       it { expect(team.current_user_display).to include(": Your membership is ") }
@@ -127,8 +141,26 @@ describe TeamDecorator do
     end
 
     context "all members except current user" do
-      it { expect(team.members_except_current_user).not_to include(user) }
+      it { expect(team.display_members).not_to include(user) }
+    end
+  end
+
+  describe "when invite by email link is displayed" do
+    context"for doctors" do
+      before(:each) do
+        sign_in user
+      end
+      it { expect(team.invite_by_email_link).to include("Invite by email") }
+      it { expect(team.invite_by_email_link).to include("/users/invitation/new") }
     end
 
+    context "for other members" do
+      let(:visitor) { FactoryGirl.create(:user) }
+      before(:each) do
+        sign_out user
+        sign_in visitor
+      end
+      it { expect(team.invite_by_email_link).to be_nil }
+    end
   end
 end

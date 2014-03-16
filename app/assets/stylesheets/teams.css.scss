@@ -6,3 +6,8 @@ form {
   margin: 0;
   padding: 0;
 }
+
+#team-members-table > tbody > tr > td > form.button_to {
+  float: left;
+  margin-right: 10px;
+}
