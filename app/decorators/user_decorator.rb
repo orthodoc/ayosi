@@ -99,37 +99,16 @@ class UserDecorator < ApplicationDecorator
 
   def action_button(team)
     if h.current_user == team.owner
-      if model == h.current_user
-        disabled_button
-      else
-        if membership_status(team) == "Inactive"
-          activate_button(team)
-        elsif membership_status(team) == "Pending"
-          activate_button(team)
-        else membership_status(team) == "Active"
-          deactivate_button(team)
-        end
-      end
-    else
-      if model == h.current_user
-        if membership_status(team) == "Inactive"
-          request_button(team)
-        elsif membership_status(team) == "Pending"
-          disabled_button
-        else membership_status(team) == "Active"
-          resign_button(team)
-        end
+      if membership_status(team) == "Inactive"
+        activate_button(team)
+      elsif membership_status(team) == "Pending"
+        activate_button(team).concat(reject_button(team))
+      elsif membership_status(team) == "Active"
+        deactivate_button(team).concat(ban_button(team))
+      else membership_status(team) == "Rejected"
+        ban_button(team)
       end
     end
   end
-
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
 
 end

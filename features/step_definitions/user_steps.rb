@@ -257,7 +257,7 @@ end
 When(/^I create a new designation at a hospital$/) do
   build_designation
   create_hospital
-  click_link "Add another hospital?"
+  click_link "Add a hospital?"
   fill_in "designation_name", with: @designation.name
   select @hospital.name, from: "designation_hospital_id"
   click_button "Submit"
@@ -379,7 +379,6 @@ Then(/^I should see my edited designation$/) do
 end
 
 Then(/^I should not see the designation$/) do
-  save_and_open_page
   page.should_not have_content(/@designation.name/)
 end
 

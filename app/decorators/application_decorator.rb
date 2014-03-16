@@ -6,7 +6,7 @@ class ApplicationDecorator < Draper::Decorator
 
   def display_name
     # This is necessary as the membership model does not have a method :name, ie:
-    # the membership table has not attribute by "name"
+    # the membership table has no attribute by "name"
     unless model.methods.include?(:name)
       model.class.name.capitalize.concat(" no: ").concat(model.id.to_s)
     else
@@ -23,13 +23,5 @@ class ApplicationDecorator < Draper::Decorator
         data: { confirm: "Are you sure you want to remove #{display_name}" }
     end
   end
-
- # def delete_button
- #   h.link_to h.fa_icon("trash-o", text: "Delete"),
- #     object,
- #     method: :delete,
- #     data: { confirm: "Are you sure?" },
- #     class: "button-mini alert"
- # end
 
 end

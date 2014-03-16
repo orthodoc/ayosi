@@ -27,39 +27,34 @@
             <% end %>
           </tbody>
         </table>
-        <%= link_to "Add another hospital?", new_designation_path %>
+        <%= link_to "Add a hospital?", new_designation_path %>
       </p>
       <p>
-        <% if team_owner? %>
-          <h5>List of teams</h5>
-          <table id="user-teams-table" class="large-only" cellspacing="0">
-            <thead>
+        <h5>List of teams</h5>
+        <table id="user-teams-table" class="large-only" cellspacing="0">
+          <thead>
+            <tr>
+              <!--There are 5 headers in total. The small-only class headers will appear in mobiles and tablets  -->
+              <th class="small-only">Name</th>
+              <th class="small-only">Hospital:</th>
+              <th class="small-only">Hit:</th>
+              <!--The large-only class headers are only for desktops  -->
+              <th class="large-only">Name</th>
+              <th class="large-only">Hospital</th>
+              <th class="large-only"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @teams.each do |team| %>
               <tr>
-                <!--There are 5 headers in total. The small-only class headers will appear in mobiles and tablets  -->
-                <th class="small-only">Name</th>
-                <th class="small-only">Hospital:</th>
-                <th class="small-only">Members:</th>
-                <th class="small-only">Hit:</th>
-                <!--The large-only class headers are only for desktops  -->
-                <th class="large-only">Name</th>
-                <th class="large-only">Hospital</th>
-                <th class="large-only">Member Count</th>
-                <th class="large-only"></th>
+                <td><%= link_to team.name, team_path(team) %></td>
+                <td><%= link_to team.hospital.name, hospital_path(team.hospital) %></td>
+                <td><%= team.delete_link(@user) %></td>
               </tr>
-            </thead>
-            <tbody>
-              <% @teams.each do |team| %>
-                <tr>
-                  <td><%= link_to team.name, edit_team_path(team) %></td>
-                  <td><%= link_to team.hospital.name, hospital_path(team.hospital) %></td>
-                  <td><%= link_to team.members.count, team_path(team) %></td>
-                  <td><%= team.delete_link(@user) %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <%= link_to "Create another team?", new_team_path %>
-        <% end %>
+            <% end %>
+          </tbody>
+        </table>
+          <%= link_to "Create a team?", new_team_path %>
       </p>
     <% else %>
       <h5>List of hospitals enrolled</h5>

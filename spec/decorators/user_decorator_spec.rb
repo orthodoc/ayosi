@@ -112,57 +112,33 @@ describe UserDecorator do
       context "and action button for" do
         let(:visitor) { UserDecorator.new(FactoryGirl.create(:user)) }
         let(:membership) { FactoryGirl.create(:membership, user_id: visitor.id, team_id: team.id) }
-        context "team owner"do
-          it { expect(user.action_button(team)).to include(user.disabled_button) }
 
-          context "when a member membership is inactive" do
-            before(:each) do
-              membership.update_attributes(aasm_state: "inactive")
-            end
-            it { expect(visitor.action_button(team)).to eq(visitor.activate_button(team)) }
-          end
-
-          context "when a member membership is pending" do
-            before(:each) do
-              membership.update_attributes(aasm_state: "pending")
-            end
-            it { expect(visitor.action_button(team)).to eq(visitor.activate_button(team)) }
-          end
-
-          context "when a member membership is active" do
-            before(:each) do
-              membership.update_attributes(aasm_state: "active")
-            end
-            it { expect(visitor.action_button(team)).to eq(visitor.deactivate_button(team)) }
-          end
-        end
-        
-        context "team member" do
+        context "when a member membership is inactive" do
           before(:each) do
-            sign_out user
-            sign_in visitor
+            membership.update_attributes(aasm_state: "inactive")
           end
+          it { expect(visitor.action_button(team)).to eq(visitor.activate_button(team)) }
+        end
 
-          context "when membership is inactive" do
-            before(:each) do
-              membership.update_attributes(aasm_state: "inactive")
-            end
-            it { expect(visitor.action_button(team)).to eq(visitor.request_button(team)) }
+        context "when a member membership is pending" do
+          before(:each) do
+            membership.update_attributes(aasm_state: "pending")
           end
+          it { expect(visitor.action_button(team)).to eq(visitor.activate_button(team).concat(visitor.reject_button(team))) }
+        end
 
-          context "when membership is pending" do
-            before(:each) do
-              membership.update_attributes(aasm_state: "pending")
-            end
-            it { expect(visitor.action_button(team)).to eq(visitor.disabled_button) }
+        context "when a member membership is active" do
+          before(:each) do
+            membership.update_attributes(aasm_state: "active")
           end
+          it { expect(visitor.action_button(team)).to eq(visitor.deactivate_button(team).concat(visitor.ban_button(team))) }
+        end
 
-          context "when membership is active" do
-            before(:each) do
-              membership.update_attributes(aasm_state: "active")
-            end
-            it { expect(visitor.action_button(team)).to eq(visitor.resign_button(team)) }
+        context "when a member membership is rejected" do
+          before(:each) do
+            membership.update_attributes(aasm_state: "rejected")
           end
+          it { expect(visitor.action_button(team)).to eq(visitor.ban_button(team)) }
         end
       end
     end

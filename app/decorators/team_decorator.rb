@@ -47,8 +47,12 @@ class TeamDecorator < ApplicationDecorator
         request_button
       elsif current_user_membership_status == "Pending"
         disabled_button
-      else current_user_membership_status == "Active"
+      elsif current_user_membership_status == "Active"
         resign_button
+      elsif current_user_membership_status == "Rejected"
+        request_button
+      else current_user_membership_status == "Banned"
+        disabled_button
       end
     end
   end
@@ -69,17 +73,14 @@ class TeamDecorator < ApplicationDecorator
     end
   end
 
-  def members_except_current_user
-    members.reject{ |m| m == h.current_user }
+  def display_members
+    members.reject{ |m| m == h.current_user || m.membership_status(model) == "Banned" }
   end
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+
+  def invite_by_email_link
+    if h.current_user == model.user
+      h.link_to "Invite by email", h.new_user_invitation_path
+    end
+  end
 
 end
