@@ -29,6 +29,7 @@ Feature: Apply for designation
     Then I should be on my page
     And I should see my edited designation
 
+  @javascript
   Scenario: Delete a designation
     When I click on the delete button
     Then I should not see the designation

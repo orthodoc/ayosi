@@ -14,19 +14,24 @@ class Designation < ActiveRecord::Base
   belongs_to :hospital
   validates :name, presence: true
   validates :hospital, presence: true
+  # user_id used instead of user to pass rspec shoulda matcher for validating presence and
+  # uniqueness of user scoped to hospital
   validates :user_id, presence: true,
                    uniqueness: { scope: :hospital_id }
 
   # Ensuring the is_default attribute takes a single default designation
   # http://stackoverflow.com/questions/4390983/setting-default-address-in-rails-user-model
-  validates :is_default, uniqueness: { scope: :user_id,  unless: Proc.new { |designation| designation.is_default == 0 } }
+  validates :is_default, uniqueness: { scope: [ :user_id, :hospital_id ],  unless: Proc.new { |designation| designation.is_default == 0 } }
 
-  # user_id used instead of user to pass rspec shoulda matcher for validating presence and
-  # uniqueness of user scoped to hospital
   accepts_nested_attributes_for :hospital
   accepts_nested_attributes_for :user
 
   after_create :make_default_designation
+  # When a user deletes his designation at a hospital (usually when she stops
+  # working at that hospital), the following callback method ensures that associated
+  # teams are also deleted
+  # http://api.rubyonrails.org/classes/ActiveRecord/Callbacks.html
+  before_destroy { |record| Team.where("user_id = ? AND hospital_id = ?", record.user_id, record.hospital_id).destroy_all }
 
   private
 

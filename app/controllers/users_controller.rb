@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :find_user
-  respond_to :html, :json
+  respond_to :html
 
   def show
     @designations = @user.designations
@@ -18,10 +18,10 @@ class UsersController < ApplicationController
   # This method is useful to get the list of users related to the hospital when
   # forming a team
   def index
-    if signed_in?
-      @hospital = Hospital.find(params[:hospital_id])
-      @users = @hospital.users.where(category: "hospital_staff").order(:name)
-      respond_with @users
+    @hospital = Hospital.find(params[:hospital_id])
+    @users = @hospital.users.where(category: "hospital_staff").order(:name)
+    respond_with @users do |format|
+      format.json
     end
   end
 

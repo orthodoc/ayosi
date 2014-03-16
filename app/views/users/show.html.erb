@@ -27,7 +27,7 @@
             <% end %>
           </tbody>
         </table>
-        <%= link_to "Apply for a designation", new_designation_path %>
+        <%= link_to "Add another hospital?", new_designation_path %>
       </p>
       <p>
         <% if team_owner? %>
@@ -58,6 +58,7 @@
               <% end %>
             </tbody>
           </table>
+          <%= link_to "Create another team?", new_team_path %>
         <% end %>
       </p>
     <% else %>
@@ -83,7 +84,7 @@
           <% end %>
         </tbody>
       </table>
-      <%= link_to "Add another hospital", new_designation_path %>
+      <%= link_to "Add another hospital?", new_designation_path %>
     <% end %>
   </div>
 </div>

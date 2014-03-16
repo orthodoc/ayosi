@@ -1,5 +1,8 @@
 require 'rubygems'
 require 'spork'
+require 'capybara/poltergeist'
+require "rspec/expectations"
+require "capybara/cucumber"
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
@@ -16,6 +19,11 @@ Spork.prefork do
 
   require 'cucumber/rails'
 
+  Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app, {debug: false})
+  end
+
+  Capybara.javascript_driver = :poltergeist
   # Capybara defaults to CSS3 selectors rather than XPath.
   # If you'd prefer to use XPath, just uncomment this line and adjust any
   # selectors in your step definitions to use the XPath syntax.

@@ -36,7 +36,11 @@
             <td><%= member.designation_name(@team) %></td>
             <td><%= member.membership_status(@team) %></td>
             <td><%= member.action_button(@team)  %></td>
-            <td><%= member.membership(@team).id %></td>
+            <td>
+              <% member.memberships.each do |m| %>
+                <%= m.delete_link(@team) %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

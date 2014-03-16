@@ -43,7 +43,7 @@ class UserDecorator < ApplicationDecorator
   end
 
   def designation_name(team)
-    designation(team).name.titleize
+    designation(team).name.titleize unless designation(team).nil?
   end
 
   def membership(team)

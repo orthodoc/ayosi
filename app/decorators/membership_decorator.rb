@@ -5,7 +5,11 @@ class MembershipDecorator < ApplicationDecorator
     if team.memberships.include?(model)
       if team.owner == h.current_user
         trash_link
+      else
+        return nil
       end
+    else
+      return nil
     end
   end
 

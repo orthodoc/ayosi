@@ -54,4 +54,6 @@ group :test do
   gem 'email_spec'
   gem 'launchy'
   gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers'
+  gem 'poltergeist'
+  gem 'capybara-select2'
 end
