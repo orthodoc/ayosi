@@ -39,10 +39,10 @@ class TeamsController < ApplicationController
   end
 
   def edit
-    if is_doctor?
+    if @team.owner == @user
       @team
     else
-      flash[:alert] = "Only doctors can edit a team"
+      flash[:alert] = "Only team owners can edit a team"
       redirect_to user_path(@user)
     end
   end

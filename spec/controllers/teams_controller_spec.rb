@@ -105,9 +105,9 @@ describe TeamsController do
     it { should set_the_flash[:alert].to("You have to sign in first!") }
   end
 
-  context "when a singed in doctor edits team" do
+  context "when the team owner edits team" do
     before(:each) do
-      @team = FactoryGirl.create(:team)
+      @team = FactoryGirl.create(:team, user: @user)
       sign_in @user
       @user.add_role :doctor
       get :edit, id: @team.id
@@ -117,16 +117,19 @@ describe TeamsController do
     it { should_not set_the_flash }
   end
 
-  context "when a nurse edits team" do
+  context "when another singed in doctor edits team" do
     before(:each) do
       @team = FactoryGirl.create(:team)
-      sign_in @user
-      @user.add_role :nurse
+      sign_out @user
+      @doctor = FactoryGirl.create(:user)
+      sign_in @doctor
+      @doctor.add_role :doctor
       get :edit, id: @team.id
     end
     it { should_not respond_with(:success) }
     it { should_not render_template(:edit) }
-    it { should set_the_flash[:alert].to("Only doctors can edit a team") }
+    it { should set_the_flash[:alert].to("Only team owners can edit a team") }
+    it { should redirect_to(user_path(@doctor))}
   end
 
   context "when updating a team" do

@@ -2,8 +2,7 @@
   <div class="small-12 medium-6">
     <h3>
       <% if signed_in? %>
-        <%= @user.name_link %>
-        <span><%= @user.role_name %></span>
+        <%= @user.welcome_title %>
       <% else %>
         Welcome Visitor!
       <% end %>

@@ -30,4 +30,14 @@ describe HospitalsController do
     it { should set_the_flash[:alert].to("You have to sign in first!") }
   end
 
+  describe "when visiting the hospital page" do
+    before(:each) do
+      @hospital = FactoryGirl.create(:hospital)
+      get :show, id: @hospital.id
+    end
+    it { should respond_with(:success) }
+    it { should render_template(:show) }
+    it { should_not set_the_flash }
+  end
+
 end
