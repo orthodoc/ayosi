@@ -1,6 +1,6 @@
 class Team < ActiveRecord::Base
   belongs_to :hospital
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :members, -> {distinct}, through: :memberships,
                                     source: :user
   # To define ownership of the team

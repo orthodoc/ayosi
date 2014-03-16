@@ -257,7 +257,7 @@ end
 When(/^I create a new designation at a hospital$/) do
   build_designation
   create_hospital
-  click_link "Apply for a designation"
+  click_link "Add another hospital?"
   fill_in "designation_name", with: @designation.name
   select @hospital.name, from: "designation_hospital_id"
   click_button "Submit"
@@ -278,7 +278,9 @@ end
 When(/^I click on the delete button$/) do
   create_user_at_hospital_with_designation
   visit user_path(@user)
-  find("i.fa-trash-o").click
+  within("table#designation-roles-table") do
+    find("i.fa-trash-o", visible: false).click
+  end
 end
 
 When(/^I select the hospital$/) do
@@ -377,7 +379,8 @@ Then(/^I should see my edited designation$/) do
 end
 
 Then(/^I should not see the designation$/) do
-  page.should_not have_content(@designation.name)
+  save_and_open_page
+  page.should_not have_content(/@designation.name/)
 end
 
 Then(/^I should be on the home page$/) do

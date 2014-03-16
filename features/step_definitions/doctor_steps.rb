@@ -72,21 +72,30 @@ def build_team
 end
 
 def create_team
-  sign_in_as_doctor
   build_team
+  create_hospital
+  sign_in_as_doctor
+  @user_designation = FactoryGirl.create(:designation, hospital: @hospital)
+  @nurse_designation = FactoryGirl.create(:designation, hospital: @hospital)
+  @nurse = @nurse_designation.user
+  @secretary_designation = FactoryGirl.create(:designation, hospital: @hospital)
+  @secretary = @secretary_designation.user
   visit new_team_path
   fill_in "team_name", with: @team[:name]
-  select @user.hospitals.first.name, from: "team_hospital_id"
+  select @hospital.name, from: "team_hospital_id"
   click_button "Submit"
+  @team.update_attributes(user: @user)
+  @team.members << [@nurse, @secretary, @user]
   @team.save
 end
 
 def create_team_with_members
   create_team
   @nurse = FactoryGirl.create(:user)
+  @nurse_designation = FactoryGirl.create(:designation, user: @nurse, hospital: @user.hospitals[0])
   @secretary = FactoryGirl.create(:user)
-  @team.members << [@nurse, @secretary]
-  @team.save
+  @secretary_designation = FactoryGirl.create(:designation, user: @secretary, hospital: @user.hospitals[0])
+  @team.members << [@nurse,@secretary]
 end
 
 def create_doctor_at_hospital_with_designation
@@ -156,11 +165,10 @@ Then(/^I should see the name of the new team$/) do
 end
 
 Then(/^I should see the team members$/) do
-  @members = @team.members.reject{ |m| m == @team.owner }
-  sign_in
+  sign_in_as_doctor
   create_team_with_members
   visit team_path(@team)
-  @members.each do |member|
+  @team.members.each do |member|
     page.should have_content(member.name)
   end
 end
@@ -177,9 +185,11 @@ Then(/^I should be on the send invitation page$/) do
   visit new_user_invitation_path
 end
 
-Then(/^I should see the designations of each team member$/) do
+Then(/^I should see the designation of each team member$/) do
   @team.members.each do |member|
-    page.should have_content(member.default_designation.name.titleize)
+    hospital = Hospital.find_by(name: @the_hospital[:name])
+    @designation = member.designations.find_by(hospital: hospital)
+    page.should have_content(@designation.name)
   end
 end
 
@@ -200,4 +210,10 @@ end
 
 Then(/^I should be a member of the team$/) do
   @team.members.include?(@team.owner)
+end
+
+Then(/^I should see the membership status of each member$/) do
+  @team.members.each do |member|
+    page.should have_content(member.memberships.find_by(team: @team).aasm_state.capitalize)
+  end
 end

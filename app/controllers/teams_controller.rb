@@ -24,7 +24,7 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     if @team.save
-      @team.members << @user
+      @team.members << @user unless @team.members.include?(@user)
       @team.owner.memberships.find_by(team: @team).activate!
       flash[:notice] = "Thank you for the submission"
       redirect_to @team
