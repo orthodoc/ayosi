@@ -1,6 +1,14 @@
-class HospitalDecorator < Draper::Decorator
+class HospitalDecorator < ApplicationDecorator
   delegate_all
-  decorates_association :users
-  decorates_association :designations
+
+  def name_link
+    h.link_to name, h.edit_hospital_path(model)
+  end
+
+  def title
+    name_link.concat(
+      h.content_tag(:span, " (".concat(city).concat(")"))
+    )
+  end
 
 end

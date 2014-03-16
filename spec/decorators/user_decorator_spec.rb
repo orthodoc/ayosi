@@ -27,13 +27,6 @@ describe UserDecorator do
       it { expect(h.user_path(user)).to eq("/users/#{user.id}") }
       it { expect(h.current_user.name_link).to eq("<a href=\"/users/#{user.id}\">#{user.name}</a>") }
     end
-
-    context "name without link" do
-      before(:each) do
-        sign_out user
-      end
-      it { expect(user.name_link).to eq(user.name) }
-    end
   end
 
   describe "where welcome title has" do
@@ -44,13 +37,6 @@ describe UserDecorator do
       it { expect(h.current_user.welcome_title).to include(user.name_link) }
       it { expect(h.current_user.welcome_title).to have_selector("span") }
       it { expect(h.current_user.welcome_title).to include(" (Doctor)")}
-    end
-
-    context "welcome message" do
-      before(:each) do
-        sign_out user
-      end
-      it { expect(user.welcome_title).to eq("Welcome Visitor!") }
     end
   end
 

@@ -168,7 +168,8 @@ Then(/^I should see the team members$/) do
   sign_in_as_doctor
   create_team_with_members
   visit team_path(@team)
-  @team.members.each do |member|
+  @members = @team.members.reject{ |m| m == @user || m.memberships.find_by(team: @team).aasm_state = "Banned" }
+  @members.each do |member|
     page.should have_content(member.name)
   end
 end

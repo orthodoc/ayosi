@@ -17,8 +17,6 @@ class UserDecorator < ApplicationDecorator
     if h.current_user == model
       h.link_to name,
         h.user_path(model)
-    else
-      name
     end
   end
 
@@ -27,8 +25,6 @@ class UserDecorator < ApplicationDecorator
       name_link.concat(
         h.content_tag(:span, " (".concat(role_name).concat(")"))
       )
-    else
-      "Welcome Visitor!"
     end
   end
 
