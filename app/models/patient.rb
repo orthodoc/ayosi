@@ -8,10 +8,6 @@ class Patient < ActiveRecord::Base
   has_many :clients
   has_many :users, -> {distinct}, through: :clients
 
-  validates_presence_of :name
-  validates_presence_of :age
-  validates_presence_of :gender
-  validates_presence_of :uhid
 
   accepts_nested_attributes_for :surgeries
   accepts_nested_attributes_for :clients

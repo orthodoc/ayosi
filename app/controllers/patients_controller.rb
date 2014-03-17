@@ -3,7 +3,7 @@ class PatientsController < ApplicationController
     if signed_in?
       @user = current_user
       @hospital = @user.default_hospital
-      @patient = Patient.new
+      @form = PatientForm.new(Patient.new)
     else
       flash[:alert] = "You must sign in first!"
       redirect_to new_user_session_path
