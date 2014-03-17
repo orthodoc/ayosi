@@ -26,6 +26,7 @@ class Designation < ActiveRecord::Base
   accepts_nested_attributes_for :hospital
   accepts_nested_attributes_for :user
 
+  before_save :ensure_default_designation
   after_create :make_default_designation
   # When a user deletes his designation at a hospital (usually when she stops
   # working at that hospital), the following callback method ensures that associated
@@ -39,6 +40,14 @@ class Designation < ActiveRecord::Base
   def make_default_designation
     unless self.user.designations.find_by(is_default: true)
       self.update_attributes(is_default: true)
+    end
+  end
+
+  # The method ensures that there is only one default designation/hospital
+  def ensure_default_designation
+    if self.is_default == true
+      d = self.user.designations.find_by(is_default: true)
+      d.update_attributes(is_default: false) unless d.nil?
     end
   end
 
