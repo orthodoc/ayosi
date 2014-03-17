@@ -14,10 +14,8 @@ class UserDecorator < ApplicationDecorator
   end
 
   def name_link
-    if h.current_user == model
-      h.link_to name,
-        h.user_path(model)
-    end
+    h.link_to name,
+      h.user_path(model)
   end
 
   def welcome_title
