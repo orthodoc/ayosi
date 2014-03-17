@@ -41,7 +41,7 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
     arel (4.0.2)
-    atomic (1.1.15)
+    atomic (1.1.16)
     bcrypt-ruby (3.1.2)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
@@ -187,7 +187,7 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    multi_json (1.8.4)
+    multi_json (1.9.0)
     multi_test (0.0.3)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
@@ -231,6 +231,13 @@ GEM
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
     ref (1.0.5)
+    reform (0.2.6)
+      activemodel
+      representable (>= 1.7.5)
+      uber (~> 0.0.4)
+    representable (1.7.7)
+      multi_json
+      nokogiri
     request_store (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
@@ -299,7 +306,8 @@ GEM
       polyglot (>= 0.3.1)
     turbolinks (2.2.1)
       coffee-rails
-    tzinfo (0.3.38)
+    tzinfo (0.3.39)
+    uber (0.0.4)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -352,6 +360,7 @@ DEPENDENCIES
   rb-fchange
   rb-fsevent
   rb-inotify
+  reform
   rolify!
   rspec-rails
   sass-rails (~> 4.0.0)
