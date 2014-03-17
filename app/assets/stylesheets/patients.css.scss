@@ -25,7 +25,6 @@ sgroup {
 
 form {
   background-color: #f2fcff;
-  margin-top: 0.15rem;
   padding: 0.8rem;
   abbr {
     display: none;
@@ -33,9 +32,12 @@ form {
   select {
     width: auto;
   }
+  .button.small {
+    margin-top: 0.75rem;
+  }
 }
 
-.fi-home {
-  font-size: 3em;
+.fa-home {
+  font-size: 4em;
   color: #0079a1;
 }
