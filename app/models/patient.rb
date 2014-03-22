@@ -12,5 +12,8 @@ class Patient < ActiveRecord::Base
   accepts_nested_attributes_for :surgeries
   accepts_nested_attributes_for :clients
 
+  # Birthday gem to get the age and other methods
+  acts_as_birthday :birthday
+
 
 end

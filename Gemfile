@@ -14,6 +14,7 @@ gem 'figaro'
 gem 'foundation-rails'
 #gem 'foundation-icons-sass-rails'
 gem 'font-awesome-rails'
+gem 'foundation-datetimepicker-rails'
 gem 'rolify', github: 'EppO/rolify'
 gem 'therubyracer', :platform=>:ruby
 gem 'thin'
@@ -24,6 +25,7 @@ gem 'devise_invitable', '1.3.2'
 gem 'js-routes'
 gem 'draper', '~> 1.3'
 gem 'reform'
+gem 'birthday'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]

@@ -17,6 +17,7 @@
 //= require foundation
 //= require stacktable
 //= require js-routes
+//= require foundation-datepicker
 //= require_tree .
 $(function() {
   $(document).foundation();

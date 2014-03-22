@@ -2,9 +2,9 @@ class PatientForm < Reform::Form
 
   include Reform::Form::ActiveRecord
 
-  properties [:name, :age, :birth_date, :gender, :uhid], on: :patient
+  properties [:name, :age, :birthday, :gender], on: :patient
 
-  validates :name, :age, :gender, :uhid, presence: :true
+  validates :name, :age, :gender, presence: :true
   validates :age, numericality: true
 
   model :patient
