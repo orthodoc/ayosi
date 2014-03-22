@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140228153924) do
+ActiveRecord::Schema.define(version: 20140321175040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,12 +60,11 @@ ActiveRecord::Schema.define(version: 20140228153924) do
 
   create_table "patients", force: true do |t|
     t.string   "name"
-    t.date     "birth_date"
     t.integer  "age"
     t.string   "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "uhid"
+    t.date     "birthday"
   end
 
   create_table "roles", force: true do |t|
@@ -90,8 +89,10 @@ ActiveRecord::Schema.define(version: 20140228153924) do
     t.string   "side"
     t.string   "region"
     t.string   "surgeon"
+    t.string   "uhid"
   end
 
+  add_index "surgeries", ["hospital_id", "uhid", "patient_id"], name: "index_surgeries_on_hospital_id_and_uhid_and_patient_id", unique: true, using: :btree
   add_index "surgeries", ["hospital_id"], name: "index_surgeries_on_hospital_id", using: :btree
   add_index "surgeries", ["name", "date", "hospital_id", "patient_id", "category", "side", "region", "surgeon"], name: "unique_surgery_attributes_index", unique: true, using: :btree
   add_index "surgeries", ["patient_id"], name: "index_surgeries_on_patient_id", using: :btree

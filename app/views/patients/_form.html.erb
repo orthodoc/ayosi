@@ -1,9 +1,15 @@
 <%= simple_form_for @form do |f| %>
   <%= f.input :name, hint: "Enter the patient's name", placeholder: Faker::Name.name %>
-  <%= f.input :age , placeholder: %w[30 35 40 45 50 55 60 65].sample, collection: (12..110) %>
-  <%= f.input :birth_date, label: "Date of Birth" %>
+  <div class="row">
+    <div class="small-8 columns">
+      <%= f.input :birthday, as: :string, label: "Date of Birth", input_html: { class: "date_picker"} %>
+    </div>
+    <div class="small-4 columns">
+      <%= f.input :age , placeholder: %w[30 35 40 45 50 55 60 65].sample, collection: (12..110) %>
+    </div>
+  </div>
   <%= f.input :gender, as: :radio_buttons, collection: ["Male", "Female", "Others"], boolean_style: :inline %>
-  <%= f.input :uhid, label: "UHID", placeholder: %w[266900 266153 113203 267443 267623].sample %>
-  <a href="/"><i class="fa fa-home"></i></a>
-  <%= f.submit "Next", class: "button small radius right" %>
+  <%#= f.input :uhid, label: "UHID", placeholder: %w[266900 266153 113203 267443 267623].sample %>
+  <%#= f.input :hospital_id, collection: @user.hospitals %>
+  <%= f.submit "Next", class: "button small radius " %>
 <% end %>

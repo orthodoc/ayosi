@@ -1,5 +1,6 @@
 // import the CSS framework
 @import "foundation";
+@import "foundation-datetimepicker";
 
 // override for the 'Home' navigation link
 .top-bar .name {
@@ -746,6 +747,12 @@ disabled look for disabled choices in the results dropdown
   }
 }
 
+/* Action Buttons */
 .light-red {
   color: #f23c5d;
+}
+
+/* Form label */
+label {
+  margin-top: 0.5rem;
 }

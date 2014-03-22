@@ -48,6 +48,9 @@ GEM
       erubis (>= 2.6.6)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    birthday (0.3.0)
+      activerecord
+      activesupport
     builder (3.1.4)
     cancan (1.6.10)
     capybara (2.2.1)
@@ -130,6 +133,7 @@ GEM
     font-awesome-rails (4.0.3.1)
       railties (>= 3.2, < 5.0)
     formatador (0.2.4)
+    foundation-datetimepicker-rails (0.1.2)
     foundation-rails (5.0.3.1)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
@@ -324,6 +328,7 @@ DEPENDENCIES
   aasm
   better_errors
   binding_of_caller
+  birthday
   cancan
   capybara
   capybara-select2
@@ -339,6 +344,7 @@ DEPENDENCIES
   ffaker
   figaro
   font-awesome-rails
+  foundation-datetimepicker-rails
   foundation-rails
   guard-bundler
   guard-cucumber
