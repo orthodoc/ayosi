@@ -10,6 +10,7 @@ describe Surgery do
   it { should validate_uniqueness_of(:name).scoped_to([:date, :hospital_id, :patient_id, :category, :side, :region, :surgeon])}
   it { should validate_presence_of(:date) }
   it { should validate_presence_of(:hospital) }
+  it { should validate_presence_of(:uhid) }
   it { should validate_presence_of(:patient) }
   it { should validate_presence_of(:category) }
   it { should ensure_inclusion_of(:category).in_array(%w(Primary Revision)) }

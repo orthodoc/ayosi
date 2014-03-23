@@ -33,6 +33,7 @@ Follow these guides:
 3. [Rails Best Practices](http://rails-bestpractices.com/posts/archive)
 4. [Better Specs](http://betterspecs.org)
 5. [Source Making](http://sourcemaking.com/)
+6. [Code Guide](http://mdo.github.io/code-guide/)
 
 The project relies on a postgresql database for persisting data. You'll have to set
 up one your machine. Fill the database.yml file with your credentials to get started.

@@ -6,6 +6,7 @@ FactoryGirl.define do
     surgery.sequence(:date) {|n| ("#{n+100}").to_i.days.ago }
     surgery.patient
     surgery.hospital
+    surgery.sequence(:uhid) {|n| "UHID #{n+1000}"}
     surgery.category {["Primary", "Revision"].sample}
     surgery.side {["Right", "Left"].sample}
     surgery.region {["Hip","Knee","Shoulder"].sample}

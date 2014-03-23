@@ -10,6 +10,7 @@ class Surgery < ActiveRecord::Base
                        uniqueness: { scope: [:date, :hospital_id, :patient_id, :category, :side, :region, :surgeon] }
   validates :date,     presence: true
   validates :hospital, presence: true
+  validates :uhid,     presence: true
   validates :patient,  presence: true
   validates :category, presence: true,
                        inclusion: { in: ["Primary", "Revision"] }

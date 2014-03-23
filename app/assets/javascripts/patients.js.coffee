@@ -13,7 +13,13 @@ jQuery ->
       viewMode: "2"
       minViewMode: "2"
     .on "changeDate", ->
-      dateString = $("patient_birthday").fdatepicker("val")
+      today = new Date()
+      birthDate = $("patient_birthday").fdatepicker.getDate
+      age = today.getYear() - birthDate.getYear()
+      m = today.getMonth() - birthDate.getMonth()
+      age-- if m < 0 or (m is 0 and today.getDate() < birthDate.getDate())
+      $("patient_age").select2("val", age)
+      console.log(birthDate)
 
   $("#patient_hospital_id")
     .select2

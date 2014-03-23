@@ -92,7 +92,6 @@ ActiveRecord::Schema.define(version: 20140321175040) do
     t.string   "uhid"
   end
 
-  add_index "surgeries", ["hospital_id", "uhid", "patient_id"], name: "index_surgeries_on_hospital_id_and_uhid_and_patient_id", unique: true, using: :btree
   add_index "surgeries", ["hospital_id"], name: "index_surgeries_on_hospital_id", using: :btree
   add_index "surgeries", ["name", "date", "hospital_id", "patient_id", "category", "side", "region", "surgeon"], name: "unique_surgery_attributes_index", unique: true, using: :btree
   add_index "surgeries", ["patient_id"], name: "index_surgeries_on_patient_id", using: :btree
