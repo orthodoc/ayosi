@@ -2,7 +2,7 @@
   <%= f.input :name, hint: "Enter the patient's name", placeholder: Faker::Name.name %>
   <div class="row">
     <div class="small-8 columns">
-      <%= f.input :birthday, as: :string, label: "Date of Birth", input_html: { class: "date_picker"} %>
+      <%= f.input :birthday, as: :string, label: "Date of Birth(optional)", input_html: { class: "date_picker"} %>
     </div>
     <div class="small-4 columns">
       <%= f.input :age , placeholder: %w[30 35 40 45 50 55 60 65].sample, collection: (12..110) %>

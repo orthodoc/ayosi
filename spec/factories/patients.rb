@@ -4,9 +4,8 @@ FactoryGirl.define do
   factory :patient do |patient|
     patient.sequence(:name) { |n| Faker::Name.name.concat(" #{n}") }
     patient.sequence(:age) {|n| ("#{n+30}").to_i}
-    patient.sequence(:birth_date) {|n| ("#{n+30}").to_i.years.ago }
+    patient.sequence(:birthday) {|n| ("#{n+30}").to_i.years.ago }
     patient.gender {["Male", "Female", "Others"].sample}
-    patient.sequence(:uhid) {|n| "UHID #{n+1000}"}
 
    # has_many association is not working with factory girl. So recreate with methods
    # while testing
