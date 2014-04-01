@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Team do
+
   subject { FactoryGirl.create(:team) }
 
   it { should belong_to(:hospital) }
@@ -14,5 +15,6 @@ describe Team do
   it { should accept_nested_attributes_for(:members) }
   it { expect(subject.owner).to eq(subject.user) }
   it { expect(subject.member_list).to eq(@member_list) }
+
 
 end

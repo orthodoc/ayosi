@@ -5,6 +5,7 @@ FactoryGirl.define do
     membership.user
     membership.team
     membership.aasm_state "inactive"
+    membership.is_default false
 
     before(:create) do
       membership.user = FactoryGirl.create(:user, category: "hospital_staff") unless membership.user.present?

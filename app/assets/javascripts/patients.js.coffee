@@ -26,3 +26,9 @@ jQuery ->
       width: "100%"
       placeholder: "Select a hospital"
       allowClear: true
+
+  $("#patient_surgeon")
+    .select2
+      width: "100%"
+      placeholder: "Select a surgeon's name"
+      allowClear: true

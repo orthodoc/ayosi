@@ -3,7 +3,7 @@ class PatientsController < ApplicationController
 
   def new
     @hospital = @user.default_hospital
-    @form = PatientForm.new(Patient.new)
+    @form = DataEntryForm.new(patient: Patient.new, surgery: Surgery.new)
   end
 
   private
