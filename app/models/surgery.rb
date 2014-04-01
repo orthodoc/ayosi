@@ -6,18 +6,5 @@ class Surgery < ActiveRecord::Base
 
   belongs_to :hospital
   belongs_to :patient
-  validates :name,     presence: true,
-                       uniqueness: { scope: [:date, :hospital_id, :patient_id, :category, :side, :region, :surgeon] }
-  validates :date,     presence: true
-  validates :hospital, presence: true
-  validates :uhid,     presence: true
-  validates :patient,  presence: true
-  validates :category, presence: true,
-                       inclusion: { in: ["Primary", "Revision"] }
-  validates :side,     presence: true,
-                       inclusion: { in: ["Right", "Left"] }
-  validates :region,   presence: true,
-                       inclusion: { in: ["Hip", "Knee", "Shoulder"] }
-  validates :surgeon,  presence: true
 
 end

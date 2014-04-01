@@ -1,5 +1,5 @@
 <%= simple_form_for @form do |f| %>
-  <%= f.input :name, hint: "Enter the patient's name", placeholder: Faker::Name.name %>
+  <%= f.input :name, placeholder: Faker::Name.name, input_html: { title: "Enter the patient's name", data: { tooltip: true } } %>
   <div class="row">
     <div class="small-8 columns">
       <%= f.input :birthday, as: :string, label: "Date of Birth(optional)", input_html: { class: "date_picker"} %>
@@ -9,7 +9,19 @@
     </div>
   </div>
   <%= f.input :gender, as: :radio_buttons, collection: ["Male", "Female", "Others"], boolean_style: :inline %>
-  <%#= f.input :uhid, label: "UHID", placeholder: %w[266900 266153 113203 267443 267623].sample %>
-  <%#= f.input :hospital_id, collection: @user.hospitals %>
+  <div class="row">
+    <div class="small-8 columns">
+      <%= f.input :hospital_id, collection: @user.hospitals %>
+    </div>
+    <div class="small-4 columns">
+      <%= f.input :uhid, label: "UHID", placeholder: %w[266900 266153 113203 267443 267623].sample %>
+    </div>
+  </div>
+  <%= f.input :patient_id, as: "hidden" %>
+  <%= f.input :region, as: :radio_buttons, collection: ["Hip", "Knee", "Shoulder"], boolean_style: :inline %>
+  <%= f.input :category, as: :radio_buttons, collection: ["Primary", "Revision"], boolean_style: :inline %>
+  <%= f.input :name, placeholder: "Total Hip Replacement", label: "Surgery" %>
+  <%= f.input :side, as: :radio_buttons, collection: ["Right", "Left"], boolean_style: :inline %>
+  <%= f.input :surgeon, collection: User.doctors %>
   <%= f.submit "Next", class: "button small radius " %>
 <% end %>
