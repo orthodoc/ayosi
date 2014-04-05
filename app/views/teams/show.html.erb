@@ -1,50 +1,47 @@
-<div class="row">
-  <div class="small-12 medium-6 columns">
+<section id="team">
+  <div class="col-md-8 col-md-offset-1">
     <h3>
       <%= link_to @team.name, edit_team_path(@team) %>
       <span>
         <%= @team.delete_link(@user) %>
-        (<%= @team.hospital.name %>)
+        - <%= @team.hospital.name %>
       </span>
     </h3>
     <p><%= @team.current_user_display %></p>
     <h5>Other Members:</h5>
-    <table id="team-members-table" class="large-only" cellspacing="0">
-      <thead>
-        <tr>
-          <!--There are 5 headers in total. The small-only class headers will appear in mobiles and tablets  -->
-          <th class="small-only">Member Names</th>
-          <th class="small-only">Designation</th>
-          <th class="small-only">Status</th>
-          <th class="small-only"></th>
-          <th class="small-only"></th>
-          <!--The large-only class headers are only for desktops  -->
-          <th class="large-only">Name</th>
-          <th class="large-only">Designation</th>
-          <th class="large-only">Status</th>
-          <th class="large-only"></th>
-          <th class="large-only"></th>
-        </tr>
-      </thead>
-      <tbody>
-      <% @team.display_members.each do |member| %>
-          <tr>
-            <td>
-              <%= member.name_link %>
-              <%= member.owner_title(@team) %>
-            </td>
-            <td><%= member.designation_name(@team) %></td>
-            <td><%= member.membership_status(@team) %></td>
-            <td><%= member.action_button(@team)  %></td>
-            <td>
-              <% member.memberships.each do |m| %>
-                <%= m.delete_link(@team) %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <div class="row">
+      <div class="col-sm-6">
+        <table id="team-members-table" class="table table-hover" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Designation</th>
+              <th>Status</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @team.display_members.each do |member| %>
+              <tr>
+                <td>
+                  <%= member.name_link %>
+                  <%= member.owner_title(@team) %>
+                </td>
+                <td><%= member.designation_name(@team) %></td>
+                <td><%= member.membership_status(@team) %></td>
+                <td><%= member.action_button(@team)  %></td>
+                <td>
+                  <% member.memberships.each do |m| %>
+                    <%= m.delete_link(@team) %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <%= @team.invite_by_email_link %>
   </div>
-</div>
+</section>

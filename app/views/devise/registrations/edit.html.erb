@@ -1,17 +1,15 @@
-<div class="row">
-  <div class="small-12 medium-6 columns">
-    <h2>Update account</h2>
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put}) do |f| %>
-      <%= devise_error_messages! %>
-      <%= f.input :name %>
-      <%= f.input :email %>
-      <%= f.input :password, input_html: { title: "Leave it blank if you don't want to change it!", data: { tooltip: true } } %>
-      <%= f.input :password_confirmation %>
-      <%= f.input :current_password, input_html: { title: "Enter current password to update changes!", data: {tooltip: true} } %>
-      <%= f.input :category, as: :radio_buttons, collection: [["I am a patient", "patient"], ["I work at a hospital", "hospital_staff"]] %>
-      <%= f.button :submit, "Update", class: "button small radius" %>
-    <% end %>
-    <p>Unhappy? <%= link_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?"}, method: :delete %><br />
-    <%= link_to "Back", :back %></p>
-  </div>
+<div class="col-md-6 col-md-offset-1">
+  <h2>Update account</h2>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, input_html: { class: ' form form-horizontal'}) do |f| %>
+    <%= devise_error_messages! %>
+    <%= f.input :name %>
+    <%= f.input :email %>
+    <%= f.input :password, input_html: { title: "Leave it blank if you don't want to change it!" } %>
+    <%= f.input :password_confirmation %>
+    <%= f.input :current_password, input_html: { title: "Enter current password to update changes!" } %>
+    <%= f.input :category, as: :radio_buttons, collection: [["I am a patient", "patient"], ["I work at a hospital", "hospital_staff"]] %>
+    <%= f.button :submit, "Update", class: "btn btn-primary" %>
+  <% end %>
+  <p>Unhappy? <%= link_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?"}, method: :delete %><br />
+  <%= link_to "Back", :back %></p>
 </div>

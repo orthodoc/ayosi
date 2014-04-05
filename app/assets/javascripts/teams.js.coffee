@@ -8,7 +8,7 @@ jQuery ->
       placeholder: "Select a hospital"
       allowClear: true
     .on "change", ->
-      hospital_id = $("#team_hospital_id").select2("val")
+      hospital = $("#team_hospital_id").select2("val")
       $("#team_member_list")
         .select2
           width: "100%"
@@ -16,7 +16,7 @@ jQuery ->
           multiple: true
           separator: ","
           ajax:
-            url: Routes.hospital_users_path(hospital_id)
+            url: Routes.hospital_users_path(hospital)
             dataType: "json"
             quietMillis: 100
             results: (data, page) ->
@@ -41,7 +41,3 @@ jQuery ->
         item.name
       formatResult: (item) ->
         item.name
-
-  $("#team-members-table")
-    .stacktable
-      myClass: "stacktable small-only"

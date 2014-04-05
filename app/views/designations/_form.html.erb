@@ -7,5 +7,5 @@
   <%= f.association :hospital, collection: Hospital.order(:name) %>
   <%= f.input :is_default, label: "Make Default", as: :boolean, checked_value: true, unchecked_value: false %>
   <%= f.input :user_id, as: "hidden", input_html: {value: @user.id} %>
-  <%= f.submit "Submit", class: "button small radius" %>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>

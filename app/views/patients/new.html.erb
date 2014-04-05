@@ -1,18 +1,16 @@
-<div class="row">
-  <hgroup class="small-12 medium-6 columns">
-    <h2 class="left">Step 1</h2>
-    <sgroup class="right">
+<hgroup class="col-md-6 col-md-offset-1">
+  <div class="row">
+    <h2 class="col-lg-6 pull-left">Step 1</h2>
+    <sgroup class="col-lg-6 pull-right">
       <% unless @hospital.nil? %>
-        <span><%= link_to @hospital.name, edit_designation_path(@user.default_designation.id) %></span><br />
-        <span><%= link_to @hospital.city, edit_designation_path(@user.default_designation.id) %></span>
+        <span class="pull-right"><%= link_to @hospital.name, edit_designation_path(@user.default_designation.id) %></span><br />
+        <span class="pull-right"><%= link_to @hospital.city, edit_designation_path(@user.default_designation.id) %></span>
       <% else %>
         <%= link_to "Add hospital", new_designation_path %>
       <% end %>
     </sgroup>
-  </hgroup>
-</div>
-<div class="row">
-  <div class="small-12 medium-6">
-    <%= render 'form' %>
   </div>
+</hgroup>
+<div class="col-md-6 col-md-offset-1">
+  <%= render 'form' %>
 </div>
