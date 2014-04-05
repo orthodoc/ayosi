@@ -12,13 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require turbolinks
+//= require bootstrap
+//= require bootstrap-datepicker
 //= require select2
-// Note: Foundation 5 won't work with turbolinks
-//= require foundation
-//= require stacktable
 //= require js-routes
-//= require foundation-datepicker
 //= require_tree .
-$(function() {
-  $(document).foundation();
-});

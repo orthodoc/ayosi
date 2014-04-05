@@ -26,19 +26,20 @@ class TeamDecorator < ApplicationDecorator
     h.button_to "Disabled",
       "",
       method: :get,
-      class: "button-mini disabled"
+      class: "btn-xs btn-primary",
+      disabled: "disabled"
   end
 
   def request_button
     h.button_to "Request",
       h.requesting_membership_path(current_user_membership),
-      class: "button-mini"
+      class: "btn-xs btn-primary"
   end
 
   def resign_button
     h.button_to "Resign",
       h.resigning_membership_path(current_user_membership),
-      class: "button-mini"
+      class: "btn-xs btn-primary"
   end
 
   def current_user_membership_button

@@ -1,27 +1,33 @@
 <%= simple_form_for @form do |f| %>
   <%= f.input :name, placeholder: Faker::Name.name, input_html: { title: "Enter the patient's name", data: { tooltip: true } } %>
   <div class="row">
-    <div class="small-8 columns">
-      <%= f.input :birthday, as: :string, label: "Date of Birth(optional)", input_html: { class: "date_picker"} %>
+    <div class="col-sm-6">
+      <%= f.input :birthday, as: :string, label: "Date of Birth(optional)", input_html: { class: "datepicker"} %>
     </div>
-    <div class="small-4 columns">
+    <div class="col-sm-6">
       <%= f.input :age , placeholder: %w[30 35 40 45 50 55 60 65].sample, collection: (12..110) %>
     </div>
   </div>
-  <%= f.input :gender, as: :radio_buttons, collection: ["Male", "Female", "Others"], boolean_style: :inline %>
   <div class="row">
-    <div class="small-8 columns">
+  </div>
+  <%= f.input :gender, as: :radio_buttons, collection: ["Male", "Female", "Others"], item_wrapper_class: 'radio-inline' %>
+  <div class="row">
+    <div class="col-sm-6">
       <%= f.input :hospital_id, collection: @user.hospitals %>
     </div>
-    <div class="small-4 columns">
+    <div class="col-sm-6">
       <%= f.input :uhid, label: "UHID", placeholder: %w[266900 266153 113203 267443 267623].sample %>
     </div>
   </div>
   <%= f.input :patient_id, as: "hidden" %>
-  <%= f.input :region, as: :radio_buttons, collection: ["Hip", "Knee", "Shoulder"], boolean_style: :inline %>
-  <%= f.input :category, as: :radio_buttons, collection: ["Primary", "Revision"], boolean_style: :inline %>
+  <%= f.input :region, as: :radio_buttons, collection: ["Hip", "Knee", "Shoulder","Ankle"], item_wrapper_class: 'radio-inline' %>
+  <%= f.input :category, as: :radio_buttons, collection: ["Primary", "Revision"], item_wrapper_class: 'radio-inline' %>
   <%= f.input :name, placeholder: "Total Hip Replacement", label: "Surgery" %>
-  <%= f.input :side, as: :radio_buttons, collection: ["Right", "Left"], boolean_style: :inline %>
-  <%= f.input :surgeon, collection: User.doctors %>
-  <%= f.submit "Next", class: "button small radius " %>
+  <%= f.input :side, as: :radio_buttons, collection: ["Right", "Left"], item_wrapper_class: 'radio-inline' %>
+  <div class="row">
+    <div class="col-sm-6">
+      <%= f.input :surgeon, collection: User.doctors %>
+    </div>
+  </div>
+  <%= f.submit "Next", class: "btn btn-primary" %>
 <% end %>

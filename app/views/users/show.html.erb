@@ -1,59 +1,59 @@
-<div class="row">
-  <div class="small-12 medium-6">
+<section role="user">
+  <div class="col-md-8 col-md-offset-1">
     <h3><%= @user.welcome_title %></h3>
     <% if @user.category == "hospital_staff" %>
       <p>
-        <h5>List of designated roles</h5>
-        <table id="designation-roles-table" class="large-only" cellspacing="0">
-          <thead>
-            <tr>
-              <!--There are 5 headers in total. The small-only class headers will appear in mobiles and tablets  -->
-              <th class="small-only">Hospital</th>
-              <th class="small-only">Designation:</th>
-              <th class="small-only">Delete:</th>
-              <!--The large-only class headers are only for desktops  -->
-              <th class="large-only">Hospital</th>
-              <th class="large-only">Designation</th>
-              <th class="large-only"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @designations.each do |designation| %>
-              <tr>
-                <td><%= link_to designation.hospital.name, hospital_path(designation.hospital.id) %></td>
-                <td><%= link_to designation.name.titleize, edit_designation_path(designation) %></td>
-                <td><%= designation.delete_link(@user) %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+        <h5>List of designations</h5>
+        <div class="row">
+          <div class="col-sm-6 ">
+            <table id="designation-roles-table" class="table table-hover" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Hospital</th>
+                  <th>Designation</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @designations.each do |designation| %>
+                  <tr>
+                    <td><%= link_to designation.hospital.name, hospital_path(designation.hospital.id) %></td>
+                    <td><%= link_to designation.name.titleize, edit_designation_path(designation) %></td>
+                    <td><%= designation.delete_link(@user) %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <%= link_to "Add a hospital?", new_designation_path %>
       </p>
       <p>
         <h5>List of teams</h5>
-        <table id="user-teams-table" class="large-only" cellspacing="0">
-          <thead>
-            <tr>
-              <!--There are 5 headers in total. The small-only class headers will appear in mobiles and tablets  -->
-              <th class="small-only">Name</th>
-              <th class="small-only">Hospital:</th>
-              <th class="small-only">Hit:</th>
-              <!--The large-only class headers are only for desktops  -->
-              <th class="large-only">Name</th>
-              <th class="large-only">Hospital</th>
-              <th class="large-only"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @teams.each do |team| %>
-              <tr>
-                <td><%= link_to team.name, team_path(team) %></td>
-                <td><%= link_to team.hospital.name, hospital_path(team.hospital) %></td>
-                <td><%= team.delete_link(@user) %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+        <div class="row">
+          <div class="col-sm-6">
+            <table id="user-teams-table" class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Team (Members)</th>
+                  <th></th>
+                  <th>Hospital</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @teams.each do |team| %>
+                  <tr>
+                    <td><%= link_to team.name, team_path(team) %></td>
+                    <td><span class="badge"><%= team.members.count %></span></td>
+                    <td><%= link_to team.hospital.name, hospital_path(team.hospital) %></td>
+                    <td><%= team.delete_link(@user) %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
           <%= link_to "Create a team?", new_team_path %>
       </p>
     <% else %>
@@ -82,4 +82,4 @@
       <%= link_to "Add another hospital?", new_designation_path %>
     <% end %>
   </div>
-</div>
+</section>

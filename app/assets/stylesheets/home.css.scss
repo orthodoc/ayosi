@@ -3,20 +3,3 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // Styling the tasks on home page
-ul.tasks {
-  list-style-type: none;
-  background-color: #E8FFDD;
-  margin-left: 0;
-  li {
-    margin-left: 1.1rem;
-  }
-  li.strike {
-    text-decoration: line-through;
-    color: #E8FFDD;
-  }
-  .green {
-   color:#50c518;
-   padding: 0.5rem;
-  }
-}
-

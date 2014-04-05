@@ -1,43 +1,7 @@
 // Place all the styles related to the patients controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-main {
-  background-color: #fff;
-}
-
-hgroup {
-  padding-top: 0.25rem;
-  background-color: #fff;
-  border-bottom: 2px solid #000;
-}
-
-h2 {
-  padding-top: 0.25rem;
-}
-
 sgroup {
-  font-size: 0.875em;
-  line-height: 1.4;
-  margin-top: 0.8rem;
-  margin-bottom: 0.5rem;
-  text-rendering: optimizeLegibility;
-}
-
-form {
-  background-color: #f2fcff;
-  padding: 0.8rem;
-  abbr {
-    display: none;
-  }
-  select {
-    width: auto;
-  }
-  .button.small {
-    margin-top: 0.75rem;
-  }
-}
-
-.fa-home {
-  font-size: 4em;
-  color: #0079a1;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }

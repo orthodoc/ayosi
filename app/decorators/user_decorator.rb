@@ -51,44 +51,45 @@ class UserDecorator < ApplicationDecorator
   def activate_button(team)
     h.button_to "Activate",
       h.activating_membership_path(membership(team)),
-      class: "button-mini"
+      class: "btn-xs btn-primary"
   end
 
   def reject_button(team)
     h.button_to "Reject",
       h.rejecting_membership_path(membership(team)),
-      class: "button-mini"
+      class: "btn-xs btn-warning"
   end
 
   def deactivate_button(team)
     h.button_to "Deactivate",
       h.deactivating_membership_path(membership(team)),
-      class: "button-mini"
+      class: "btn-xs btn-warning"
   end
 
   def ban_button(team)
     h.button_to "Ban",
       h.banning_membership_path(membership(team)),
-      class: "button-mini"
+      class: "btn-xs btn-danger"
   end
 
   def disabled_button
     h.button_to "Disabled",
       "",
       method: :get,
-      class: "button-mini disabled"
+      class: "btn-xs btn-primary",
+      disabled: "disabled"
   end
 
   def request_button(team)
     h.button_to "Request",
       h.requesting_membership_path(membership(team)),
-      class: "button-mini"
+      class: "btn-xs btn-primary"
   end
 
   def resign_button(team)
     h.button_to "Resign",
       h.resigning_membership_path(membership(team)),
-      class: "button-mini"
+      class: "btn-xs btn-primary"
   end
 
   def action_button(team)

@@ -1,7 +1,7 @@
 <%= simple_form_for @team do |f| %>
   <%= f.input :name %>
   <%= f.association :hospital, collection: @user.hospitals %>
-  <%= f.input :member_list, as: "hidden", label: "Choose members" %>
+  <%= f.input :member_list, label: "Choose members" %>
   <%= f.input :user_id, as: "hidden", input_html: { value: @user.id } %>
-  <%= f.submit "Submit", class: "button small radius" %>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>
