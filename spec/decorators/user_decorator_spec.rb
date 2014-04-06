@@ -68,31 +68,31 @@ describe UserDecorator do
       context "and buttons" do
         it { expect(h.current_user.activate_button(team)).to include("Activate") }
         it { expect(h.current_user.activate_button(team)).to include("/memberships/#{membership.id}/activating") }
-        it { expect(h.current_user.activate_button(team)).to have_selector(".button-mini") }
+        it { expect(h.current_user.activate_button(team)).to have_selector(".btn-xs") }
 
         it { expect(h.current_user.reject_button(team)).to include("Reject") }
         it { expect(h.current_user.reject_button(team)).to include("/memberships/#{membership.id}/rejecting") }
-        it { expect(h.current_user.reject_button(team)).to have_selector(".button-mini") }
+        it { expect(h.current_user.reject_button(team)).to have_selector(".btn-xs") }
 
         it { expect(h.current_user.deactivate_button(team)).to include("Deactivate") }
         it { expect(h.current_user.deactivate_button(team)).to include("/memberships/#{membership.id}/deactivating") }
-        it { expect(h.current_user.deactivate_button(team)).to have_selector(".button-mini") }
+        it { expect(h.current_user.deactivate_button(team)).to have_selector(".btn-xs") }
 
         it { expect(h.current_user.ban_button(team)).to include("Ban") }
         it { expect(h.current_user.ban_button(team)).to include("/memberships/#{membership.id}/banning") }
-        it { expect(h.current_user.ban_button(team)).to have_selector(".button-mini") }
+        it { expect(h.current_user.ban_button(team)).to have_selector(".btn-xs") }
 
         it { expect(h.current_user.request_button(team)).to include("Request") }
         it { expect(h.current_user.request_button(team)).to include("/memberships/#{membership.id}/requesting") }
-        it { expect(h.current_user.request_button(team)).to have_selector(".button-mini") }
+        it { expect(h.current_user.request_button(team)).to have_selector(".btn-xs") }
 
         it { expect(h.current_user.resign_button(team)).to include("Resign") }
         it { expect(h.current_user.resign_button(team)).to include("/memberships/#{membership.id}/resigning") }
-        it { expect(h.current_user.resign_button(team)).to have_selector(".button-mini") }
+        it { expect(h.current_user.resign_button(team)).to have_selector(".btn-xs") }
 
         it { expect(h.current_user.disabled_button).to include("Disabled") }
         it { expect(h.current_user.disabled_button).not_to include("/memberships/#{membership.id}") }
-        it { expect(h.current_user.disabled_button).to have_selector(".button-mini")}
+        it { expect(h.current_user.disabled_button).to have_selector(".btn-xs")}
       end
 
       context "and action button for" do

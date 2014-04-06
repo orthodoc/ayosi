@@ -3,8 +3,8 @@
     <h2 class="col-lg-6 pull-left">Step 1</h2>
     <sgroup class="col-lg-6 pull-right">
       <% unless @hospital.nil? %>
-        <span class="pull-right"><%= link_to @hospital.name, edit_designation_path(@user.default_designation.id) %></span><br />
-        <span class="pull-right"><%= link_to @hospital.city, edit_designation_path(@user.default_designation.id) %></span>
+        <span class="pull-right"><%= link_to @hospital.name, user_path(@user) %></span><br />
+        <span class="pull-right"><%= link_to @hospital.city, user_path(@user) %></span>
       <% else %>
         <%= link_to "Add hospital", new_designation_path %>
       <% end %>

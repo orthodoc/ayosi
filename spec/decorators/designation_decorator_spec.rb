@@ -31,4 +31,25 @@ describe DesignationDecorator do
 
   end
 
+  describe "when make default radio button is" do
+    context "displayed" do
+      before(:each) do
+        sign_in user
+        designation.update_attributes(is_default: false)
+      end
+
+      it { expect(designation.make_default_button).not_to have_selector("i.fa-check-circle") }
+      it { expect(designation.make_default_button).to have_selector("input#designation_id_#{designation.id}") }
+    end
+
+    context "not displayed" do
+      before(:each) do
+        sign_in user
+        designation.update_attributes(is_default: true)
+      end
+      it { expect(designation.make_default_button).to have_selector("i.fa-check-circle") }
+      it { expect(designation.make_default_button).not_to have_selector("input#designation_id_#{designation.id}") }
+    end
+  end
+
 end
