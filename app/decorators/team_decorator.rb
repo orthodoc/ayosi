@@ -84,8 +84,4 @@ class TeamDecorator < ApplicationDecorator
     end
   end
 
-  def is_member?(user)
-    self.members.include?(user)
-  end
-
 end

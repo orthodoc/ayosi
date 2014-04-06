@@ -10,6 +10,8 @@ class DesignationDecorator < ApplicationDecorator
   def make_default_button
     unless model.is_default == true
       h.radio_button_tag "designation_id", model.id
+    else
+      h.content_tag(:i, "", class: "fa fa-check-circle")
     end
   end
 
