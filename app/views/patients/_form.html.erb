@@ -20,8 +20,14 @@
     </div>
   </div>
   <%= f.input :patient_id, as: "hidden" %>
-  <%= f.input :region, as: :radio_buttons, collection: ["Hip", "Knee", "Shoulder","Ankle"], item_wrapper_class: 'radio-inline' %>
-  <%= f.input :category, as: :radio_buttons, collection: ["Primary", "Revision"], item_wrapper_class: 'radio-inline' %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :category, collection: ["Primary", "Revision"] %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :region, collection: ["Hip", "Knee", "Shoulder", "Ankle"] %>
+    </div>
+  </div>
   <%= f.input :name, placeholder: "Total Hip Replacement", label: "Surgery" %>
   <%= f.input :side, as: :radio_buttons, collection: ["Right", "Left"], item_wrapper_class: 'radio-inline' %>
   <div class="row">

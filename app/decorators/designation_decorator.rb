@@ -7,4 +7,10 @@ class DesignationDecorator < ApplicationDecorator
     end
   end
 
+  def make_default_button
+    unless model.is_default == true
+      h.radio_button_tag "designation_id", model.id
+    end
+  end
+
 end

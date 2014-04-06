@@ -4,7 +4,11 @@ Ayosi::Application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations"}
   resources :patients
   resources :users
-  resources :designations
+  resources :designations do
+    collection do
+      put :make_default
+    end
+  end
   resources :hospitals do
     resources :users, only: :index
   end
