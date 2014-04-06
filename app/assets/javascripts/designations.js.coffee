@@ -4,6 +4,6 @@
 jQuery ->
   $('#designation_hospital_id')
     .select2
-      width: "resolve"
+      width: "100%"
       allowClear: true
       placeholder: "Select a hospital"

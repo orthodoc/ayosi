@@ -16,6 +16,14 @@ jQuery ->
       width: "100%"
       placeholder: "Select the hospital"
 
+  $('#patient_category')
+    .select2
+      width: "100%"
+
+  $('#patient_region')
+    .select2
+      width: "100%"
+
   $('#patient_surgeon')
     .select2
       width: "100%"
