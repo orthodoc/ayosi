@@ -5,7 +5,7 @@
 > Ed Tufte
 
 Ayosi 
-======================
+======
 
 [![Build Status](https://travis-ci.org/orthodoc/ayosi.png?branch=master)](https://travis-ci.org/orthodoc/ayosi)
 [![Code Climate](https://codeclimate.com/github/orthodoc/ayosi.png)](https://codeclimate.com/github/orthodoc/ayosi)
@@ -21,25 +21,23 @@ available for public consumption. The goal of this project is to also involve
 patients actively in the data submission process, especially related to outcome
 studies. The project **does not** intend to replace a well functioning registry.
 
-For Developers
-======================
+## For Developers
 
 Fork the project and contribute!!
 
 Follow these guides:
 
-1. [Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide)
-2. [Rails Style Guide](https://github.com/bbatsov/rails-style-guide)
-3. [Rails Best Practices](http://rails-bestpractices.com/posts/archive)
-4. [Better Specs](http://betterspecs.org)
-5. [Source Making](http://sourcemaking.com/)
-6. [Code Guide](http://mdo.github.io/code-guide/)
+1. [Ruby Style Guide]
+2. [Rails Style Guide]
+3. [Rails Best Practices]
+4. [Better Specs]
+5. [Source Making]
+6. [Code Guide]
 
 The project relies on a postgresql database for persisting data. You'll have to set
 up one your machine. Fill the database.yml file with your credentials to get started.
 
-Working Features (Apr 7, 2014)
-==============================
+#### Working Features (Apr 7, 2014)
 
 1. User registration, login, logout
 2. Creating designations(default hospital or place of work)
@@ -48,8 +46,7 @@ Working Features (Apr 7, 2014)
 5. Inviting members by email
 6. Patient biodata and surgery forms
 
-To be done (Apr 7, 2014)
-========================
+#### To be done (Apr 7, 2014)
 
 1. Implant details from stickers
 2. Uploading images
@@ -57,15 +54,23 @@ To be done (Apr 7, 2014)
 4. Patient search
 5. Dashboard
 6. Patient communication
+7. Patient Consent form
 
-License
-=====================
+## License
 
 The code in this repository is covered by the GPL v3 license. The content is
 available in LICENSE.txt.
 
 (c) Biswajit Dutta Baruah 2014.
 
-This application was generated with the [Rails apps composer gem]
-(https://github.com/RailsApps/rails_apps_composer) provided by the [RailsApps Project]
-(http://railsapps.github.io)
+This application was generated with the [Rails apps composer gem] provided by the [RailsApps Project]
+
+
+[Ruby Style Guide]:(https://github.com/bbatsov/ruby-style-guide)
+[Rails Style Guide]:(https://github.com/bbatsov/rails-style-guide)
+[Rails Best Practices]:(http://rails-bestpractices.com/posts/archive)
+[Better Specs]:(http://betterspecs.org)
+[Source Making]:(http://sourcemaking.com/)
+[Code Guide]:(http://mdo.github.io/code-guide/)
+[Rails apps composer gem]:(https://github.com/RailsApps/rails_apps_composer)
+[RailsApps Project]:(http://railsapps.github.io)
