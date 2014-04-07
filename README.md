@@ -39,19 +39,19 @@ up one your machine. Fill the database.yml file with your credentials to get sta
 
 #### Task list (Apr 7, 2014)
 
-- [x] User registration, login, logout
-- [x] Creating designations(default hospital or place of work)
-- [x] Team formation
-- [x] Member actions like activating, deactivating done
-- [x] Inviting members by email
-- [x] Patient biodata and surgery forms
-- [ ] Implant details from stickers
-- [ ] Uploading images
-- [ ] Outcome scores
-- [ ] Patient search
-- [ ] Dashboard
-- [ ] Patient communication
-- [ ] Patient Consent form
+1. ~~User registration, login, logout~~
+2. ~~Creating designations(default hospital or place of work)~~
+3. ~~Team formation~~
+4. ~~Member actions like activating, deactivating done~~
+5. ~~Inviting members by email~~
+6. Patient biodata and surgery forms
+7. Implant details from stickers
+8. Uploading images
+9. Outcome scores
+10. Patient search
+11. Dashboard
+12. Patient communication
+13. Patient Consent form
 
 ## License
 
