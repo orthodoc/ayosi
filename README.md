@@ -52,6 +52,7 @@ up one your machine. Fill the database.yml file with your credentials to get sta
 11. Dashboard
 12. Patient communication
 13. Patient Consent form
+14. Patient Identification
 
 ## License
 
