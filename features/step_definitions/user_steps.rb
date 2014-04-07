@@ -279,9 +279,7 @@ When(/^I click on the delete button$/) do
   create_user_at_hospital_with_designation
   visit user_path(@user)
   within("table#user-designations-table") do
-    unless @user.designations.nil?
-      find("i.fa-trash-o", visible: false).click 
-    end
+    find("i.fa-trash-o", visible: false).click
   end
 end
 
@@ -376,7 +374,7 @@ end
 
 Then(/^I should see my edited designation$/) do
   if @user.category == "hospital_staff"
-    page.should have_content(@new_designation.name)
+    page.should have_content(@new_designation.name.titleize)
   end
 end
 
