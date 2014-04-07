@@ -37,24 +37,21 @@ Follow these guides:
 The project relies on a postgresql database for persisting data. You'll have to set
 up one your machine. Fill the database.yml file with your credentials to get started.
 
-#### Working Features (Apr 7, 2014)
+#### Task list (Apr 7, 2014)
 
-1. User registration, login, logout
-2. Creating designations(default hospital or place of work)
-3. Team formation
-4. Member actions like activating, deactivating done
-5. Inviting members by email
-6. Patient biodata and surgery forms
-
-#### To be done (Apr 7, 2014)
-
-1. Implant details from stickers
-2. Uploading images
-3. Outcome scores
-4. Patient search
-5. Dashboard
-6. Patient communication
-7. Patient Consent form
+- [x] User registration, login, logout
+- [x] Creating designations(default hospital or place of work)
+- [x] Team formation
+- [x] Member actions like activating, deactivating done
+- [x] Inviting members by email
+- [x] Patient biodata and surgery forms
+- [ ] Implant details from stickers
+- [ ] Uploading images
+- [ ] Outcome scores
+- [ ] Patient search
+- [ ] Dashboard
+- [ ] Patient communication
+- [ ] Patient Consent form
 
 ## License
 
@@ -66,11 +63,11 @@ available in LICENSE.txt.
 This application was generated with the [Rails apps composer gem] provided by the [RailsApps Project]
 
 
-[Ruby Style Guide]:(https://github.com/bbatsov/ruby-style-guide)
-[Rails Style Guide]:(https://github.com/bbatsov/rails-style-guide)
-[Rails Best Practices]:(http://rails-bestpractices.com/posts/archive)
-[Better Specs]:(http://betterspecs.org)
-[Source Making]:(http://sourcemaking.com/)
-[Code Guide]:(http://mdo.github.io/code-guide/)
-[Rails apps composer gem]:(https://github.com/RailsApps/rails_apps_composer)
-[RailsApps Project]:(http://railsapps.github.io)
+[Ruby Style Guide]:https://github.com/bbatsov/ruby-style-guide
+[Rails Style Guide]:https://github.com/bbatsov/rails-style-guide
+[Rails Best Practices]:http://rails-bestpractices.com/posts/archive
+[Better Specs]:http://betterspecs.org
+[Source Making]:http://sourcemaking.com
+[Code Guide]:http://mdo.github.io/code-guide
+[Rails apps composer gem]:https://github.com/RailsApps/rails_apps_composer
+[RailsApps Project]:http://railsapps.github.io
