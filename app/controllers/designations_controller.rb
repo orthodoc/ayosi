@@ -37,14 +37,16 @@ class DesignationsController < ApplicationController
   end
 
   def make_default
-    @designation = Designation.find(params[:designation_id])
-    if @designation.update_attributes(is_default: true)
-      flash[:notice] = "Designation was made default"
-      redirect_to user_path(@user)
+    if params[:designation_id].nil?
+      flash[:alert] = "Select any one designation to make default"
     else
-      flash[:alert] = "Designation was not updated"
-      redirect_to user_path(@user)
+      @designation = Designation.find(params[:designation_id])
+      unless @designation.is_default == true
+        @designation.update_attributes(is_default: true)
+        flash[:notice] = "Designation was made default"
+      end
     end
+    redirect_to user_path(@user)
   end
 
   def destroy

@@ -40,4 +40,34 @@ describe HospitalsController do
     it { should_not set_the_flash }
   end
 
+  describe "when editing the hospital" do
+    let(:admin) { FactoryGirl.create(:user) }
+    context "as an admin" do
+      before(:each) do
+        sign_in admin
+        admin.add_role :admin
+        @hospital = FactoryGirl.create(:hospital)
+        get :edit, id: @hospital.id
+      end
+
+      it { should respond_with(:success) }
+      it { should render_template(:edit) }
+      it { should_not set_the_flash }
+    end
+
+    context "as a user" do
+      before(:each) do
+        sign_in user
+        @hospital = FactoryGirl.create(:hospital)
+        @request.env['HTTP_REFERER'] = hospital_path(@hospital)
+        get :edit, id: @hospital.id
+      end
+
+      it { should_not respond_with(:success) }
+      it { should_not render_template(:edit) }
+      it { should set_the_flash[:alert].to("Only an admin can change the hospital details") }
+      it { should redirect_to(hospital_path(@hospital)) }
+    end
+  end
+
 end
