@@ -278,8 +278,10 @@ end
 When(/^I click on the delete button$/) do
   create_user_at_hospital_with_designation
   visit user_path(@user)
-  within("table#user-designations-table.table.table-hover") do
-    find("i.fa-trash-o", visible: false).click
+  within("table#user-designations-table") do
+    unless @user.designations.nil?
+      find("i.fa-trash-o", visible: false).click 
+    end
   end
 end
 

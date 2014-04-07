@@ -119,6 +119,34 @@ describe DesignationsController do
     end
   end
 
+  context "where making a designation default" do
+    before(:each) do
+      sign_in @user
+      @designation = FactoryGirl.create(:designation)
+    end
+    context "when its not default" do
+      before(:each) do
+        @designation.update_attributes(is_default: false)
+        @new_designation = FactoryGirl.build_stubbed(:designation, is_default: true)
+        put :make_default, designation_id: @designation.id, designation: @new_designation[:is_default]
+        @designation.reload
+      end
+
+      it { expect(@designation.is_default).to eq(true) }
+      it { should set_the_flash[:notice].to("Designation was made default") }
+      it { should redirect_to(user_path(@user)) }
+    end
+
+    context "without making a selection" do
+      before(:each) do
+        put :make_default, designation_id: nil
+      end
+
+      it { should set_the_flash[:alert].to("Select any one designation to make default")}
+      it { should redirect_to(user_path(@user)) }
+    end
+  end
+
   context "when deleting a designation" do
     before(:each) do
       sign_in @user
