@@ -1,11 +1,9 @@
-<div class="row">
-  <div class="small-12 medium-6 columns">
-    <h2>Send Invitations</h2>
-    <%= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post } ) do |f| %>
-      <% resource.class.invite_key_fields.each do |field| %>
-        <%= f.input field %>
-      <% end %>
-      <%= f.button :submit, "Invite!", class: "button small radius" %>
+<div class="col-sm-6 col-sm-offset-1">
+  <h2>Send Invitations</h2>
+  <%= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post } ) do |f| %>
+    <% resource.class.invite_key_fields.each do |field| %>
+      <%= f.input field %>
     <% end %>
-  </div>
+    <%= f.button :submit, "Invite!", class: "btn btn-primary" %>
+  <% end %>
 </div>
