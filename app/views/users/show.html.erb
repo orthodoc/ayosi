@@ -63,27 +63,33 @@
       </p>
     <% else %>
       <h5>List of hospitals enrolled</h5>
-      <table cellspacing="0" class="large-only" id="designation-roles-table">
-        <thead>
-          <tr>
-            <th class="small-only">Hospital</th>
-            <th class="small-only">Hit:</th>
-            <th class="small-only">Hit:</th>
-            <th class="large-only">Hospital</th>
-            <th class="large-only"></th>
-            <th class="large-only"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @designations.each do |designation| %>
-            <tr>
-              <td><%= link_to designation.hospital.name, hospital_path(designation.hospital.id) %></td>
-              <td><%= button_to "Edit", edit_designation_path(designation), method: :get %></td>
-              <td><%= designation.delete_link(@user) %></td>
-            </tr>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= form_tag make_default_designations_path, method: :put do %>
+            <table cellspacing="0" class="table table-hover" id="user-designations-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Hospital</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @designations.each do |designation| %>
+                  <tr>
+                    <td><%= designation.make_default_button %></td>
+                    <td><%= link_to designation.hospital.name, hospital_path(designation.hospital.id) %></td>
+                    <td><%= button_to "Edit", edit_designation_path(designation), method: :get, class: "btn btn-xs btn-primary" %></td>
+                    <td><%= designation.delete_link(@user) %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <%= submit_tag "Default", class: "btn btn-xs btn-primary" %>
           <% end %>
-        </tbody>
-      </table>
+        </div>
+      </div>
       <%= link_to "Add another hospital?", new_designation_path %>
     <% end %>
   </div>
