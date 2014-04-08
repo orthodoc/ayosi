@@ -17,7 +17,7 @@ describe DataEntryForm do
   it { should validate_presence_of(:category) }
   it { should validate_presence_of(:side) }
   it { should validate_presence_of(:region) }
-  it { should validate_presence_of(:surgeon) }
+  it { should validate_presence_of(:diagnosis) }
 
   #This is a bug. See: 
   #https://github.com/thoughtbot/shoulda-matchers/issues/457
