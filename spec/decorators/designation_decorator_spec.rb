@@ -16,7 +16,7 @@ describe DesignationDecorator do
       it { expect(designation.delete_link(user)).to include("/designations/#{designation.id}") }
       it { expect(designation.delete_link(user)).to have_selector("i.fa-trash-o") }
       it { expect(designation.delete_link(user)).to include("Delete") }
-      it { expect(designation.delete_link(user)).to include("Are you sure you want to remove #{designation.name}") }
+      it { expect(designation.delete_link(user)).to include("Are you sure you want to remove #{designation.name.titleize}") }
     end
 
     context "not displayed" do

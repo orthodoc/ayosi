@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :surgery do |surgery|
-    surgery.sequence(:name) { |n| Faker::Lorem.word.titleize + " Procedure" + " #{n}" }
+    surgery.sequence(:name) { |n| Faker::Lorem.word + " Procedure" + " #{n}" }
     surgery.sequence(:date) {|n| ("#{n+100}").to_i.days.ago }
     surgery.patient
     surgery.hospital
