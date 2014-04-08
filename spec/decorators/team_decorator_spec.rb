@@ -123,7 +123,7 @@ describe TeamDecorator do
       end
 
       it { expect(team.current_user_display).to have_selector("span") }
-      it { expect(team.current_user_display).to include(visitor.name) }
+      it { expect(team.current_user_display).to include("#{visitor.name}") }
       it { expect(team.current_user_display).to include(": Your membership is ") }
       it { expect(team.current_user_display).to include(team.current_user_membership_status) }
       it { expect(team.current_user_display).to include(team.current_user_membership_button) }

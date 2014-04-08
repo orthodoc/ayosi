@@ -11,6 +11,7 @@ FactoryGirl.define do
     surgery.side {["Right", "Left"].sample}
     surgery.region {["Hip","Knee","Shoulder"].sample}
     surgery.sequence(:surgeon) { |n| Faker::Name.name.concat(" #{n}") }
+    surgery.sequence(:diagnosis) { |n| "Primary OA" + " #{n}"}
 
     before(:create) do
       surgery.patient = FactoryGirl.create(:patient) unless surgery.patient.present?

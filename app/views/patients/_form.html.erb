@@ -29,7 +29,15 @@
     </div>
   </div>
   <%= f.input :name, placeholder: "Total Hip Replacement", label: "Surgery" %>
-  <%= f.input :side, as: :radio_buttons, collection: ["Right", "Left"], item_wrapper_class: 'radio-inline' %>
+  <%= f.input :diagnosis, placeholder: "Primary Osteoarthritis" %>
+  <div class="row">
+    <div class="col-sm-6">
+      <%= f.input :side, as: :radio_buttons, collection: ["Right", "Left"], item_wrapper_class: 'radio-inline' %>
+    </div>
+    <div class="col-sm-6">
+      <%= f.input :date, as: :string, label: "Date of surgery", input_html: { class: "datepicker" }  %>
+    </div>
+  </div>
   <div class="row">
     <div class="col-sm-6">
       <%= f.input :surgeon, collection: User.doctors %>

@@ -4,7 +4,7 @@ class DataEntryForm < Reform::Form
   include Composition
 
   properties [:name, :age, :birthday, :gender], on: :patient
-  properties [:name, :date, :hospital_id, :patient_id, :category, :side, :region, :surgeon, :uhid], on: :surgery
+  properties [:name, :date, :hospital_id, :patient_id, :category, :side, :region, :surgeon, :uhid, :diagnosis], on: :surgery
 
   # validations for patient attributes
   validates :name, :age, :gender, presence: :true, on: :patient
@@ -24,6 +24,7 @@ class DataEntryForm < Reform::Form
   validates :region,   presence: true,
                        inclusion: { in: ["Hip", "Knee", "Shoulder"] }
   validates :surgeon,  presence: true
+  validates :diagnosis, presence: true
 
   model :patient
 
