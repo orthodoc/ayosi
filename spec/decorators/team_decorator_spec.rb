@@ -13,7 +13,7 @@ describe TeamDecorator do
       it { expect(team.delete_link(user)).to include("/teams/#{team.id}") }
       it { expect(team.delete_link(user)).to have_selector("i.fa-trash-o") }
       it { expect(team.delete_link(user)).to include("Delete") }
-      it { expect(team.delete_link(user)).to include("Are you sure you want to remove #{team.name}") }
+      it { expect(team.delete_link(user)).to include("Are you sure you want to remove #{team.name.titleize}") }
     end
 
     context "not displayed for other users" do
@@ -75,7 +75,7 @@ describe TeamDecorator do
       end
 
       it { expect(team.current_user_display).to have_selector("span") }
-      it { expect(team.current_user_display).to include(user.name) }
+      it { expect(team.current_user_display).to include("#{user.name}") }
       it { expect(team.current_user_display).to include(" (Owner)") }
 
     end

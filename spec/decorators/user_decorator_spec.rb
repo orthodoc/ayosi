@@ -55,7 +55,7 @@ describe UserDecorator do
 
     context "finds the designation" do
       it { expect(h.current_user.designation(team)).to eq(designation) }
-      it { expect(h.current_user.designation_name(team)).to eq(designation.name.titleize) }
+      it { expect(h.current_user.designation_name(team)).to eq("#{designation.name.titleize}") }
     end
 
     context "finds membership details" do
