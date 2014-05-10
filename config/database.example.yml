@@ -1,0 +1,32 @@
+development:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: ayosi_development
+  pool:     5
+  username: <username>
+  password: <password>
+  template: template0
+
+test: &test
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: ayosi_test
+  pool:     5
+  username: <username>
+  password: <password>
+  template: template0
+
+production:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: ayosi_production
+  pool:     5
+  username: <username>
+  password: <password>
+  template: template0
+
+cucumber:
+  <<: *test
