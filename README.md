@@ -36,7 +36,7 @@ Follow these guides:
 7. [Github Guide]
 
 The project relies on a postgresql database for persisting data. You'll have to set
-up one your machine. Fill the database.yml file with your credentials to get started.
+up one your machine. Rename the database.example.yml to database.yml and fill with your credentials to get started.
 
 #### Task list (Apr 7, 2014)
 
