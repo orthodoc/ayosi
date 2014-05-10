@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408085248) do
+ActiveRecord::Schema.define(version: 20140509051736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(version: 20140408085248) do
     t.date     "birthday"
   end
 
+  add_index "patients", ["name", "age", "gender"], name: "patient_unique_index", unique: true, using: :btree
+
   create_table "roles", force: true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -80,7 +82,6 @@ ActiveRecord::Schema.define(version: 20140408085248) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "surgeries", force: true do |t|
-    t.string   "name"
     t.date     "date"
     t.integer  "hospital_id"
     t.integer  "patient_id"
@@ -90,13 +91,13 @@ ActiveRecord::Schema.define(version: 20140408085248) do
     t.string   "side"
     t.string   "region"
     t.string   "surgeon"
-    t.string   "uhid"
     t.string   "diagnosis"
+    t.string   "procedure"
   end
 
   add_index "surgeries", ["hospital_id"], name: "index_surgeries_on_hospital_id", using: :btree
-  add_index "surgeries", ["name", "date", "hospital_id", "patient_id", "category", "side", "region", "surgeon"], name: "unique_surgery_attributes_index", unique: true, using: :btree
   add_index "surgeries", ["patient_id"], name: "index_surgeries_on_patient_id", using: :btree
+  add_index "surgeries", ["procedure", "patient_id", "hospital_id", "date", "category", "side", "region", "surgeon"], name: "surgery_unique_index", unique: true, using: :btree
 
   create_table "teams", force: true do |t|
     t.string   "name"

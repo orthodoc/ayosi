@@ -37,5 +37,9 @@ module Ayosi
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.i18n.enforce_available_locales = true
+
+    # The default format for dumping the database. Eliminate schema.rb in favour of
+    # structure.sql as we have postgresql specific expressions to generate indices.
+    config.active_record.schema_format = :sql
   end
 end

@@ -1,0 +1,42 @@
+<hgroup class="col-md-6 col-md-offset-1">
+  <div class="row">
+    <h2 class="col-lg-6 pull-left">Step 2</h2>
+    <sgroup class="col-lg-6 pull-right">
+      <% unless @hospital.nil? %>
+        <span class="pull-right"><%= link_to @hospital.name, user_path(@user) %></span><br />
+        <span class="pull-right"><%= link_to @hospital.city, user_path(@user) %></span>
+      <% else %>
+        <%= link_to "Add hospital", new_designation_path %>
+      <% end %>
+    </sgroup>
+  </div>
+</hgroup>
+<div class="col-md-6 col-md-offset-1">
+<%= simple_form_for @surgery, url: wizard_path, method: :put do |f| %>
+  <%= f.input :patient_id, as: "hidden" %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :category, collection: ["Primary", "Revision"] %>
+    </div>
+    <div class="col-md-6">
+      <%= f.input :region, collection: ["Hip", "Knee", "Shoulder", "Ankle"] %>
+    </div>
+  </div>
+  <%= f.input :procedure, placeholder: "Total Hip Replacement", label: "Surgery" %>
+  <%= f.input :diagnosis, placeholder: "Primary Osteoarthritis" %>
+  <div class="row">
+    <div class="col-sm-6">
+      <%= f.input :side, as: :radio_buttons, collection: ["Right", "Left"], item_wrapper_class: 'radio-inline' %>
+    </div>
+    <div class="col-sm-6">
+      <%= f.input :date, as: :string, label: "Date of surgery", input_html: { class: "datepicker" }  %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <%= f.input :surgeon, collection: User.doctors %>
+    </div>
+  </div>
+  <%= f.submit "Next", class: "btn btn-primary" %>
+<% end %>
+</div>

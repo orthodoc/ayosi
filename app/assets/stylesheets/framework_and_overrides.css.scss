@@ -31,6 +31,18 @@ hgroup {
   border-bottom: 1px solid #eee;
 }
 
+.patient, .user {
+ padding-bottom: 0.33em;
+ border-bottom: 0.1em solid #eee;
+}
+
+span.subtitle {
+  text-transform: uppercase;
+  font-size: 0.84em;
+  color: #999;
+  margin-left: 0.3em;
+}
+
 .light-red {
   color: #f23c5d;
 }
@@ -94,4 +106,32 @@ table > tbody > tr > td > form, section#team > div > form {
 
 .select2-container .sellect2-choice .select2-arrow {
   display: none;
+}
+
+// Media queries
+
+// Reduced section top margin to compact the view in mobiles
+@media (max-width: 767px) {
+  section {
+    margin-top: 0.33em;
+  }
+  h3, .h3 {
+    margin-top: 0.36em;
+  }
+  form {
+    padding: 1em;
+    .btn {
+      margin-bottom: 0;
+    }
+  }
+  .form-group {
+    margin-bottom: 0;
+  }
+  h3 {
+    margin-bottom: 1px;
+  }
+  span.subtitle {
+    margin-top: 0;
+    padding-top:0;
+  }
 }

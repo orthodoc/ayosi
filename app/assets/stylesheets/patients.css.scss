@@ -5,3 +5,13 @@ sgroup {
   margin-top: 20px;
   margin-bottom: 10px;
 }
+
+input#query.form-control {
+  width: 75%;
+}
+
+@media (max-width: 767px) {
+  input.btn {
+    margin-top: 0.36em;
+  }
+}

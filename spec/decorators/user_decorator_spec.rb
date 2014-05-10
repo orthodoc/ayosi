@@ -29,17 +29,6 @@ describe UserDecorator do
     end
   end
 
-  describe "where welcome title has" do
-    context "name link" do
-      before(:each) do
-        user.add_role :doctor
-      end
-      it { expect(h.current_user.welcome_title).to include(user.name_link) }
-      it { expect(h.current_user.welcome_title).to have_selector("span") }
-      it { expect(h.current_user.welcome_title).to include(" (Doctor)")}
-    end
-  end
-
   context "where for a team," do
     let(:designation) { FactoryGirl.create(:designation, user_id: user.id, hospital_id: hospital.id) }
     let(:team) { FactoryGirl.create(:team, user: user, hospital: hospital) }

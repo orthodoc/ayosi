@@ -4,6 +4,7 @@ class UserDecorator < ApplicationDecorator
   decorates_association :teams
   decorates_association :roles
   decorates_association :memberships
+  decorates_association :hospitals
 
   def role_name
     if roles.count == 0
@@ -16,14 +17,6 @@ class UserDecorator < ApplicationDecorator
   def name_link
     h.link_to name,
       h.user_path(model)
-  end
-
-  def welcome_title
-    if h.current_user == model
-      name_link.concat(
-        h.content_tag(:span, " (".concat(role_name).concat(")"))
-      )
-    end
   end
 
   def owner_title(team)

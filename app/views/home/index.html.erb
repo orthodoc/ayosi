@@ -1,12 +1,20 @@
 <section class="home">
   <div class="col-md-8 col-md-offset-1">
-    <h3>
-      <% if signed_in? %>
-        <%= @user.welcome_title %>
-      <% else %>
-        Welcome Visitor!
-      <% end %>
-    </h3>
+    <% if signed_in? %>
+      <div class="row user">
+        <div class="col-xs-3">
+          <span>
+            <img src="http://lorempixel.com/output/people-q-c-75-75-7.jpg" alt="Betty" class="img-responsive img-rounded" />
+          </span>
+        </div>
+        <div class="col-xs-9">
+          <h3><%= @user.name_link %></h3>
+          <span class="subtitle"><%= @user.role_name %></span>
+        </div>
+      </div>
+    <% else %>
+      <h3>Welcome Visitor!</h3>
+    <% end %>
     <div class="row">
       <div class="col-sm-6">
         <p>
@@ -16,7 +24,7 @@
                 Before you proceed, let us know what you do at the hospital
                 <%= simple_form_for @user, url: user_path(@user), html: { method: :put}  do |f| %>
                   <%= f.input :role_ids, label: "Role", collection: Role.hospital_staff, as: :radio_buttons, label_method: lambda { |r| r.name.titleize unless r.nil? } %>
-                  <%= f.submit "Submit", class: "button small radius" %>
+                  <%= f.submit "Submit", class: "btn btn-sm btn-primary" %>
                 <% end %>
               <% elsif @user.roles.first.name == "doctor" %>
                 <p>You need to complete the following:</p>
