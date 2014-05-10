@@ -7,18 +7,7 @@ guard :bundler do
   # watch(/^.+\.gemspec/)
 end
 
-guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAILS_ENV' => 'test' } do
-  watch('config/application.rb')
-  watch('config/environment.rb')
-  watch('config/environments/test.rb')
-  watch(%r{^config/initializers/.+\.rb$})
-  watch('Gemfile.lock')
-  watch('spec/spec_helper.rb') { :rspec }
-  watch('test/test_helper.rb') { :test_unit }
-  watch(%r{features/support/}) { :cucumber }
-end
-
-guard 'cucumber', cmd: '--drb', :all_on_start => false, :all_after_pass => false, notification: false do
+guard 'cucumber', coomand_prefix: 'spring', bundler: false, :all_on_start => false, :all_after_pass => false, notification: false do
   watch(%r{^features/.+\.feature$})
   watch(%r{^features/support/.+$})          { 'features' }
   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
@@ -29,7 +18,7 @@ guard 'rails' do
   watch(%r{^(config|lib)/.*})
 end
 
-guard :rspec, cmd: '--drb', :all_on_start => false, :all_after_pass => false, failed_mode: :focus, notification: false do
+guard :rspec, cmd: 'spring rspec -f doc', :all_on_start => false, :all_after_pass => false, failed_mode: :focus, notification: false do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
@@ -59,3 +48,7 @@ guard 'livereload' do
   # Rails Assets Pipeline
   watch(%r{(app|vendor)(/assets/\w+/(.+\.(css|js|html|png|jpg))).*}) { |m| "/assets/#{m[3]}" }
 end
+
+guard 'sass', input: 'app/assets/stylesheets', output: 'app/assets/stylesheets', noop: true, hide_success: true
+
+guard 'coffeescript', :input => 'app/assets/javascripts', noop: true, hide_success: true

@@ -1,4 +1,18 @@
-<%= simple_form_for @patient do |f| %>
+<hgroup class="col-md-6 col-md-offset-1">
+  <div class="row">
+    <h2 class="col-lg-6 pull-left">Step 1</h2>
+    <sgroup class="col-lg-6 pull-right">
+      <% unless @hospital.nil? %>
+        <span class="pull-right"><%= link_to @hospital.name, user_path(@user) %></span><br />
+        <span class="pull-right"><%= link_to @hospital.city, user_path(@user) %></span>
+      <% else %>
+        <%= link_to "Add hospital", new_designation_path %>
+      <% end %>
+    </sgroup>
+  </div>
+</hgroup>
+<div class="col-md-6 col-md-offset-1">
+<%= simple_form_for @patient, url: wizard_path, method: :put do |f| %>
   <%= f.input :name, placeholder: Faker::Name.name, input_html: { title: "Enter the patient's name", data: { tooltip: true } } %>
   <div class="row">
     <% if @user.has_role? :patient %>
@@ -15,3 +29,4 @@
   <%= f.input :gender, as: :radio_buttons, collection: ["Male", "Female", "Others"], item_wrapper_class: 'radio-inline' %>
   <%= f.submit "Next", class: "btn btn-primary" %>
 <% end %>
+</div>

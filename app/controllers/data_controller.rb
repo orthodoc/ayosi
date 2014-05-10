@@ -1,37 +1,33 @@
-class PatientsController < ApplicationController
+class DataController < ApplicationController
+
   before_filter :find_user
 
-  def index
-    @patients = @user.patients.text_search(params[:query]).page(params[:page]).per_page(10)
-  end
+  include Wicked::Wizard
+  steps :patient, :surgery, :implants #, :xrays, :images, :outcomes
 
   def show
-    @patient = Patient.find(params[:id])
-  end
-
-  def new
     @patient = PatientForm.new(@user.patients.build)
+    render_wizard
   end
 
-  def create
+  def update
     @patient = PatientForm.new(@user.patients.create(patient_params))
     if @patient.save
       flash[:notice] = "Patient #{@patient.name} added to the database"
-      redirect_to user_path(@user)
     else
       flash[:alert] = "Patient was not saved due to errors!"
-      render action: :new
     end
+    render_wizard @patient
   end
 
   private
 
   def find_user
     if signed_in?
-      @user = current_user.decorate
+      @user = current_user
       @hospital = @user.default_hospital
     else
-      flash[:alert] = "You must sign in first!"
+      flash[:alert] = "You have to be signed in first"
       redirect_to new_user_session_path
     end
   end
@@ -39,4 +35,5 @@ class PatientsController < ApplicationController
   def patient_params
     params.require(:patient).permit(:id, :name, :age, :birthday, :gender)
   end
+
 end

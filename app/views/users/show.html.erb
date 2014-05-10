@@ -1,6 +1,16 @@
 <section role="user">
   <div class="col-md-8 col-md-offset-1">
-    <h3><%= @user.welcome_title %></h3>
+    <div class="row user">
+      <div class="col-xs-3">
+        <span>
+          <img src="http://lorempixel.com/output/people-q-c-75-75-7.jpg" alt="Betty" class="img-responsive img-rounded" />
+        </span>
+      </div>
+      <div class="col-xs-9">
+        <h3><%= @user.name_link %></h3>
+        <span class= "subtitle"><%= @user.role_name %></span>
+      </div>
+    </div>
     <% if @user.category == "hospital_staff" %>
       <p>
         <h5>List of designations</h5>

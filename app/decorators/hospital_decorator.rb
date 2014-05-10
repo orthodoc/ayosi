@@ -1,5 +1,6 @@
 class HospitalDecorator < ApplicationDecorator
   delegate_all
+  decorates_association :patients
 
   def name_link
     h.link_to name, h.edit_hospital_path(model)

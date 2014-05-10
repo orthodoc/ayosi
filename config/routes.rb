@@ -2,8 +2,9 @@ Ayosi::Application.routes.draw do
   get "memberships/destroy"
   root to: 'home#index'
   devise_for :users, controllers: { registrations: "registrations"}
-  resources :patients
+  resources :patients, only: [:index, :new, :create, :show]
   resources :users
+  resources :data
   resources :designations do
     collection do
       put :make_default

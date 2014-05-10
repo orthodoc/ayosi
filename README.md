@@ -33,6 +33,7 @@ Follow these guides:
 4. [Better Specs]
 5. [Source Making]
 6. [Code Guide]
+7. [Github Guide]
 
 The project relies on a postgresql database for persisting data. You'll have to set
 up one your machine. Fill the database.yml file with your credentials to get started.
@@ -72,3 +73,4 @@ This application was generated with the [Rails apps composer gem] provided by th
 [Code Guide]:http://mdo.github.io/code-guide
 [Rails apps composer gem]:https://github.com/RailsApps/rails_apps_composer
 [RailsApps Project]:http://railsapps.github.io
+[Github Guide]:http://scottchacon.com/2011/08/31/github-flow.html
