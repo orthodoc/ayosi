@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.3'
-gem 'sass-rails', '~> 4.0.0'
+gem 'rails', '4.1.1'
+gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
@@ -17,7 +17,7 @@ gem 'bootstrap-datepicker-rails', github: 'Nerian/bootstrap-datepicker-rails'
 gem 'rolify', github: 'EppO/rolify'
 gem 'therubyracer', :platform=>:ruby
 gem 'thin'
-gem 'simple_form', '~> 3.0.0', :github => 'plataformatec/simple_form', branch: 'master'
+gem 'simple_form', '~> 3.1.0.rc1', :github => 'plataformatec/simple_form', branch: 'master'
 gem 'aasm'
 gem 'select2-rails', github: 'argerim/select2-rails'
 gem 'pg_search'
