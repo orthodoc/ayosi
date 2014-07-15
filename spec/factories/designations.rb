@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :designation do |designation|
-    designation.sequence(:name) { |n| Faker::Company.position.titleize.concat(" #{n}") }
+    designation.name { Faker::Company.position.titleize }
+    # designation.sequence(:name) { |n| Faker::Company.position.titleize.concat(" #{n}") }
     designation.user
     designation.hospital
     designation.is_default false

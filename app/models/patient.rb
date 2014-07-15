@@ -26,7 +26,7 @@ class Patient < ActiveRecord::Base
     if query.present?
       search(query)
     else
-      scoped
+      all
     end
   end
 

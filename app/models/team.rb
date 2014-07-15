@@ -19,25 +19,20 @@ class Team < ActiveRecord::Base
 
   # member_list is a virtual attribute. The following method sets the collection of
   # member_ids. Rails prefers an array for the collection while select2 sets comma
-  # separated values.The setter method below converts the array to comma separated values
+  # separated values.The setter method below converts the comma separated values to an array
   # for select2 to work with rails
   def member_list=(ids)
-    ids = ids.split(",")
-    s_ids = []
-    ids.each do |id|
-      if id.match("\[" && "\]")
-        s_ids << id.gsub("\[","").gsub("\]","").to_i
-      else
-        s_ids << id
-      end
+    @member_list = []
+    ids.split(",").each do |id|
+      @member_list << id.to_i
     end
-    @member_list = s_ids
+    @member_list = @member_list.reject{|id| id == /\D/}
   end
 
   # member_list is a virtual attribute. Getter method below.
   def member_list
     @member_list
-    #@member_list = self.member_ids.join(",")
+    #@member_list = self.member_ids
   end
 
   private

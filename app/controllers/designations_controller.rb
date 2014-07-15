@@ -62,7 +62,12 @@ class DesignationsController < ApplicationController
   end
 
   def find_user
-    @user = current_user
+    if signed_in?
+      @user = current_user.decorate
+    else
+      flash[:alert] = "You have to sign in first!"
+      redirect_to new_user_session_path
+    end
   end
 
   def find_designation

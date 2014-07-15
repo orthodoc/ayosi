@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :surgery do |surgery|
-    surgery.sequence(:procedure) { |n| Faker::Lorem.word + " Procedure" + " #{n}" }
+    surgery.procedure { Faker::Lorem.word + " Procedure" }
+    # surgery.sequence(:procedure) { |n| Faker::Lorem.word + " Procedure" + " #{n}" }
     surgery.sequence(:date) {|n| ("#{n+100}").to_i.days.ago }
     surgery.patient
     surgery.hospital
@@ -10,8 +11,10 @@ FactoryGirl.define do
     surgery.category {["Primary", "Revision"].sample}
     surgery.side {["Right", "Left"].sample}
     surgery.region {["Hip","Knee","Shoulder"].sample}
-    surgery.sequence(:surgeon) { |n| Faker::Name.name.concat(" #{n}") }
-    surgery.sequence(:diagnosis) { |n| "Primary OA" + " #{n}"}
+    surgery.surgeon { Faker::Name.name }
+    # surgery.sequence(:surgeon) { |n| Faker::Name.name.concat(" #{n}") }
+    surgery.diagnosis {["Primary OA", "Secondary OA", "AVN"].sample}
+    # surgery.sequence(:diagnosis) { |n| "Primary OA" + " #{n}"}
 
     before(:create) do
       surgery.patient = FactoryGirl.create(:patient) unless surgery.patient.present?

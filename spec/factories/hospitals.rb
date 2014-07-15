@@ -2,8 +2,10 @@
 
 FactoryGirl.define do
   factory :hospital do |hospital|
-    hospital.sequence(:name) { |n| Faker::Lorem.words(2).join(" ").titleize + " Hospital #{n}" }
-    hospital.sequence(:city) { |n| Faker::Address.city.concat(" #{n}") }
+    hospital.name { Faker::Lorem.words(2).join(" ").titleize + " Hospital" }
+    hospital.city { Faker::Address.city }
+    # hospital.sequence(:name) { |n| Faker::Lorem.words(2).join(" ").titleize + " Hospital #{n}" }
+    # hospital.sequence(:city) { |n| Faker::Address.city.concat(" #{n}") }
 
    # has_many association is not working with factory girl. So recreate with methods
    # while testing

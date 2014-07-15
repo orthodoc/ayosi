@@ -29,7 +29,7 @@ describe DesignationsController do
     end
 
     it { should redirect_to(new_user_session_path) }
-    it { should set_the_flash[:alert].to("You must sign in first!") }
+    it { should set_the_flash[:alert].to("You have to sign in first!") }
   end
 
   context "when user creates with valid attributes" do

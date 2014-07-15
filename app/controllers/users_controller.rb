@@ -4,7 +4,6 @@ class UsersController < ApplicationController
 
   def show
     @designations = @user.designations
-    @teams = @user.teams
   end
 
   def update

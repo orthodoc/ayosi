@@ -1,5 +1,15 @@
-<div class="col-md-6 col-md-offset-1">
-  <h3><%= @hospital.title %></h3>
-  <p></p>
-  <%= link_to "Back", :back %>
-</div>
+<section role="hospital">
+  <div class="col-md-8 col-md-offset-1">
+    <div class="row patient">
+      <div class="col-xs-3">
+        <span>
+          <img src="http://lorempixel.com/output/city-q-c-75-75-2.jpg" alt="hospital" class="img-responsive img-rounded" />
+        </span>
+      </div>
+      <div class="col-xs-9">
+        <h3><%= @hospital.name %></h3>
+        <span class="subtitle"><%= @hospital.city %></span>
+      </div>
+    </div>
+  </div>
+</section>

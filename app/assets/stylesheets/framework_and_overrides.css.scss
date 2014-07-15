@@ -78,6 +78,18 @@ table > tbody > tr > td > form, section#team > div > form {
   box-shadow: none;
 }
 
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+  float: left;
+  margin-left: 0;
+}
+
+label {
+  margin-top: 5px;
+}
+
 .radio-inline {
   vertical-align: baseline;
 }

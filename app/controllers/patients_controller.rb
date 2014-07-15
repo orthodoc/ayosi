@@ -2,7 +2,7 @@ class PatientsController < ApplicationController
   before_filter :find_user
 
   def index
-    @patients = @user.patients.text_search(params[:query]).page(params[:page]).per_page(10)
+    @patients = @user.patients.text_search(params[:query])
   end
 
   def show

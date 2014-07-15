@@ -1,4 +1,19 @@
-<div class="col-sm-6 col-sm-offset-1">
-  <h3>Edit designations for: <%= link_to @user.name, user_path(@user) %></h3>
-  <%= render 'form' %>
-</div>
+<section role="designation">
+  <div class="col-md-8 col-md-offset-1">
+    <div class="row user">
+      <div class="col-xs-3">
+        <span>
+          <img src="http://lorempixel.com/output/people-q-c-75-75-7.jpg" alt="Betty" class="img-responsive img-rounded" />
+        </span>
+      </div>
+      <div class="col-xs-9">
+        <h3><%= @user.name_link %></h3>
+        <span class="subtitle"><%= @user.role_name %></span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-md-offset-1">
+    <h4>Edit Designation</h4>
+    <%= render 'form' %>
+  </div>
+</section>
