@@ -26,10 +26,10 @@ Feature: Team building by the surgeon
       Then I should be on the send invitation page
 
     Scenario: Approve membership
-    
-  Scenario: Continuing without froming a team
-    Given I am logged in as hospital staff
-    And I am assigned as a doctor
-    When I skip team creation
-    Then I should be on the new patient page
+
+    Scenario: Continuing without froming a team
+      Given I am logged in as hospital staff
+      And I am assigned as a doctor
+      When I skip team creation
+      Then I should be on the new patient page
 
