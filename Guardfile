@@ -7,7 +7,7 @@ guard :bundler do
   # watch(/^.+\.gemspec/)
 end
 
-guard 'cucumber', coomand_prefix: 'spring', bundler: false, :all_on_start => false, :all_after_pass => false, notification: false do
+guard 'cucumber', command_prefix: 'spring', bundler: false, :all_on_start => false, :all_after_pass => false, notification: false do
   watch(%r{^features/.+\.feature$})
   watch(%r{^features/support/.+$})          { 'features' }
   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
