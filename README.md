@@ -34,6 +34,7 @@ Follow these guides:
 5. [Source Making]
 6. [Code Guide]
 7. [Github Guide]
+8. [Inspired EHR]
 
 The project relies on a postgresql database for persisting data. You'll have to set
 up one your machine. Rename the database.example.yml to database.yml and fill with your credentials to get started.
@@ -74,3 +75,4 @@ This application was generated with the [Rails apps composer gem] provided by th
 [Rails apps composer gem]:https://github.com/RailsApps/rails_apps_composer
 [RailsApps Project]:http://railsapps.github.io
 [Github Guide]:http://scottchacon.com/2011/08/31/github-flow.html
+[Inspired EHR]:http://inspiredehrs.org
