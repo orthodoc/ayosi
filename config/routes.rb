@@ -2,6 +2,8 @@ Ayosi::Application.routes.draw do
   get "memberships/destroy"
   root to: 'home#index'
   devise_for :users, controllers: { registrations: "registrations"}
+  mount API::Base, at: "/"
+  mount GrapeSwaggerRails::Engine, at: "/documentation"
   resources :patients, only: [:index, :new, :create, :show]
   resources :users
   resources :data

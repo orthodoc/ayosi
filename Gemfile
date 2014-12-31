@@ -30,6 +30,11 @@ gem 'birthday'
 gem 'wicked'
 gem 'jquery-turbolinks'
 gem "will_paginate", '~>3.0'
+gem 'active_model_serializers'
+gem 'grape'
+gem 'grape-active_model_serializers'
+gem 'grape-swagger-rails'
+gem 'rack-cors', require: 'rack/cors'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
